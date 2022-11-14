@@ -29,7 +29,8 @@
     <div class="col-lg-4">
       <div class="card-service wow fadeInUp">
         <div class="header">
-          <img src="landing/img/services/service-1.svg" alt="">
+          {% comment %} "{% static 'landing/css/maicons.css' %}" {% endcomment %}
+          <img src="{% static 'landing/img/services/service-1.svg' % } " alt="">
         </div>
         <div class="body">
           <h5 class="text-secondary">SEO Consultancy</h5>
@@ -53,7 +54,7 @@
     <div class="col-lg-4">
       <div class="card-service wow fadeInUp">
         <div class="header">
-          <img src="landing/img/services/service-3.svg" alt="">
+          <img src="{% static 'landing/img/services/service-3.svg' %} " alt="">
         </div>
         <div class="body">
           <h5 class="text-secondary">Keyword Research</h5>
@@ -80,7 +81,7 @@
     </div>
     <div class="col-lg-6 py-3 wow fadeInRight">
       <div class="img-fluid py-3 text-center">
-        <img src="landing/img/about_frame.png" alt="">
+        <img src="{% static 'landing/img/about_frame.png' %} " alt="">
       </div>
     </div>
   </div>
@@ -174,7 +175,7 @@
 </div> <!-- .page-section -->
 
 <div class="page-section banner-seo-check">
-<div class="wrap bg-image" style="background-image: url(landing/img/bg_pattern.svg);">
+<div class="wrap bg-image" style="background-image: url({% static 'landing/img/bg_pattern.svg' %} );">
   <div class="container text-center">
     <div class="row justify-content-center wow fadeInUp">
       <div class="col-lg-8">
