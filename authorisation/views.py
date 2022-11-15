@@ -8,7 +8,7 @@ def login(request):
 def register(request):
     if request.method == 'POST':
         email = request.POST ['email']
-        password = request.POST ['password ']
+        password = request.POST ['password']
         
        
         return redirect ('register')
