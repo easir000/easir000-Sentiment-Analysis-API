@@ -26,7 +26,7 @@ def register(request):
     
         newUser = User.objects.create_user(email=email,username=email,password=password2)
         newUser.save()
-        auth.login(request,user)
+        auth.login(request,newUser)
         return redirect ('home')
         return render (request,'authorisation/register.html', {})
      
