@@ -47,9 +47,15 @@
               <a class="nav-link" href="service.html">Blog</a>
             </li>
            
+            {% user.is_authenticated %}
             <li class="nav-item">
-              <a class="btn btn-primary ml-lg-2" href="#">Register</a>
+              <a class="btn btn-primary ml-lg-2" href="#">Dashboard</a>
             </li>
+           {% else %}
+           <li class="nav-item">
+            <a class="btn btn-primary ml-lg-2" href=" {% url 'register' %} ">Registe</a>
+          </li>
+          {% endif %}
           </ul>
         </div>
 
