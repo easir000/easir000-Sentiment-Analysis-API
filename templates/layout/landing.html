@@ -45,7 +45,7 @@
             </li>
             
            
-            {% user.is_authenticated %}
+            {% if user.is_authenticated %}
             <li class="nav-item">
               <a class="btn btn-primary ml-lg-2" href="#">Dashboard</a>
             </li>
@@ -54,7 +54,6 @@
             <a class="btn btn-primary ml-lg-2" href=" {% url 'register' %} ">Register</a>
           </li>
           {% endif %}
-          {% endblock %}
           </ul>
         </div>
 
