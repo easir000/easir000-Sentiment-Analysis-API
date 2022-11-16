@@ -1,4 +1,4 @@
-from django.shortcuts import render ,redirect
+from django.shortcuts import render ,redirect,HttpResponse
 from django.contrib.auth.models import User,auth
 
 from django.contrib import messages
@@ -28,6 +28,6 @@ def register(request):
         newUser.save()
         auth.login(request,newUser)
         return redirect ('home')
-        return render (request,'authorisation/register.html', {})
+        return render (request,'authorisation/register.html')
      
      
