@@ -47,7 +47,7 @@
               <a class="nav-link" href="service.html">Blog</a>
             </li>
            
-            {% request.user.is_authenticated() %}
+            {% if user.is_authenticated %}
             <li class="nav-item">
               <a class="btn btn-primary ml-lg-2" href="#">Dashboard</a>
             </li>
