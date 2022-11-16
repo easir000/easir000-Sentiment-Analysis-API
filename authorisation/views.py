@@ -10,6 +10,7 @@ def login(request):
 
 def register(request):
     if request.method == 'POST':
+        
         email = request.POST ['email'].replace('','' ).lower()
         password1 = request.POST ['password1']
         password2 = request.POST ['password2']
@@ -27,6 +28,6 @@ def register(request):
         newUser.save()
         auth.login(request,user)
         return redirect ('home')
-        return render (request,'authorisation/register.html', {})
+        return HttpResponseRedirect (request,"authorisation/register.html", {})
      
      
