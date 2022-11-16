@@ -1,4 +1,5 @@
-from django.shortcuts import render ,redirect
+from django.shortcuts import render, redirect, HttpResponse
+from django.template import loader
 from django.contrib.auth.models import User,auth
 
 from django.contrib import messages
