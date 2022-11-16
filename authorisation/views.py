@@ -28,6 +28,6 @@ def register(request):
         newUser.save()
         auth.login(request,user)
         return redirect ('home')
-        # return HttpResponseRedirect (request,"authorisation/register.html", {})
-        return render(request, 'register.html')
+        return render (request,'authorisation/register.html', {})
+     
      
