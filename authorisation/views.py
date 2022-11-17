@@ -20,7 +20,6 @@ def login(request):
         if user:
             
             auth.login(request,user)
-            messages.success(request,'welcome {user} !!')
             return redirect ('home')
             
     else:
