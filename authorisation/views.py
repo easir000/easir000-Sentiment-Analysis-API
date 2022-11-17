@@ -39,10 +39,14 @@ def register(request):
                 messages.info(request, 'Email Taken')
                 return redirect('register')
             else:
-                user = User.objects.create_user(email=email,username=email,password=password2)
-                user.save()
+                # user = User.objects.create_user(email=email,username=email,password=password2)
+                # user.save()
 				
-                return redirect('/Dashboard')
+                
+                newUser = User.objects.create_user(email=email,username=email,password=password2)
+                newUser.save()
+                auth.login(request,newUser)
+                return redirect ('home')
                 
         else:
             messages.info(request, 'Password does not match')
