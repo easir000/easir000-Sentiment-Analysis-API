@@ -17,12 +17,11 @@ def login(request):
         user = auth.authenticate(username = email, password=password )
         
     
-    if user:
-        auth.login(request,user)
+        if user:
+         auth.login(request,user)
         
         messages.success(request, ' welcome {user} !!')
         return redirect('home')
-            
     else:
          messages.error(request, "Invalid credentials or user does not exists")
          return redirect ('register')
