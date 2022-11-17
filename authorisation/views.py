@@ -1,7 +1,5 @@
 from django.shortcuts import render ,redirect,HttpResponse
 from django.contrib.auth.models import User,auth
-from django.contrib.auth import authenticate,login,logout
-from django.contrib.auth.forms import AuthenticationForm
 
 from django.contrib import messages
 
@@ -19,19 +17,18 @@ def login(request):
         user = auth.authenticate(username = email, password=password )
         
     
-        if user is not None:
-            login(request,user)
-            return redirect('/')
-        else:
-            form = AuthenticationForm()
-            return render(request,'authorisation/login.html',{'form':form})
-     
+        if user:
+            
+            auth.login(request,user)
+            messages.success(request, f' welcome {user} !!')
+            return redirect ('home')
+            
     else:
-        form = AuthenticationForm()
-        return render(request, 'authorisation/login.html', {'form':form})
+         messages.error(request, "Invalid credentials or user does not exists")
+         return redirect ('register')
     
         
-        return render (request,'authorisation/login.html', {})
+    return render (request,'authorisation/login.html', {})
 
 
 
