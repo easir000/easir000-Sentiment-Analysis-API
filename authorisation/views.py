@@ -29,7 +29,7 @@ from django.contrib import messages
         
 #     return render (request,'authorisation/login.html', {})
 
-def Login(request):
+def login(request):
     if request.method == 'POST':
   
         # AuthenticationForm_can_also_be_used__
@@ -38,7 +38,7 @@ def Login(request):
         password = request.POST['password']
         user = auth.authenticate(request, username = email, password = password)
         if user is not None:
-            auth.login(request, user)
+            form = auth.login(request, user)
             messages.success(request, f' welcome {user} !!')
             return redirect('home')
         else:
