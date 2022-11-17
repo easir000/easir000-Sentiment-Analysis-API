@@ -22,9 +22,9 @@ def login(request):
             auth.login(request,user)
             return redirect ('home')
             
-    else:
-         messages.error(request, "Invalid credentials or user does not exists")
-         return redirect ('register')
+    # else:
+    #      messages.error(request, "Invalid credentials or user does not exists")
+    #      return redirect ('register')
     
         
     return render (request,'authorisation/login.html', {})
