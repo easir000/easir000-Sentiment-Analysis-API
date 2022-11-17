@@ -48,9 +48,9 @@ def register(request):
        
         # return redirect ('register')
     
-        # newUser = User.objects.create_user(email=email,username=email,password=password2)
-        # newUser.save()
-        # auth.login(request,newUser)
+        # user = User.objects.create_user(email=email,username=email,password=password2)
+        # user.save()
+        # auth.login(request,user)
         # return redirect ('home')
         # return render (request,'authorisation/register.html')
     
@@ -67,9 +67,9 @@ def register(request):
                 # user.save()
 				
                 
-                newUser = User.objects.create_user(email=email,username=email,password=password2)
-                newUser.save()
-                auth.login(request,newUser)
+                user = User.objects.create_user(email=email,username=email,password=password2)
+                user.save()
+                auth.login(request,user)
                 return redirect ('home')
                 
         else:
