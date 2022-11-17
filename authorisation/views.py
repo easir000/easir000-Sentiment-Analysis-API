@@ -17,14 +17,14 @@ def login(request):
         user = auth.authenticate(username = email, password=password )
         
     
-        if user:
-            
-            auth.login(request,user)
-            return redirect ('home')
+    if user is not None:
+            form = login(request, user)
+            messages.success(request, ' welcome {user} !!')
+            return redirect('home')
             
     else:
          messages.error(request, "Invalid credentials or user does not exists")
-         return redirect ('register')
+        #  return redirect ('register')
     
         
     return render (request,'authorisation/login.html', {})
