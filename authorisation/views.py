@@ -6,7 +6,32 @@ from django.contrib import messages
 # Create your views here.
 
 def login(request):
+    
+    
+    if request.method == 'POST':
+        
+        email = request.POST ['email'].replace('','' ).lower()
+        password = request.POST ['password']
+        # password2 = request.POST ['password2']
+        
+        user = auth.authenticate(username = email, password=password )
+        
+    if user is not None:
+        messages.info("getting close...")
+        if user:
+            messages.success("it worked")
+            auth.login(request,user)
+            return redirect ('home')
+            
+    else:
+         messages.error(request, "Invalid credentials or user does not exists")
+         return redirect ('register')
+    
+        
     return render (request,'authorisation/login.html', {})
+
+
+
 
 def register(request):
     if request.method == 'POST':
