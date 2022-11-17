@@ -16,16 +16,18 @@ def login(request):
         
         user = auth.authenticate(username = email, password=password )
         
-    if user is not None:
-        messages.info("getting close...")
-        if user:
+    
+        if user.is_active:
             messages.success("it worked")
             auth.login(request,user)
             return redirect ('home')
             
     else:
-         messages.error(request, "Invalid credentials or user does not exists")
-         return redirect ('register')
+        messages.error("invalid login details. User: " + email + ", Pass: " + password)
+        return render(request, 'register')
+         
+        #  (request, "Invalid credentials or user does not exists")
+        #  return redirect ('register')
     
         
     return render (request,'authorisation/login.html', {})
