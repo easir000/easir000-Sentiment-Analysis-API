@@ -23,11 +23,8 @@ def login(request):
             return redirect ('home')
             
     else:
-        messages.error("invalid login details. User: " + email + ", Pass: " + password)
-        return render(request, 'register')
-         
-        #  (request, "Invalid credentials or user does not exists")
-        #  return redirect ('register')
+         messages.error(request, "Invalid credentials or user does not exists")
+         return redirect ('register')
     
         
     return render (request,'authorisation/login.html', {})
