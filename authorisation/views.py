@@ -17,8 +17,8 @@ def login(request):
         user = auth.authenticate(username = email, password=password )
         
     
-        if user.is_active:
-            messages.success("it worked")
+        if user:
+            
             auth.login(request,user)
             return redirect ('home')
             
