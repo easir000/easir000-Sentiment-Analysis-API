@@ -17,7 +17,7 @@ def login(request):
         user = auth.authenticate(username = email, password=password )
         
     
-    if user is not None:
+    if user :
             form = login(request, user)
             messages.success(request, ' welcome {user} !!')
             return redirect('home')
