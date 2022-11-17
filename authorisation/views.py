@@ -5,31 +5,46 @@ from django.contrib import messages
 
 # Create your views here.
 
-def login(request):
+# def login(request):
     
     
+#     if request.method == 'POST':
+        
+#         email = request.POST ['email'].replace('','' ).lower()
+#         password = request.POST ['password']
+#         # password2 = request.POST ['password2']
+        
+#         user = auth.authenticate(username = email, password=password )
+        
+    
+#         if user:
+#          auth.login(request,user)
+        
+#         messages.success(request, ' welcome {user} !!')
+#         return redirect('home')
+#     else:
+#          messages.error(request, "Invalid credentials or user does not exists")
+#          return redirect ('register')
+    
+        
+#     return render (request,'authorisation/login.html', {})
+
+def Login(request):
     if request.method == 'POST':
-        
+  
+        # AuthenticationForm_can_also_be_used__
+  
         email = request.POST ['email'].replace('','' ).lower()
-        password = request.POST ['password']
-        # password2 = request.POST ['password2']
-        
-        user = auth.authenticate(username = email, password=password )
-        
+        password = request.POST['password']
+        user = auth.authenticate(request, username = email, password = password)
+        if user is not None:
+            form = auth.login(request, user)
+            messages.success(request, f' welcome {user} !!')
+            return redirect('home')
+        else:
+            messages.info(request, f'account done not exit plz sign in')
     
-        if user:
-         auth.login(request,user)
-        
-        messages.success(request, ' welcome {user} !!')
-        return redirect('home')
-    else:
-         messages.error(request, "Invalid credentials or user does not exists")
-         return redirect ('register')
-    
-        
     return render (request,'authorisation/login.html', {})
-
-
 
 
 def register(request):
