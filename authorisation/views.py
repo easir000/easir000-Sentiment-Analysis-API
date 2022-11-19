@@ -1,4 +1,4 @@
-from django.shortcuts import render ,redirect,HttpResponse
+from django.shortcuts import render ,redirect,HttpResponseRedirect
 from django.contrib.auth.models import User,auth
 from django.contrib import messages
 from django.contrib.auth import logout
@@ -29,8 +29,10 @@ def anonymous_required(function=None, redirect_url=None):
     return actual_decorator
 
 
-# @anonymous_required
-def login(request):
+    @secure
+    def login(request):
+     return HttpResponse()
+
     if request.method == 'POST':
   
         # AuthenticationForm_can_also_be_used__
