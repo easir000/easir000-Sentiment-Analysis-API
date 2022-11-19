@@ -20,6 +20,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('landing.urls')),
     path('auth/',include('authorisation.urls')),
-    path('dashboard/',include('dashboard.urls')),
+    # path('dashboard/',include('dashboard.urls')),
     
 ]
