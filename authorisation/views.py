@@ -1,7 +1,9 @@
 from django.shortcuts import render ,redirect,HttpResponse
 from django.contrib.auth.models import User,auth
-
 from django.contrib import messages
+
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import user_passes_test
 
 # Create your views here.
 
@@ -40,7 +42,7 @@ def login(request):
         if user is not None:
             form = auth.login(request, user)
             messages.success(request, f' welcome {user} !!')
-            return redirect('home')
+            return redirect('dashboard')
         else:
             messages.info(request, f'account does not exit plz sign in')
     
@@ -85,10 +87,10 @@ def register(request):
                 user = User.objects.create_user(email=email,username=email,password=password2)
                 user.save()
                 auth.login(request,user)
-                return redirect ('home')
+                return redirect ('dashboard')
                 
         else:
             messages.info(request, 'Password does not match')
             return redirect('register')
     else:
-        return render (request,'authorisation/register.html')
+        return render (request,'authorisation/login.html')
