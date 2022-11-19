@@ -42,7 +42,7 @@ def login(request):
             messages.success(request, f' welcome {user} !!')
             return redirect('home')
         else:
-            messages.info(request, f'account done not exit plz sign in')
+            messages.info(request, f'account does not exit plz sign in')
     
     return render (request,'authorisation/login.html', {})
 
