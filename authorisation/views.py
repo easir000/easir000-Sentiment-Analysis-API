@@ -1,6 +1,7 @@
 from django.shortcuts import render ,redirect,HttpResponse
 from django.contrib.auth.models import User,auth
 from django.contrib import messages
+from django.contrib.auth import logout
 
 from django.conf import settings
 
@@ -78,4 +79,12 @@ def register(request):
             messages.info(request, 'Password does not match')
             return redirect('register')
     else:
-        return render (request,'authorisation/login.html')
+        return render (request,'authorisation/register.html' )
+    
+    
+    @login_required 
+    def logout(request):
+    # Log out the user.
+     auth.logout(request)
+    # Return to homepage.
+    return HttpResponseRedirect('login')
