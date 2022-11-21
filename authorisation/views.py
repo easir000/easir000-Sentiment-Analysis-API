@@ -50,7 +50,7 @@ def login(request):
     
     return render (request,'authorisation/login.html', {})
 
-# @anonymous_required
+@anonymous_required
 def register(request):
     if request.method == 'POST':
         
