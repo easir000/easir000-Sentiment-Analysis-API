@@ -31,7 +31,7 @@ def anonymous_required(function=None, redirect_url=None):
 
 
 # @anonymous_required
-@login_required
+
 def login(request):
     if request.method == 'POST':
   
@@ -50,7 +50,7 @@ def login(request):
     return render (request,'authorisation/login.html', {})
 
 # @anonymous_required
-@login_required
+
 def register(request):
     if request.method == 'POST':
         
