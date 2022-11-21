@@ -44,7 +44,7 @@ def login(request):
             messages.success(request, f' welcome {user} !!')
             return redirect('dashboard')
         else:
-            messages.info(request, f'account does not exit plz sign in')
+            messages.error(request, f'account does not exit plz sign in')
     
     return render (request,'authorisation/login.html', {})
 
@@ -60,12 +60,10 @@ def register(request):
     
      
         if password1 == password2:
-            if User.objects.filter(username=email).exists():
-                messages.info(request, 'Username Taken')
+            if User.objects.filter(email=email).exists():
+                messages.error(request, 'Email Taken')
                 return redirect('register')
-            elif User.objects.filter(email=email).exists():
-                messages.info(request, 'Email Taken')
-                return redirect('register')
+             
             else:
                 # user = User.objects.create_user(email=email,username=email,password=password2)
                 # user.save()
@@ -77,7 +75,7 @@ def register(request):
                 return redirect ('dashboard')
                 
         else:
-            messages.info(request, 'Password does not match')
+            messages.error(request, 'Password does not match')
             return redirect('register')
     else:
         return render (request,'authorisation/register.html' )
