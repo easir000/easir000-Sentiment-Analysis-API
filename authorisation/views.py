@@ -3,7 +3,8 @@ from django.contrib.auth.models import User,auth
 from django.contrib import messages
 from django.contrib.auth import logout
 
-
+from django.contrib.auth import login, authenticate
+from . import forms
 from django.conf import settings
 
 from django.contrib.auth.decorators import login_required
@@ -31,22 +32,40 @@ def anonymous_required(function=None, redirect_url=None):
 
 
 @anonymous_required
-def login(request):
-    if request.method == 'POST':
+# def login(request):
+#     if request.method == 'POST':
   
-        # AuthenticationForm_can_also_be_used__
+#         # AuthenticationForm_can_also_be_used__
   
-        email = request.POST ['email'].replace('','' ).lower()
-        password = request.POST['password']
-        user = auth.authenticate(request, username = email, password = password)
-        if user is not None:
-            form = auth.login(request, user)
-            # messages.success(request, f' welcome {user} !!')
-            return redirect('dashboard')
-        else:
-            messages.info(request, f'account does not exit plz sign in')
+#         email = request.POST ['email'].replace('','' ).lower()
+#         password = request.POST['password']
+#         user = auth.authenticate(request, username = email, password = password)
+#         if user is not None:
+#             form = auth.login(request, user)
+#             # messages.success(request, f' welcome {user} !!')
+#             return redirect('dashboard')
+#         else:
+#             messages.info(request, f'account does not exit plz sign in')
     
-    return render (request,'authorisation/login.html', {})
+#     return render (request,'authorisation/login.html', {})
+def login_view(request):
+    form = forms.LoginForm()
+    message = ''
+    if request.method == 'POST':
+        form = forms.LoginForm(request.POST)
+        if form.is_valid():
+            user = authenticate()
+            email = request.POST ['email'].replace('','' ).lower()
+        password = request.POST['password']
+              
+    if user is not None:
+                login(request, user)
+                message = f'Hello {user.username}! You have been logged in'
+    else:
+                message = 'Login failed!'
+    return render(
+        request, 'authentication/login.html', context={'form': form, 'message': message})
+
 
 @anonymous_required
 def register(request):
