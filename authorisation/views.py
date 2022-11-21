@@ -40,7 +40,7 @@ def login(request):
         user = auth.authenticate(request, username = email, password = password)
         if user is not None:
             form = auth.login(request, user)
-            messages.success(request, f' welcome {user} !!')
+            # messages.success(request, f' welcome {user} !!')
             return redirect('dashboard')
         else:
             messages.info(request, f'account does not exit plz sign in')
