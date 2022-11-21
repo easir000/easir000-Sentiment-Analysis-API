@@ -43,11 +43,11 @@ def login(request):
         user = auth.authenticate(request, username = email, password = password)
         if user:
             auth.login(request, user)
-            messages.success(request, f' welcome {user} !!')
+            
             return redirect('dashboard')
         else:
             messages.error(request, f'account does not exit plz sign in')
-    
+            return redirect('register')
     return render (request,'authorisation/login.html', {})
 
 @anonymous_required
