@@ -89,4 +89,4 @@ def register(request):
     def logout_request(request):
      auth.logout(request)
     messages.info(request, "Logged out successfully!")
-    return redirect("login")
+    return redirect("home")
