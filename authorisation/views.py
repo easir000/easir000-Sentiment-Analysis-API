@@ -5,8 +5,9 @@ from django.contrib.auth import logout
 
 from django.conf import settings
 
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required 
 from django.contrib.auth.decorators import user_passes_test
+
  
 
 
@@ -29,7 +30,8 @@ def anonymous_required(function=None, redirect_url=None):
     return actual_decorator
 
 
-@anonymous_required
+# @anonymous_required
+@login_required
 def login(request):
     if request.method == 'POST':
   
@@ -48,6 +50,7 @@ def login(request):
     return render (request,'authorisation/login.html', {})
 
 # @anonymous_required
+@login_required
 def register(request):
     if request.method == 'POST':
         
