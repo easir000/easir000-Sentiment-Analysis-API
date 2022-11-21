@@ -12,25 +12,40 @@ from django.contrib.auth.decorators import user_passes_test
 
 
 
+LOGGED_IN_HOME = settings.LOGGED_IN_HOME
 
-
-
-
-def anonymous_required(function=None, redirect_url=None):
-    if not redirect_url:
-        redirect_url = 'dashboard'
-
+def login_forbidden(function=None, redirect_field_name=None, redirect_to=LOGGED_IN_HOME):
+    """
+    Decorator for views that checks that the user is NOT logged in, redirecting
+    to the homepage if necessary.
+    """
     actual_decorator = user_passes_test(
-        lambda u: u.is_anonymous(),
-        login_url=redirect_url
+        lambda u: not u.is_authenticated(),
+        login_url=redirect_to,
+        redirect_field_name=redirect_field_name
     )
-
     if function:
         return actual_decorator(function)
     return actual_decorator
 
 
+
+# def anonymous_required(function=None, redirect_url=None):
+#     if not redirect_url:
+#         redirect_url = 'dashboard'
+
+#     actual_decorator = user_passes_test(
+#         lambda u: u.is_anonymous(),
+#         login_url=redirect_url
+#     )
+
+#     if function:
+#         return actual_decorator(function)
+#     return actual_decorator
+
+
 # @anonymous_required
+@login_forbidden
 def login(request):
     if request.method == 'POST':
   
@@ -49,6 +64,7 @@ def login(request):
     return render (request,'authorisation/login.html', {})
 
 # @anonymous_required
+@login_forbidden
 def register(request):
     if request.method == 'POST':
         
