@@ -4,41 +4,30 @@ from django.contrib import messages
 from django.contrib.auth import logout
 
 
-from django.contrib.auth.decorators import user_passes_test
 from django.conf import settings
+
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import user_passes_test
  
 
 
 
 
 
-def login_forbidden(function=None, redirect_field_name=None):
-    
+
+
+def login_forbidden(function=None, redirect_url=None):
     if not redirect_url:
         redirect_url = 'dashboard'
-        
+
     actual_decorator = user_passes_test(
         lambda u: u.is_anonymous(),
         login_url=redirect_url
     )
+
     if function:
         return actual_decorator(function)
     return actual_decorator
-
-
-
-# def anonymous_required(function=None, redirect_url=None):
-#     if not redirect_url:
-#         redirect_url = 'dashboard'
-
-#     actual_decorator = user_passes_test(
-#         lambda u: u.is_anonymous(),
-#         login_url=redirect_url
-#     )
-
-#     if function:
-#         return actual_decorator(function)
-#     return actual_decorator
 
 
 # @anonymous_required
