@@ -39,9 +39,9 @@ def login(request):
         email = request.POST ['email'].replace('','' ).lower()
         password = request.POST['password']
         user = auth.authenticate(request, username = email, password = password)
-        if user.is_authenticated:
-            form = auth.login(request, user)
-            # messages.success(request, f' welcome {user} !!')
+        if user:
+            auth.login(request, user)
+            messages.success(request, f' welcome {user} !!')
             return redirect('dashboard')
         else:
             messages.info(request, f'account does not exit plz sign in')
