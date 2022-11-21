@@ -29,7 +29,7 @@ def anonymous_required(function=None, redirect_url=None):
     return actual_decorator
 
 
-@anonymous_required(redirect_url='dashboard')
+@anonymous_required
 def login(request):
     if request.method == 'POST':
   
@@ -86,4 +86,4 @@ def register(request):
     def logout_request(request):
      auth.logout(request)
     messages.info(request, "Logged out successfully!")
-    return redirect("main")
+    return redirect("login")
