@@ -1,9 +1,8 @@
-from django.shortcuts import render ,redirect,HttpResponseRedirect
+from django.shortcuts import render ,redirect,HttpResponse
 from django.contrib.auth.models import User,auth
 from django.contrib import messages
 from django.contrib.auth import logout
 
-from django.contrib.auth import login, authenticate
 
 from django.conf import settings
 
@@ -40,17 +39,14 @@ def login(request):
         email = request.POST ['email'].replace('','' ).lower()
         password = request.POST['password']
         user = auth.authenticate(request, username = email, password = password)
-    if user is not None:
-                auth.login(request, user)
-                message = f'Hello {user.username}! You have been logged in'
-                return redirect('home')
-    else:
-                message = 'Login failed!'
-                return redirect('register')
-    return render (request,'authorisation/login.html', {})
-
-              
+        if user.is_authenticated:
+            auth.login(request, user)
+            # messages.success(request, f' welcome {user} !!')
+            return redirect('dashboard')
+        else:
+            messages.info(request, f'account does not exit plz sign in')
     
+    return render (request,'authorisation/login.html', {})
 
 # @anonymous_required
 def register(request):
@@ -86,7 +82,7 @@ def register(request):
     else:
         return render (request,'authorisation/register.html' )
     
-    # @login_required 
+    @login_required 
     def logout_request(request):
      logout(request)
     messages.info(request, "Logged out successfully!")
