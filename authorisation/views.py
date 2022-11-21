@@ -1,13 +1,12 @@
-from django.shortcuts import render ,redirect
+from django.shortcuts import render ,redirect,HttpResponse
 from django.contrib.auth.models import User,auth
 from django.contrib import messages
-
+from django.contrib.auth import logout
 
 from django.conf import settings
 
-from django.contrib.auth.decorators import login_required 
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.decorators import user_passes_test
-
  
 
 
@@ -31,7 +30,6 @@ def anonymous_required(function=None, redirect_url=None):
 
 
 # @anonymous_required
-
 def login(request):
     if request.method == 'POST':
   
@@ -50,7 +48,6 @@ def login(request):
     return render (request,'authorisation/login.html', {})
 
 # @anonymous_required
-
 def register(request):
     if request.method == 'POST':
         
@@ -85,9 +82,7 @@ def register(request):
         return render (request,'authorisation/register.html' )
     
     
-    @login_required
     def logout_request(request):
-     if request.method=="POST":
-      logout(request)
+     logout(request)
     messages.info(request, "Logged out successfully!")
-    return redirect("home")
+    return redirect("main")
