@@ -82,8 +82,7 @@ def register(request):
         return render (request,'authorisation/register.html' )
     
     
-    @login_required
-    def logout(request):
-     if request.method=="POST":
-        auth.logout(request)
-        return ('login')
+    def logout_request(request):
+     logout(request)
+    messages.info(request, "Logged out successfully!")
+    return redirect("main")
