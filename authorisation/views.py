@@ -63,9 +63,7 @@ def login_view(request):
                 message = f'Hello {user.username}! You have been logged in'
     else:
                 message = 'Login failed!'
-    return render(
-        request, 'authentication/login.html', context={'form': form, 'message': message})
-
+    return render (request,'authorisation/login.html', {})
 
 @anonymous_required
 def register(request):
