@@ -1,4 +1,4 @@
-from django.shortcuts import render ,redirect,HttpResponse
+from django.shortcuts import render ,redirect,HttpResponseRedirect
 from django.contrib.auth.models import User,auth
 from django.contrib import messages
 from django.contrib.auth import logout
@@ -21,7 +21,7 @@ def anonymous_required(function=None, redirect_url=None):
         redirect_url = 'dashboard'
 
     actual_decorator = user_passes_test(
-        lambda u: u.is_anonymous,
+        lambda u: u.is_anonymous(),
         login_url=redirect_url
     )
 
