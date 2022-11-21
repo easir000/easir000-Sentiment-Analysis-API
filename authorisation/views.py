@@ -2,9 +2,6 @@ from django.shortcuts import render ,redirect,HttpResponse
 from django.contrib.auth.models import User,auth
 from django.contrib import messages
 
-from django.contrib.auth import auth_views
-from django.contrib.auth import login
-from django.core.checks import register
 from django.contrib.auth import logout
 from django.conf import settings
 
@@ -91,6 +88,6 @@ def register(request):
     @login_required
     def logout_request(request):
      if request.method=="POST":
-      auth.logout(request)
+      logout(request)
     messages.info(request, "Logged out successfully!")
     return redirect("home")
