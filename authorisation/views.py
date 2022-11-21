@@ -1,7 +1,7 @@
 from django.shortcuts import render ,redirect,HttpResponse
 from django.contrib.auth.models import User,auth
 from django.contrib import messages
-from django.contrib.auth import logout
+from django.contrib.auth import logout,login,authenticate
 
 from django.conf import settings
 
@@ -82,7 +82,7 @@ def register(request):
         return render (request,'authorisation/register.html' )
     
     @login_required
-    def logout(request):
-     
-        auth.logout(request)
-        return redirect('login')
+    def accounts_logout(request):
+     logout(request)
+    url = reverse("accounts:login")
+    return redirect(url, args=(),kwargs={}) 
