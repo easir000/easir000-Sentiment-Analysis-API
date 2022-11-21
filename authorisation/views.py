@@ -39,7 +39,7 @@ def login(request):
         email = request.POST ['email'].replace('','' ).lower()
         password = request.POST['password']
         user = auth.authenticate(request, username = email, password = password)
-        if user.is_authenticated:
+        if request.user.is_authenticated:
             auth.login(request, user)
             # messages.success(request, f' welcome {user} !!')
             return redirect('dashboard')
