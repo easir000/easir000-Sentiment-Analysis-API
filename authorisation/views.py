@@ -3,6 +3,7 @@ from django.contrib.auth.models import User,auth
 from django.contrib import messages
 from django.contrib.auth import logout
 
+
 from django.conf import settings
 
 from django.contrib.auth.decorators import login_required
@@ -38,7 +39,7 @@ def login(request):
         email = request.POST ['email'].replace('','' ).lower()
         password = request.POST['password']
         user = auth.authenticate(request, username = email, password = password)
-        if user.is_authenticated:
+        if request.user.is_authenticated:
             form = auth.login(request, user)
             # messages.success(request, f' welcome {user} !!')
             return redirect('dashboard')
