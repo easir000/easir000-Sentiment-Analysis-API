@@ -84,6 +84,6 @@ def register(request):
     
     @login_required 
     def logout(request):
-     if request.method=="POST":
+     
         auth.logout(request)
         return redirect('login')
