@@ -41,10 +41,12 @@ def login(request):
         password = request.POST['password']
         user = auth.authenticate(request, username = email, password = password)
     if user is not None:
-                login(request, user)
+                auth.login(request, user)
                 message = f'Hello {user.username}! You have been logged in'
+                return redirect('home')
     else:
                 message = 'Login failed!'
+                return redirect('register')
     return render (request,'authorisation/login.html', {})
 
               
