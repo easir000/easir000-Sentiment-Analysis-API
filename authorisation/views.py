@@ -87,6 +87,7 @@ def register(request):
     
     @login_required
     def logout_request(request):
-     auth.logout(request)
+     if request.method=="POST":
+      auth.logout(request)
     messages.info(request, "Logged out successfully!")
     return redirect("home")
