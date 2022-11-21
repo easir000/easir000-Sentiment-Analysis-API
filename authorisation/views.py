@@ -49,10 +49,10 @@ def anonymous_required(function=None, redirect_url=None):
     
 #     return render (request,'authorisation/login.html', {})
 def login_view(request):
-    form = forms.LoginForm()
+    form = auth.login()
     message = ''
     if request.method == 'POST':
-        form = forms.LoginForm(request.POST)
+        form = auth.login(request.POST)
         if form.is_valid():
             user = authenticate()
             email = request.POST ['email'].replace('','' ).lower()
