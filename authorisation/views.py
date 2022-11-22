@@ -15,7 +15,7 @@ from django.contrib.auth.decorators import user_passes_test
 
 
 
-#Anonymous required 
+
 def anonymous_required(function=None, redirect_url=None):
 
    if not redirect_url:
@@ -31,7 +31,7 @@ def anonymous_required(function=None, redirect_url=None):
    return actual_decorator
 
 
-# @anonymous_required
+
 @anonymous_required
 def login(request):
     if request.method == 'POST':
@@ -40,13 +40,13 @@ def login(request):
   
         email = request.POST ['email'].replace('','' ).lower()
         password = request.POST['password']
-        user = auth.authenticate(request, username = email, password = password)
+        user = auth.authenticate( username = email, password = password)
         if user:
             auth.login(request, user)
             
             return redirect('dashboard')
         else:
-            messages.error(request, f'account does not exit plz sign in')
+            messages.error(request, 'account does not exit plz sign in')
             return redirect('register')
     return render (request,'authorisation/login.html', {})
 
