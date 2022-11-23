@@ -50,23 +50,22 @@ class ProfileForm(forms.Form):
 def __init__(self, *args, **kwargs):
     super(ProfileForm, self).__init__(*args, **kwargs)
 #    super().__init__(self, *args, **kwargs)
-    self.helper = FormHelper
-    self.helper.form_method = 'POST'
-    self.helper.layout =(
+    self.helper = FormHelper()
+    self.helper.layout = Layout(
             Row(
                 Column('addressLine1', css_class='form-group col-md-6'),
-                Column('addressLine2', css_class='form-group col-md-6')
-                )),
+                Column('addressLine2', css_class='form-group col-md-6'),
+                ),
     Row(
                 Column('city', css_class='form-group col-md-6'),
-                Column('province', css_class='form-group col-md-6')
-                )
+                Column('province', css_class='form-group col-md-6'),
+                ),
     Row(
                 Column('country', css_class='form-group col-md-6'),
                 Column('postalCode', css_class='form-group col-md-6')
-                )
+                ),
    
-Submit('submit', 'Save changes', css_class= "btn btn-primary me-2")
+Submit('submit', 'Save changes', css_class= "btn btn-primary me-2"))
 
 
 
