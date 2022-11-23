@@ -81,8 +81,8 @@ def register(request):
     else:
         return render (request,'authorisation/register.html' )
     
-    @login_required 
-    def logout(request):
-     
-        auth.logout(request)
-        return redirect('login')
+   #using the long-required decorator
+@login_required
+def logout(request):
+  auth.logout(request)
+  return redirect('login')
