@@ -67,7 +67,7 @@
           <form   action = "#"  id="ProfileForm" method="POST">
           
             {% csrf_token %}
-            {% crispy form %}
+            {{ my_formset|crispy }}
             
 
            
