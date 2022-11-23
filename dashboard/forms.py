@@ -48,8 +48,9 @@ class ProfileForm(forms.Form):
 
 
 def __init__(self, *args, **kwargs):
-#    super().__init__(*args, **kwargs)
-   self.helper = FormHelper()
+#    super().__init__(self, *args, **kwargs)
+   self.helper = FormHelper
+   self.helper.form_method = 'POST'
    self.helper.layout =(
             Row(
                 Column('addressLine1', css_class='form-group col-md-6'),
@@ -65,6 +66,7 @@ def __init__(self, *args, **kwargs):
                 )
    
 Submit('submit', 'Save changes', css_class= "btn btn-primary me-2")
+
 
 
 class Meta:
