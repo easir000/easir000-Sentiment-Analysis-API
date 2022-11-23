@@ -18,15 +18,15 @@ def home(request):
 
 
 def profile(request):
-    
-       if request.method == 'GET':
+    context = {}  
+    if request.method == 'GET':
         form  = ProfileForm()
-        context = {}
+        context ['form'] =form
         return render(request, 'dashboard/profile.html', context)
     
     
     
-       if request.method == 'POST':
+    if request.method == 'POST':
         form  =  ProfileForm(request.POST)
 
         if form.is_valid():
