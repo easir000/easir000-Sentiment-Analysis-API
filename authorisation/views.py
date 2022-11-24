@@ -33,7 +33,7 @@ def anonymous_required(function=None, redirect_url=None):
 
 
 # @anonymous_required
-def login(request):
+def user_login(request):
     if request.method == 'POST':
   
         # AuthenticationForm_can_also_be_used__
