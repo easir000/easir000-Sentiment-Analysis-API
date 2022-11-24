@@ -65,7 +65,7 @@ def __init__(self, *args, **kwargs):
                 Column('postalCode', css_class='form-group col-md-6')),
                 
    
-Submit('submit', 'Save changes', css_class= "btn btn-primary me-2")
+Submit('submit', 'Save Changes', css_class= "btn btn-primary me-2")
 )
 
 
