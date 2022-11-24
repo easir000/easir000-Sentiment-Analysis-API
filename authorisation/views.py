@@ -2,7 +2,7 @@ from django.shortcuts import render ,redirect,HttpResponse
 from django.contrib.auth.models import User,auth
 from django.contrib import messages
 
-
+from django.contrib.auth import login as authlogin
 from django.contrib.auth import logout
 
 
@@ -33,22 +33,37 @@ def anonymous_required(function=None, redirect_url=None):
 
 
 # @anonymous_required
-def user_login(request):
-    if request.method == 'POST':
+# def login(request):
+#     if request.method == 'POST':
   
-        # AuthenticationForm_can_also_be_used__
+#         # AuthenticationForm_can_also_be_used__
   
-        email = request.POST ['email'].replace('','' ).lower()
-        password = request.POST['password']
-        user = auth.authenticate( username = email, password = password)
-        if user is not None:
-         login(request, user)
+#         email = request.POST ['email'].replace('','' ).lower()
+#         password = request.POST['password']
+#         user = auth.authenticate( username = email, password = password)
+#         if user is not None:
+#          login(request, user)
             
-         return redirect('dashboard')
-        else:
+#          return redirect('dashboard')
+#         else:
+#             messages.error(request, 'account does not exit plz sign in')
+#             return redirect('register')
+#     return render (request,'authorisation/login.html', {})
+
+def login(request):
+    # ⋮
+
+ def handlelogin(request):
+     email = request.POST ['email'].replace('','' ).lower()
+     password = request.POST['password']
+     user = auth.authenticate( username = email, password = password)
+     if user is not None:
+        authlogin(request, user)
+        return redirect('dashboard')
+     else:
             messages.error(request, 'account does not exit plz sign in')
             return redirect('register')
-    return render (request,'authorisation/login.html', {})
+     return render (request,'authorisation/login.html', {})
 
 # @anonymous_required
 def register(request):
