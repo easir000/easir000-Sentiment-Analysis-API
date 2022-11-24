@@ -30,5 +30,13 @@ def profile(request):
         form  =  ProfileForm(request.POST)
 
         if form.is_valid():
-            pass
-            return render(request, 'dashboard/profile.html', context)
+            
+             form= ProfileForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('dashboard/profile.html') 
+    else:    
+        form = ProfileForm()
+    
+            
+    return render(request, 'dashboard/profile.html', context)
