@@ -33,37 +33,37 @@ def anonymous_required(function=None, redirect_url=None):
 
 
 # @anonymous_required
-# def login(request):
-#     if request.method == 'POST':
-  
-#         # AuthenticationForm_can_also_be_used__
-  
-#         email = request.POST ['email'].replace('','' ).lower()
-#         password = request.POST['password']
-#         user = auth.authenticate( username = email, password = password)
-#         if user is not None:
-#          login(request, user)
-            
-#          return redirect('dashboard')
-#         else:
-#             messages.error(request, 'account does not exit plz sign in')
-#             return redirect('register')
-#     return render (request,'authorisation/login.html', {})
-
 def login(request):
+    if request.method == 'POST':
+  
+        # AuthenticationForm_can_also_be_used__
+  
+        email = request.POST ['email'].replace('','' ).lower()
+        password = request.POST['password']
+        user = auth.authenticate( username = email, password = password)
+        if user is not None:
+         login(request, user)
+            
+         return redirect('dashboard')
+        else:
+            messages.error(request, 'account does not exit plz sign in')
+            return redirect('register')
+    return render (request,'authorisation/login.html', {})
+
+# def login(request):
     
 
  
-     email = request.POST ['email'].replace('','' ).lower()
-     password = request.POST['password']
-     user = auth.authenticate( username = email, password = password)
-     if user is not None:
-        authlogin(request, user)
-        return redirect('dashboard')
-     else:
-            messages.error(request, 'account does not exit plz sign in')
-            return redirect('register')
-     return render (request,'authorisation/login.html', {})
+#      email = request.POST ['email'].replace('','' ).lower()
+#      password = request.POST['password']
+#      user = auth.authenticate( username = email, password = password)
+#      if user is not None:
+#         authlogin(request, user)
+#         return redirect('dashboard')
+#      else:
+#             messages.error(request, 'account does not exit plz sign in')
+#             return redirect('register')
+#      return render (request,'authorisation/login.html', {})
 
 # @anonymous_required
 def register(request):

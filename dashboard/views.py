@@ -1,5 +1,5 @@
 from django.shortcuts import render ,redirect,HttpResponse
-from django.contrib.auth.models import auth,User
+from django.contrib.auth.models import User,auth
 from django.contrib import messages
 
 
@@ -27,12 +27,10 @@ def home(request):
 def profile(request):
     context = {}  
    
-    # if request.method == 'GET':
-    #     # form  = ProfileForm(instance = request.user.profile)
-    #     context ['form'] =form
-    #     return render(request, 'dashboard/profile.html', context)
-    
-    
+    if request.method == 'GET':
+        form  = ProfileForm(instance = request.user.profile)
+        context ['form'] =form
+        return render(request, 'dashboard/profile.html', context)
     
     if request.method == 'POST':
 
