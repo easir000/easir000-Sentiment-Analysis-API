@@ -1,5 +1,5 @@
 from django.shortcuts import render ,redirect,HttpResponse
-from django.contrib.auth.models import User,auth,user
+from django.contrib.auth.models import auth,user
 from django.contrib import messages
 
 
