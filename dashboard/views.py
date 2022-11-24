@@ -10,6 +10,8 @@ from django.contrib.auth.decorators import user_passes_test
 from .forms import *
 from .models import *
 
+from . import views
+
 
 @login_required
 def home(request):
