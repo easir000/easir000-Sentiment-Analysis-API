@@ -1,5 +1,5 @@
 from django.shortcuts import render ,redirect,HttpResponse
-from django.contrib.auth.models import User,auth,user
+from django.contrib.auth.models import User,auth,user,views
 from django.contrib import messages
 
 
@@ -10,7 +10,7 @@ from django.contrib.auth.decorators import user_passes_test
 from .forms import *
 from .models import *
 
-from . import views
+
 
 
 @login_required
