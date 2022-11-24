@@ -1,6 +1,7 @@
 from django.shortcuts import render ,redirect,HttpResponse
-from django.contrib.auth.models import User,auth
+from django.contrib.auth.models import User,auth,user
 from django.contrib import messages
+
 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.decorators import user_passes_test
@@ -17,10 +18,13 @@ def home(request):
     return render (request,'dashboard/home.html', context)
 
 
+
+@login_required
 def profile(request):
     context = {}  
+   
     if request.method == 'GET':
-        form  = ProfileForm()
+        form  = ProfileForm(instance = request.user.profile)
         context ['form'] =form
         return render(request, 'dashboard/profile.html', context)
     
@@ -31,12 +35,11 @@ def profile(request):
 
         if form.is_valid():
             
-             form= ProfileForm(request.POST, request.FILES)
+             form= ProfileForm(request.POST,instance = request.user.profile)
         if form.is_valid():
             form.save()
-            return redirect('dashboard/profile.html') 
-    else:    
-        form = ProfileForm()
+            return redirect('profile') 
+    
     
             
     return render(request, 'dashboard/profile.html', context)
