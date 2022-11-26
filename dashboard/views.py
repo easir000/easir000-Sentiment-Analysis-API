@@ -35,9 +35,11 @@ def profile(request):
     if request.method == 'POST':
 
         form= ProfileForm(request.POST,instance = request.user.profile)
-        if form.is_valid():
-            form.save()
-            return redirect('profile') 
+        u = form.save()
+        profile = Profile.objects.create(user=u)
+        profile.save()
+        u.save()
+        return redirect('profile') 
     
     
             
