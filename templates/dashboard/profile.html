@@ -3,7 +3,7 @@
 {% load static %}
 {% load crispy_forms_tags %}
 
-
+{% crispy ProfileForm ProfileForm.helper %}
 
 
 
@@ -67,7 +67,7 @@
           <form   action = "#"   method="POST">
           
             {% csrf_token %}
-            {{form|crispy}}
+            {% crispy form %}
             
 
             <div class = "mt-2">
