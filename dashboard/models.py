@@ -58,3 +58,13 @@ def save(self, *args, **kwargs):
         self.slug = slugify('{} {} {} '.format(self.user.first_name, self.user.last_name, self.user.email))
         self.last_updated = timezone.localtime(timezone.now())
         super(Profile, self).save(*args, **kwargs)
+        
+        
+# @receiver(post_save, sender=User)
+def create_user_profile(sender, instance, created, *args, **kwargs):
+    if created:
+        Profile.objects.create(user=instance)
+
+# @receiver(post_save, sender=User)
+def save_user_profile(sender, instance, **kwargs):
+    instance.profile.save()
