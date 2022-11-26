@@ -50,7 +50,7 @@ def home(request):
 @login_required
 def profile(request):
     if request.method == 'POST':
-        form  = ProfileForm(instance = request.user.profile)
+        user_form  = ProfileForm(instance = request.user.profile)
 
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
