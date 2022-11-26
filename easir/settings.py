@@ -54,6 +54,8 @@ INSTALLED_APPS = [
     'dashboard',
     #third party apps
     'crispy_forms',
+      #'DjangoRestfulServer', #remove there is no need toimport the main project
+    'main', #no need for substantiating an app
 ]
 
 MIDDLEWARE = [
