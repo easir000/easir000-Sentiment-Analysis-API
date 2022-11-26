@@ -6,13 +6,21 @@ from .models import Profile
 
 @receiver(pre_save, sender=User)
 def create_profile(sender, instance, created, **kwargs):
-     if not created:
-        return
-     Profile.objects.create(user=instance)
+    if created:
+        Profile.objects.create(user=instance)
 
-@receiver([post_save,post_delete], sender=User)
-def save_profile(sender, instance, created, **kwargs):
-    instance.profile.save()
+
+# @receiver([post_save,post_delete], sender=User)
+# def save_profile(sender, instance, created, **kwargs):
+#     instance.profile.save()
     
+    
+    @receiver(post_save, sender=User, dispatch_uid='save_new_user_profile')
+    def save_profile(sender, instance, created, **kwargs):
+     user = instance
+    if created:
+        profile = Profile(user=User)
+        profile.save()
+        
     post_save.connect(create_profile, sender=User)
     post_save.connect(save_profile, sender=User)
