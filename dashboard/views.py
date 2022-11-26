@@ -23,42 +23,25 @@ def home(request):
 
 
 
-# @login_required
-# def profile(request):
-#     context = {}  
+@login_required
+def profile(request):
+    context = {}  
    
-#     if request.method == 'GET':
-#         form  = ProfileForm(instance = request.user.profile)
-#         context ['form'] =form
-#         # return render(request, 'dashboard/profile.html', context)
-#     return render(request=request, template_name="dashboard/profile.html", context={"user":request.user,  "form":ProfileForm })
+    # if request.method == 'GET':
+    #     form  = ProfileForm(instance = request.user.profile)
+    #     context ['form'] =form
+    #     # return render(request, 'dashboard/profile.html', context)
+    # return render(request=request, template_name="dashboard/profile.html", context={"user":request.user,  "form":ProfileForm })
     
-#     if request.method == 'POST':
+    if request.method == 'POST':
 
-#         form= ProfileForm(request.POST,instance = request.user.profile)
-#         u = form.save()
-#         profile = Profile.objects.create(user=u)
-#         profile.save()
-#         u.save()
-#         return redirect('profile') 
+        form= ProfileForm(request.POST,instance = request.user.profile)
+        u = form.save()
+        profile = Profile.objects.create(user=u)
+        profile.save()
+        u.save()
+        return redirect('profile') 
     
     
             
-#     return render(request, 'dashboard/profile.html', context)
-
-
-@login_required
-def profile(request):
-    if request.method == 'POST':
-        form  = ProfileForm(instance = request.user.profile)
-
-        if form.is_valid() and profile_form.is_valid():
-            form.save()
-            profile_form.save()
-            messages.success(request, 'Your profile is updated successfully')
-            return redirect(to='users-profile')
-    else:
-        form = ProfileForm(instance=request.user)
-        profile_form = ProfileForm(instance=request.user.profile)
-
-    return render(request, 'users/profile.html', {'form': form, 'profile_form': profile_form})
+    return render(request, 'dashboard/profile.html', context)
