@@ -12,7 +12,7 @@ from django.contrib.auth.decorators import user_passes_test
 from .forms import *
 from .models import *
 
-from .forms import ProfileForm
+
 
 
 
