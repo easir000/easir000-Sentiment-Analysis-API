@@ -24,7 +24,7 @@ def home(request):
 
 
 @login_required
-def profile(request):
+def ProfileForm(request):
     context = {}  
    
     if request.method == 'GET':
