@@ -1,5 +1,5 @@
 from django.shortcuts import render ,redirect,HttpResponse
-from django.contrib.auth.models import User,auth
+from django.contrib.auth.models import User,auth,user
 from django.contrib import messages
 
 
@@ -27,7 +27,7 @@ def home(request):
 @login_required
 def profile(request):
     context = {}  
-   
+    profile = user.profile
     if request.method == 'GET':
         form  = ProfileForm(instance = request.user.profile)
         context ['form'] =form
