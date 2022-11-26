@@ -1,5 +1,5 @@
 from django.db.models.signals import post_save,pre_delete,pre_save,post_delete
-from django.contrib.auth.models import User,UserProfile
+from django.contrib.auth.models import User
 
 from django.dispatch import receiver
 from .models import Profile  
@@ -12,11 +12,7 @@ def create_profile(sender, instance, created, **kwargs):
 
 # @receiver([post_save,post_delete], sender=User)
 def save_profile(sender, instance, created, **kwargs):
-    # instance.profile.save()
-    user = instance
-    if created:
-        profile = UserProfile(user=user)
-        profile.save()
+    instance.profile.save()
     
     post_save.connect(create_profile, sender=User)
     post_save.connect(save_profile, sender=User)
