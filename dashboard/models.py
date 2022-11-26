@@ -5,6 +5,8 @@ from django.utils import timezone
 from django.urls import reverse
 from uuid import uuid4
 from django_resized import ResizedImageField
+from django.dispatch import receiver #add this
+from django.db.models.signals import post_save #add this
 
 import os 
 
@@ -60,11 +62,15 @@ def save(self, *args, **kwargs):
         super(Profile, self).save(*args, **kwargs)
         
         
-# @receiver(post_save, sender=User)
-def create_user_profile(sender, instance, created, *args, **kwargs):
+@receiver(post_save, sender=User) #add this
+def create_profile(sender, instance, created, **kwargs):
     if created:
         Profile.objects.create(user=instance)
 
-# @receiver(post_save, sender=User)
-def save_user_profile(sender, instance, **kwargs):
+
+@receiver(post_save, sender=User) #add this
+def save_profile(sender, instance, created, **kwargs):
     instance.profile.save()
+    
+    post_save.connect(create_profile, sender=User)
+    post_save.connect(save_profile, sender=User)  
