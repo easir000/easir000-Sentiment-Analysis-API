@@ -87,7 +87,7 @@ def register(request):
                 
                 user = User.objects.create_user(email=email,username=email,password=password2)
                 user.save()
-                # auth.login(request,user)
+                auth.login(request,user)
                 return redirect ('dashboard')
                 
         else:
