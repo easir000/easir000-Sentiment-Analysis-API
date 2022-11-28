@@ -43,3 +43,7 @@ def profile(request):
     
             
     return render(request, 'dashboard/profile.html', context)
+
+
+def dashboard(request):
+    return render(request,"dashboard.html")
