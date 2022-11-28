@@ -23,7 +23,7 @@ def home(request):
 
 
 
-@login_required
+# @login_required
 def profile(request):
     context = {}  
    
