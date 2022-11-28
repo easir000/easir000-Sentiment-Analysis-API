@@ -42,11 +42,10 @@ def login(request):
         password = request.POST['password']
         user = auth.authenticate( username = email, password = password)
         if user is not None:
-            if user.is_active:
-                login(request, user)
+         login(request, user)
             
-        return redirect('dashboard')
-    else:
+         return redirect('dashboard')
+        else:
             messages.error(request, 'account does not exit plz sign in')
             return redirect('register')
     return render (request,'authorisation/login.html', {})
