@@ -1,5 +1,5 @@
 from django.shortcuts import render ,redirect
-from django.contrib.auth.models import User,auth,AuthenticationForm
+from django.contrib.auth.models import User,auth
 from django.contrib import messages
 
 from django.contrib.auth import login as authlogin
@@ -37,13 +37,12 @@ def login(request):
     if request.method == 'POST':
   
         # AuthenticationForm_can_also_be_used__
-       form = AuthenticationForm(request, data=request.POST)
-    if form.is_valid():
+  
         email = request.POST ['email'].replace('','' ).lower()
         password = request.POST['password']
         user = auth.authenticate( username = email, password = password)
         if user is not None:
-         login(request, user)
+         authlogin(request, user)
             
          return redirect('dashboard')
         else:
@@ -51,7 +50,22 @@ def login(request):
             return redirect('register')
     return render (request,'authorisation/login.html', {})
 
+# def login(request):
+    
 
+ 
+#      email = request.POST ['email'].replace('','' ).lower()
+#      password = request.POST['password']
+#      user = auth.authenticate( username = email, password = password)
+#      if user is not None:
+#         authlogin(request, user)
+#         return redirect('dashboard')
+#      else:
+#             messages.error(request, 'account does not exit plz sign in')
+#             return redirect('register')
+#      return render (request,'authorisation/login.html', {})
+
+# @anonymous_required
 def register(request):
     if request.method == 'POST':
         
