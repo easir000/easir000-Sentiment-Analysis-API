@@ -5,9 +5,7 @@ from django.dispatch import receiver
 from .models import Profile  
 
 # @receiver(pre_save, sender=User)
-# def create_profile(sender, instance, created, **kwargs):
-#     if created:
-#         Profile.objects.create(user=instance)
+
 def create_profile(sender, instance, created, *args, **kwargs):
     # ignore if this is an existing User
     if not created:
@@ -15,9 +13,7 @@ def create_profile(sender, instance, created, *args, **kwargs):
     Profile.objects.create(user=instance)
 
 
-# @receiver([post_save,post_delete], sender=User)
-# def save_profile(sender, instance, created, **kwargs):
-#     instance.profile.save()
+
     
     
     # @receiver(post_save, sender=User, dispatch_uid='save_new_user_profile')

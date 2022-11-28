@@ -55,13 +55,6 @@ def get_profile(request):
     
     return render(request,"profile.html",{"profile":profile})
 
-
-def get_profile(request):    
-    
-    profile = get_object_or_404(Profile,user=request.user)
-    
-    return render(request,"profile.html",{"profile":profile})
-
 # @login_required(login_url="user:login")
 def update_profile(request):       
     profile = get_object_or_404(Profile, user=request.user)
