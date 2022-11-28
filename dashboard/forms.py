@@ -5,6 +5,7 @@ from django.contrib.auth.forms import UserCreationForm
 from .models import Profile
 
 
+from django.forms import ModelForm
 
     
 
@@ -12,7 +13,7 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Submit, Row, Column
 
 
-class ProfileForm(forms.ProfileForm):
+class ProfileForm(forms.ModelForm):
 
     
      helper = FormHelper()
