@@ -36,13 +36,13 @@ def anonymous_required(function=None, redirect_url=None):
 def login(request):
     if request.method == 'POST':
   
-        # AuthenticationForm_can_also_be_used__
+  
   
         email = request.POST ['email'].replace('','' ).lower()
         password = request.POST['password']
         user = auth.authenticate( username = email, password = password)
         if user is not None:
-         authlogin(request, user)
+         login(request, user)
             
          return redirect('dashboard')
         else:
