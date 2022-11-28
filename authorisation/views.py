@@ -1,5 +1,5 @@
 from django.shortcuts import render ,redirect
-from django.contrib.auth.models import User,auth
+from django.contrib.auth.models import User,auth,AuthenticationForm
 from django.contrib import messages
 
 from django.contrib.auth import login as authlogin
@@ -37,7 +37,8 @@ def login(request):
     if request.method == 'POST':
   
         # AuthenticationForm_can_also_be_used__
-  
+       form = AuthenticationForm(request, data=request.POST)
+    if form.is_valid():
         email = request.POST ['email'].replace('','' ).lower()
         password = request.POST['password']
         user = auth.authenticate( username = email, password = password)
