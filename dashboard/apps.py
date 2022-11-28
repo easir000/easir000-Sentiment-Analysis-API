@@ -13,3 +13,4 @@ class DashboardConfig(AppConfig):
         # from . import signals
         
         import dashboard.signals
+        

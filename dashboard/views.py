@@ -1,12 +1,12 @@
-from django.shortcuts import render ,redirect,HttpResponse
+from django.shortcuts import render ,HttpResponse
 from django.contrib.auth.models import User,auth
 from django.contrib import messages
-
+from django.shortcuts import redirect, render,get_object_or_404
 
 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.decorators import user_passes_test
-
+from django.http import HttpResponseRedirect
 
 from .forms import *
 from .models import *
@@ -47,3 +47,32 @@ def profile(request):
 
 def dashboard(request):
     return render(request,"dashboard.html")
+
+@login_required(login_url="user:login")
+def get_profile(request):    
+    
+    profile = get_object_or_404(Profile,user=request.user)
+    
+    return render(request,"profile.html",{"profile":profile})
+
+
+def get_profile(request):    
+    
+    profile = get_object_or_404(Profile,user=request.user)
+    
+    return render(request,"profile.html",{"profile":profile})
+
+# @login_required(login_url="user:login")
+def update_profile(request):       
+    profile = get_object_or_404(Profile, user=request.user)
+    form = ProfileForm(instance=profile)
+    if request.method=="POST":
+        form = ProfileForm(request.POST,request.FILES,instance=request.user.user_profile)
+        if form.is_valid():
+            form.save()
+            messages.success(request,"Profile is updated successfully")
+            return HttpResponseRedirect(reverse("profile:profile"))   
+        else:
+            return render(request,"profile.html",{"form":form})                 
+            
+    return render(request,"edit.html",{"form":form})
