@@ -22,6 +22,6 @@ def create_profile(sender, instance, created, **kwargs):
     #     profile = Profile
     #     profile.user = User
     #     profile.save()
-        instance.objects.save()
+        instance.profile.save()
     post_save.connect(create_profile, sender=User)
     post_save.connect(save_profile, sender=User)
