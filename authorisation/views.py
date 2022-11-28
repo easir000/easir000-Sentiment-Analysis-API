@@ -41,7 +41,7 @@ def login(request):
         email = request.POST ['email'].replace('','' ).lower()
         password = request.POST['password']
         user = auth.authenticate( username = email, password = password)
-        if user is not None:
+        if user :
          auth.login(request, user)
             
          return redirect('dashboard')
