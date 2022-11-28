@@ -42,7 +42,7 @@ def login(request):
         password = request.POST['password']
         user = auth.authenticate( username = email, password = password)
         if user is not None:
-         login(request, user)
+         auth.login(request, user)
             
          return redirect('dashboard')
         else:
