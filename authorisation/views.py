@@ -1,4 +1,4 @@
-from django.shortcuts import render ,redirect
+from django.shortcuts import render ,redirect,HttpResponseRedirect,reverse
 from django.contrib.auth.models import User,auth
 from django.contrib import messages
 
@@ -33,37 +33,42 @@ def anonymous_required(function=None, redirect_url=None):
 
 
 # @anonymous_required
-def login(request):
-    if request.method == 'POST':
-  
-        # AuthenticationForm_can_also_be_used__
-  
-        email = request.POST ['email'].replace('','' ).lower()
-        password = request.POST['password']
-        user = auth.authenticate( username = email, password = password)
-        if user is not None:
-         authlogin(request, user)
-            
-         return redirect('dashboard')
-        else:
-            messages.error(request, 'account does not exit plz sign in')
-            return redirect('register')
-    return render (request,'authorisation/login.html', {})
-
 # def login(request):
-    
-
- 
-#      email = request.POST ['email'].replace('','' ).lower()
-#      password = request.POST['password']
-#      user = auth.authenticate( username = email, password = password)
-#      if user is not None:
-#         authlogin(request, user)
-#         return redirect('dashboard')
-#      else:
+#     if request.method == 'POST':
+  
+#         # AuthenticationForm_can_also_be_used__
+  
+#         email = request.POST ['email'].replace('','' ).lower()
+#         password = request.POST['password']
+#         user = auth.authenticate( username = email, password = password)
+#         if user is not None:
+#          login(request, user)
+            
+#          return redirect('dashboard')
+#         else:
 #             messages.error(request, 'account does not exit plz sign in')
 #             return redirect('register')
-#      return render (request,'authorisation/login.html', {})
+#     return render (request,'authorisation/login.html', {})
+
+
+
+def login_view(request):
+    if request.method == 'GET':
+        return render(request, 'authorisation/login.html')
+    if request.method == 'POST':
+       email = request.POST ['email'].replace('','' ).lower()
+       password = request.POST['password']
+       user = auth.authenticate( username = email, password = password)
+       if user is not None:
+            return HttpResponseRedirect(reverse('error'))
+    if not user.is_active:
+            return HttpResponseRedirect(reverse('error'))
+
+        # Correct password, and the user is marked "active"
+    auth.login(request, user)
+        # Redirect to a success page.
+    return HttpResponseRedirect(reverse('home'))
+
 
 # @anonymous_required
 def register(request):
