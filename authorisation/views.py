@@ -53,8 +53,7 @@ def anonymous_required(function=None, redirect_url=None):
 
 
 def login_view(request):
-    if request.method == 'GET':
-        return render(request, 'authorisation/login.html')
+    
     if request.method == 'POST':
        email = request.POST ['email'].replace('','' ).lower()
        password = request.POST['password']
