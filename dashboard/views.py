@@ -1,4 +1,4 @@
-from django.shortcuts import render ,redirect,HttpResponse 
+from django.shortcuts import render ,redirect
 from django.contrib.auth.models import User,auth
 from django.contrib import messages
 from django.shortcuts import redirect, render,get_object_or_404
@@ -29,17 +29,20 @@ def profile(request):
     context = {}  
     context['models'] = models
    
-    # if request.method == 'GET':
-    #     # form  = ProfileForm()
-    #     context ['form'] =form
-    #     return render(request, 'dashboard/profile.html', context)
+    if request.method == 'GET':
+        form  = ProfileForm()
+        context ['form'] =form
+        return render(request, 'dashboard/profile.html', context)
     
     
     if request.method == 'POST':
 
-        form= ProfileForm(request.POST)
+        form= ProfileForm(request.POST,instance = request.user)
         if form.is_valid():
-         pass
-    
-    
-        return render(request, 'dashboard/profile.html', context)
+           form.save()
+        return redirect('profile') 
+    else:
+            form = ProfileForm(instance=request.user)
+            context = {'form': form}
+            return render(request,'dashboard/profile.html', context)
+              
