@@ -5,7 +5,7 @@ from django.contrib.auth.forms import UserCreationForm
 from .models import Profile
 
 
-from django.forms import ModelForm
+from django.forms import ProfileModel
 
     
 
@@ -13,7 +13,7 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Submit, Row, Column
 
 
-class Profile(forms.Model):
+class ProfileForm(forms.ModelForm):
 
     
      helper = FormHelper()
@@ -79,7 +79,7 @@ Submit('submit', 'Save Changes', css_class= "btn btn-primary me-2")
 
 
 
-class ProfileForm(ModelForm):
+
     class Meta:
-     model = Profile
+     model = ProfileModel
     fields = ['addressLine1','addressLine2','city','province','country','postalcode']
