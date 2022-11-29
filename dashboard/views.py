@@ -30,61 +30,16 @@ def profile(request):
     context['models'] = models
    
     if request.method == 'GET':
-        form  = ProfileForm(instance = request.user.profile)
+        form  = ProfileForm()
         context ['form'] =form
         return render(request, 'dashboard/profile.html', context)
     
     
     if request.method == 'POST':
 
-        form= ProfileForm(request.POST,instance = request.user.profile)
+        form= ProfileForm(request.POST)
         if form.is_valid():
-           form.save()
-        return redirect('profile') 
+         pass
     
     
-            
-    return render(request, 'dashboard/profile.html', context)
-def update_profile(request):
-    if request.method == 'POST':
-        
-        profile_form = ProfileForm(request.POST, instance=request.user.profile)
-        if profile_form.is_valid():
-            
-            profile_form.save()
-            messages.success(request,('Your profile was successfully updated!'))
-            return redirect('settings:profile')
-        else:
-            messages.error(request,('Please correct the error below.'))
-    else:
-        
-        profile_form = ProfileForm(instance=request.user.profile)
-    return render(request, 'profiles/profile.html', {
-       
-        'profile_form': profile_form
-    })
-
-# def dashboard(request):
-#     return render(request,"dashboard.html")
-
-# @login_required(login_url="user:login")
-# def get_profile(request):    
-    
-#     profile = get_object_or_404(Profile,user=request.user)
-    
-#     return render(request,"profile.html",{"profile":profile})
-
-# # @login_required(login_url="user:login")
-# def update_profile(request):       
-#     profile = get_object_or_404(Profile, user=request.user)
-#     form = ProfileForm(instance=profile)
-#     if request.method=="POST":
-#         form = ProfileForm(request.POST,request.FILES,instance=request.user.user_profile)
-#         if form.is_valid():
-#             form.save()
-#             messages.success(request,"Profile is updated successfully")
-#             return HttpResponseRedirect(reverse("profile:profile"))   
-#         else:
-#             return render(request,"profile.html",{"form":form})                 
-            
-#     return render(request,"edit.html",{"form":form})
+        return render(request, 'dashboard/profile.html', context)
