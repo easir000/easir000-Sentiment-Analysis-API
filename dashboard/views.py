@@ -28,14 +28,14 @@ def profile(request):
     context = {}  
    
     if request.method == 'GET':
-        form  = ProfileForm(instance = request.user.profile)
+        form  = ProfileForm(instance=request.user.profile)
         context ['form'] =form
         return render(request, 'dashboard/profile.html', context)
     
     
     if request.method == 'POST':
 
-        form= ProfileForm(request.POST,instance = request.user.profile)
+        form= ProfileForm(request.POST, instance=request.user.profile)
         if form.is_valid():
            form.save()
         return redirect('profile') 
