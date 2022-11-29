@@ -13,38 +13,38 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Submit, Row, Column
 
 
-class ProfileForm(forms.Form):
+class ProfileForm(forms.ModelForm):
 
     
      helper = FormHelper()
     
     
-     addressLine1_input = forms.CharField(
+     addressLine1 = forms.CharField(
                     required = True,
                     label='Address Line 1',
                     widget=forms.TextInput(attrs={'class': 'form-control mb-3', 'placeholder': 'Enter Address Line 1'}))
                     
-     addressLine2_input = forms.CharField(
+     addressLine2 = forms.CharField(
                     required = True,
                     label='Address Line 2',
                     widget=forms.TextInput(attrs={'class': 'form-control mb-3', 'placeholder': 'Enter Address Line 2'}))
                     
-     city_input = forms.CharField(
+     city = forms.CharField(
                     required = True,
                     label='City',
                     widget=forms.TextInput(attrs={'class': 'form-control mb-3', 'placeholder': 'Enter City'}))
                     
-     province_input =forms.CharField(
+     province =forms.CharField(
                     required = True,
                     label='Province',
                     widget=forms.TextInput(attrs={'class': 'form-control mb-3', 'placeholder': 'Enter Province'}))
                     
-     country_input = forms.CharField(
+     country = forms.CharField(
                     required = True,
                     label='Country',
                     widget=forms.TextInput(attrs={'class': 'form-control mb-3', 'placeholder': 'Enter Country'}))
                     
-     postalCode_input = forms.CharField(
+     postalCode = forms.CharField(
                     required = True,
                     label='Postal Code',
                     widget=forms.TextInput(attrs={'class': 'form-control mb-3', 'placeholder': 'Enter Postal Code'}))
