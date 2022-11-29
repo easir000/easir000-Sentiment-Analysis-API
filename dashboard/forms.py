@@ -19,32 +19,32 @@ class ProfileForm(forms.Form):
      helper = FormHelper()
     
     
-     addressLine1 = forms.CharField(
+     addressLine1_input = forms.CharField(
                     required = True,
                     label='Address Line 1',
                     widget=forms.TextInput(attrs={'class': 'form-control mb-3', 'placeholder': 'Enter Address Line 1'}))
                     
-     addressLine2 = forms.CharField(
+     addressLine2_input = forms.CharField(
                     required = True,
                     label='Address Line 2',
                     widget=forms.TextInput(attrs={'class': 'form-control mb-3', 'placeholder': 'Enter Address Line 2'}))
                     
-     city = forms.CharField(
+     city_input = forms.CharField(
                     required = True,
                     label='City',
                     widget=forms.TextInput(attrs={'class': 'form-control mb-3', 'placeholder': 'Enter City'}))
                     
-     province =forms.CharField(
+     province_input =forms.CharField(
                     required = True,
                     label='Province',
                     widget=forms.TextInput(attrs={'class': 'form-control mb-3', 'placeholder': 'Enter Province'}))
                     
-     country = forms.CharField(
+     country_input = forms.CharField(
                     required = True,
                     label='Country',
                     widget=forms.TextInput(attrs={'class': 'form-control mb-3', 'placeholder': 'Enter Country'}))
                     
-     postalCode = forms.CharField(
+     postalCode_input = forms.CharField(
                     required = True,
                     label='Postal Code',
                     widget=forms.TextInput(attrs={'class': 'form-control mb-3', 'placeholder': 'Enter Postal Code'}))
@@ -57,7 +57,7 @@ class ProfileForm(forms.Form):
 
 
 def __init__(self, *args, **kwargs):
-        # super(ProfileForm, self).__init__(*args, **kwargs)
+        super(ProfileForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.layout = Layout(
             Row(
