@@ -2,7 +2,7 @@ from django.shortcuts import render ,redirect
 from django.contrib.auth.models import User,auth
 from django.contrib import messages
 from django.shortcuts import redirect, render,get_object_or_404
-from django.forms import ModelForm
+
 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.decorators import user_passes_test
@@ -28,14 +28,14 @@ def profile(request):
     context = {}  
    
     if request.method == 'GET':
-        form  = ModelForm(instance = request.user.profile)
+        form  = ProfileForm(instance = request.user.profile)
         context ['form'] =form
         return render(request, 'dashboard/profile.html', context)
     
     
     if request.method == 'POST':
 
-        form= ModelForm(request.POST,instance = request.user.profile)
+        form= ProfileForm(request.POST,instance = request.user.profile)
         if form.is_valid():
            form.save()
         return redirect('profile') 
@@ -46,7 +46,7 @@ def profile(request):
 def update_profile(request):
     if request.method == 'POST':
         
-        profile_form = ModelForm(request.POST, instance=request.user.profile)
+        profile_form = ProfileForm(request.POST, instance=request.user.profile)
         if profile_form.is_valid():
             
             profile_form.save()
@@ -56,7 +56,7 @@ def update_profile(request):
             messages.error(request,('Please correct the error below.'))
     else:
         
-        profile_form = ModelForm(instance=request.user.profile)
+        profile_form = ProfileForm(instance=request.user.profile)
     return render(request, 'profiles/profile.html', {
        
         'profile_form': profile_form

@@ -5,7 +5,7 @@ from django.contrib.auth.forms import UserCreationForm
 from .models import Profile
 
 
-from django.forms import ModelForm
+
 
     
 
@@ -13,7 +13,7 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Submit, Row, Column
 
 
-class ModelForm(forms.ModelForm):
+class ProfileForm(forms.ModelForm):
 
     
      helper = FormHelper()
@@ -56,7 +56,7 @@ class ModelForm(forms.ModelForm):
 
 
 def __init__(self, *args, **kwargs):
-    super(ModelForm, self).__init__(*args, **kwargs)
+    super(ProfileForm, self).__init__(*args, **kwargs)
     #   super().__init__(*args, **kwargs)
     self.helper = FormHelper()
     self.helper.layout = Layout(
