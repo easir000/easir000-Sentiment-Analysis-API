@@ -30,7 +30,7 @@ def profile(request):
     context['models'] = models
    
     if request.method == 'GET':
-        form  = ProfileForm()
+        # form  = ProfileForm()
         context ['form'] =form
         return render(request, 'dashboard/profile.html', context)
     
