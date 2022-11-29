@@ -55,11 +55,11 @@ class ProfileForm(forms.Form):
      #Enter the Form Variables
 
 
+
 def __init__(self, *args, **kwargs):
-    super(ProfileForm, self).__init__(*args, **kwargs)
-    #   super().__init__(*args, **kwargs)
-    self.helper = FormHelper()
-    self.helper.layout = Layout(
+        super(ProfileForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
             Row(
                 Column('addressLine1', css_class='form-group col-md-6'),
                 Column('addressLine2', css_class='form-group col-md-6')),
@@ -80,6 +80,6 @@ Submit('submit', 'Save Changes', css_class= "btn btn-primary me-2")
 
 
 
-    class Meta:
-     model = Profile
-    fields = ['addressLine1','addressLine2','city','province','country','postalcode']
+class Meta:
+    model = Profile
+fields = ['addressLine1','addressLine2','city','province','country','postalcode']
