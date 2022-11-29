@@ -24,72 +24,48 @@ def home(request):
 
 
 # @login_required
-# def profile(request):
-#     context = {}  
-   
-#     # if request.method == 'GET':
-#     #     form  = ProfileForm(instance = request.user.profile)
-#     #     context ['form'] =form
-#     #     return render(request, 'dashboard/profile.html', context)
-    
-    
-#     if request.method == 'POST':
-
-#         form= ProfileForm(request.POST,instance = request.user.profile)
-#         if form.is_valid():
-#            form.save()
-#         return redirect('profile') 
-    
-    def update_profile(request):
-         context = {}  
+def profile(request):
+    context = {}  
    
     if request.method == 'GET':
         form  = ProfileForm(instance = request.user.profile)
         context ['form'] =form
         return render(request, 'dashboard/profile.html', context)
-        if request.method == 'POST':
-         user_form = UserForm(request.POST, instance=request.user)
-        profile_form = ProfileForm(request.POST, instance=request.user.profile)
-        if user_form.is_valid() and profile_form.is_valid():
-            user_form.save()
-            profile_form.save()
-            messages.success(request, _('Your profile was successfully updated!'))
-            return redirect('settings:profile')
-        else:
-            messages.error(request, _('Please correct the error below.'))
-    else:
-        user_form = UserForm(instance=request.user)
-        profile_form = ProfileForm(instance=request.user.profile)
-    return render(request, 'dashboard/profile.html', {
-        'user_form': user_form,
-        'profile_form': profile_form
-    })
+    
+    
+    if request.method == 'POST':
+
+        form= ProfileForm(request.POST,instance = request.user.profile)
+        if form.is_valid():
+           form.save()
+        return redirect('profile') 
+    
     
             
     return render(request, 'dashboard/profile.html', context)
 
 
-def dashboard(request):
-    return render(request,"dashboard.html")
-
-@login_required(login_url="user:login")
-def get_profile(request):    
-    
-    profile = get_object_or_404(Profile,user=request.user)
-    
-    return render(request,"profile.html",{"profile":profile})
+# def dashboard(request):
+#     return render(request,"dashboard.html")
 
 # @login_required(login_url="user:login")
-def update_profile(request):       
-    profile = get_object_or_404(Profile, user=request.user)
-    form = ProfileForm(instance=profile)
-    if request.method=="POST":
-        form = ProfileForm(request.POST,request.FILES,instance=request.user.user_profile)
-        if form.is_valid():
-            form.save()
-            messages.success(request,"Profile is updated successfully")
-            return HttpResponseRedirect(reverse("profile:profile"))   
-        else:
-            return render(request,"profile.html",{"form":form})                 
+# def get_profile(request):    
+    
+#     profile = get_object_or_404(Profile,user=request.user)
+    
+#     return render(request,"profile.html",{"profile":profile})
+
+# # @login_required(login_url="user:login")
+# def update_profile(request):       
+#     profile = get_object_or_404(Profile, user=request.user)
+#     form = ProfileForm(instance=profile)
+#     if request.method=="POST":
+#         form = ProfileForm(request.POST,request.FILES,instance=request.user.user_profile)
+#         if form.is_valid():
+#             form.save()
+#             messages.success(request,"Profile is updated successfully")
+#             return HttpResponseRedirect(reverse("profile:profile"))   
+#         else:
+#             return render(request,"profile.html",{"form":form})                 
             
-    return render(request,"edit.html",{"form":form})
+#     return render(request,"edit.html",{"form":form})
