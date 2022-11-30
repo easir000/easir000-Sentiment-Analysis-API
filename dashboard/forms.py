@@ -54,10 +54,7 @@ class ProfileForm(forms.ModelForm):
     
      #Enter the Form Variables
 
-class Meta:
-        model = Profile
-        fields = '__all__'
-        exclude = ['user']
+
 
 def __init__(self, *args, **kwargs):
         super(ProfileForm, self).__init__(*args, **kwargs)
@@ -81,11 +78,11 @@ Submit('submit', 'Save Changes', css_class= "btn btn-primary me-2")
 
 
 
-# class ProfileForm(forms.ModelForm):
-# #  class Meta:
-# #     model = ProfileForm
-# # fields = ['addressLine1','addressLine2','city','province','country','postalcode']
+class ProfileForm(forms.ModelForm):
 #  class Meta:
-#         model = Profile
-#         fields = '__all__'
-#         exclude = ['user']
+#     model = ProfileForm
+# fields = ['addressLine1','addressLine2','city','province','country','postalcode']
+ class Meta:
+        model = Profile
+        fields = '__all__'
+        exclude = ['user']
