@@ -1,18 +1,23 @@
 from django.db.models.signals import post_save
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User ,UserProfile
 
 
 from .models import Profile  
 
 # @receiver(pre_save, sender=User)
 
-def create_profile(sender, instance, created, **kwargs):
-    # ignore if this is an existing User
-    if created:
+# def create_profile(sender, instance, created, **kwargs):
+#     # ignore if this is an existing User
+#     if created:
         
-     Profile.objects.create(user=instance)
+#      Profile.objects.create(user=instance)
 
-
+def create_profile(sender, **kwargs):
+    user = kwargs["instance"]
+    if kwargs["created"]:
+        user_profile = UserProfile(user=user)
+        user_profile.save()
+post_save.connect(create_profile, sender=User)
 
     
     
