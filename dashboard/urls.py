@@ -6,7 +6,7 @@ urlpatterns = [
  
    # path('home', views.home, name='dashboard'),
    path('profile', views.profile, name='profile'),
-    path('profile/', views.ProfileView.as_view(), name='profile'),
+    path('profile/', views.profileView.as_view(), name='profile'),
    
    
    
