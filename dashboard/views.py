@@ -25,7 +25,7 @@ def home(request):
 
 # @login_required
 def profile(request):
-    context = { 'form': form}  
+    context = {}  
    
     if request.method == 'GET':
         form  = ProfileForm(instance = request.user.profile)
