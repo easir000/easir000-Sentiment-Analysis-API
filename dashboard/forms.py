@@ -13,7 +13,7 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Submit, Row, Column
 
 
-class ProfileForm(forms.ModelForm):
+class ProfileForm(forms.Form):
 
     
      helper = FormHelper()
@@ -78,7 +78,7 @@ Submit('submit', 'Save Changes', css_class= "btn btn-primary me-2")
 
 
 
-class ProfileForm(forms.ModelForm):
+class ProfileForm(forms.Form):
 #  class Meta:
 #     model = ProfileForm
 # fields = ['addressLine1','addressLine2','city','province','country','postalcode']
