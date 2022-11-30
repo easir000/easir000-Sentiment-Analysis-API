@@ -1,9 +1,9 @@
 {% extends 'layout/dashboard.html' %}
 
-{% load static %}
+{% comment %} {% load static %} {% endcomment %}
 {% load crispy_forms_tags %}
 
-{% crispy ProfileForm ProfileForm.helper %}
+{% comment %} {% crispy ProfileForm ProfileForm.helper %} {% endcomment %}
 
 
 
@@ -67,7 +67,7 @@
           <form action="#" method="POST">
           
             {% csrf_token %}
-            {{forms|crispy}}
+           {% crispy form %}
             
 
             {% comment %} <div class = "mt-2">

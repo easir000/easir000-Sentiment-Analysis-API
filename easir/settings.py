@@ -55,7 +55,7 @@ INSTALLED_APPS = [
     #third party apps
     'crispy_forms',
 ]
-CRISPY_TEMPLATE_PACK = 'bootstrap4' 
+ 
 
 
 MIDDLEWARE = [
@@ -158,6 +158,8 @@ MEDIA_URL = '/uploads/'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'email.host'
