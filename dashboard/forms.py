@@ -84,6 +84,5 @@ Submit('submit', 'Save Changes', css_class= "btn btn-primary me-2")
 #     model = Profile
 # fields = ['addressLine1','addressLine2','city','province','country','postalcode']
 class Meta:
-        model = Profile
-        fields = '__all__'
-        exclude = ['user']
+        models = Profile
+        fields = "__all__"
