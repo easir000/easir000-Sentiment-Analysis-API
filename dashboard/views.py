@@ -74,4 +74,4 @@ class profile(View):
         return redirect('profile')
     
             
-    # return render(request, 'dashboard/profile.html', context)
+        return render(request, 'dashboard/profile.html', context)
