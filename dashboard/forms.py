@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from .models import Profile
 
-
+from dashboard.models import Profile
 
 
     
@@ -13,7 +13,7 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Submit, Row, Column
 
 
-class ProfileForm(forms.Form):
+class ProfileForm(forms.ModelForm):
 
     
      helper = FormHelper()
@@ -82,4 +82,12 @@ Submit('submit', 'Save Changes', css_class= "btn btn-primary me-2")
 
 class Meta:
     model = Profile
-fields = ['addressLine1','addressLine2','city','province','country','postalcode']
+# fields = ['addressLine1','addressLine2','city','province','country','postalcode']
+fields = '__all__'
+
+def form_validation_error(form):
+    msg = ""
+    for field in form:
+        for error in field.errors:
+            msg += "%s: %s \\n" % (field.label if hasattr(field, 'label') else 'Error', error)
+    return msg
