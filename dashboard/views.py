@@ -46,7 +46,7 @@ from dashboard.models import Profile
     
     
     
-@method_decorator(login_required(login_url='login'), name='dispatch')
+# @method_decorator(login_required(login_url='login'), name='dispatch')
 class profile(View):
     profile = None
 
