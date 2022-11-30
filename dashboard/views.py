@@ -47,12 +47,12 @@ from dashboard.models import Profile
     
     
 @method_decorator(login_required(login_url='login'), name='dispatch')
-class ProfileView(View):
+class profile(View):
     profile = None
 
     def dispatch(self, request, *args, **kwargs):
         self.profile, __ = Profile.objects.get_or_create(user=request.user)
-        return super(ProfileView, self).dispatch(request, *args, **kwargs)
+        return super(profile, self).dispatch(request, *args, **kwargs)
 
     def get(self, request):
         context = {'profile': self.profile, 'segment': 'profile'}
