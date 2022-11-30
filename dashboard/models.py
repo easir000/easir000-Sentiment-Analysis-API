@@ -5,7 +5,7 @@ from django.utils import timezone
 from django.urls import reverse
 from uuid import uuid4
 from django_resized import ResizedImageField
-
+from django.utils.translation import gettext as _
 import os 
 
 # Create your models here.
@@ -44,7 +44,8 @@ last_updated = models.DateTimeField(blank=True, null=True)
 def __str__(self):
         return  '{} {} {} '.format(self.user.first_name, self.user.last_name, self.user.email)
 
-
+class Meta:
+        verbose_name = _('Profile')
 
 
 def save(self, *args, **kwargs):
