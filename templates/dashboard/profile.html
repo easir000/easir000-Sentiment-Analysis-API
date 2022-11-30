@@ -1,12 +1,12 @@
 {% extends 'layout/dashboard.html' %}
 
 {% load static %}
-{% block title %} Settings {% endblock %}
+
 
 <!-- Specific Page CSS goes HERE  -->
 {% block stylesheets %}{% endblock stylesheets %}
 
-{% block content %}
+
 {% load crispy_forms_tags %}
 
 {% crispy ProfileForm ProfileForm.helper %}
