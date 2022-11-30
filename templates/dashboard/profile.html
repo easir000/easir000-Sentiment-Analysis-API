@@ -67,7 +67,7 @@
           <form action="#" method="POST">
           
             {% csrf_token %}
-           {% crispy form%}
+            {{form|crispy}}
             
 
             {% comment %} <div class = "mt-2">
