@@ -64,8 +64,8 @@
         <hr class="my-0" />
         <div class="card-body">
 
-          <form action="#" method="POST">
-          
+          {% comment %} <form action="#" method="POST"> {% endcomment %}
+          <form action="submit_survey"  id="ProfileForm" method="post">
             {% csrf_token %}
            {% crispy form%}
             

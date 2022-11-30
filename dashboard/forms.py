@@ -13,7 +13,7 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Submit, Row, Column
 
 
-class ProfileForm(forms.ModelForm):
+class ProfileForm(forms.Form):
 
     
      helper = FormHelper()
@@ -59,6 +59,12 @@ class ProfileForm(forms.ModelForm):
 def __init__(self, *args, **kwargs):
         super(ProfileForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
+        self.helper.form_id = 'id-exampleForm'
+        self.helper.form_class = 'blueForms'
+        self.helper.form_method = 'post'
+        self.helper.form_action = 'submit_survey'
+
+        self.helper.add_input(Submit('submit', 'Submit'))
         self.helper.layout = Layout(
             Row(
                 Column('addressLine1', css_class='form-group col-md-6'),
@@ -78,7 +84,7 @@ Submit('submit', 'Save Changes', css_class= "btn btn-primary me-2")
 
 
 
-class ProfileForm(forms.ModelForm):
+class ProfileForm(forms.Form):
 #  class Meta:
 #     model = ProfileForm
 # fields = ['addressLine1','addressLine2','city','province','country','postalcode']
