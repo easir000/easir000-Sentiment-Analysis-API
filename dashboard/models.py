@@ -5,7 +5,7 @@ from django.utils import timezone
 from django.urls import reverse
 from uuid import uuid4
 from django_resized import ResizedImageField
-from django.utils.translation import gettext as _
+
 import os 
 
 # Create your models here.
@@ -26,6 +26,16 @@ profileImage = ResizedImageField(size=[200, 200], quality=90, upload_to='profile
    
    
    
+   
+  
+    #### ADD OTHER VARIABLES HERE
+    
+    
+    #Related Variables
+    # user = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE)
+
+    #Utility Variable
+  
 uniqueId = models.CharField(null=True, blank=True, max_length=100)
 slug = models.SlugField(max_length=500, unique=True, blank=True, null=True)
 date_created = models.DateTimeField(blank=True, null=True)
@@ -48,11 +58,6 @@ def save(self, *args, **kwargs):
         self.slug = slugify('{} {} {} '.format(self.user.first_name, self.user.last_name, self.user.email))
         self.last_updated = timezone.localtime(timezone.now())
         super(Profile, self).save(*args, **kwargs)
-        
-        
-class Meta:
-        verbose_name = _('Profile')
-        verbose_name_plural = _('Profiles')
         
         
         
