@@ -29,12 +29,12 @@ def profile(request):
    
     if request.method == 'GET':
         form  = ProfileForm(instance = request.user.profile)
-        context ['form'] =form
+        context ['forms'] =forms
         return render(request, 'dashboard/profile.html', context)
     
     
     if request.method == 'POST':
-        context['form'] = form
+        context['forms'] = forms
         form= ProfileForm(request.POST,instance = request.user.profile)
         if form.is_valid():
            form.save()
