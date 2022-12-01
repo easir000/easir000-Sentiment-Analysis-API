@@ -24,22 +24,43 @@ def home(request):
 
 
 # @login_required
-def profile(request):
-    context = {}  
+# def profile(request):
+#     context = {}  
    
-    if request.method == 'GET':
-        form  = ProfileForm(instance = request.user.profile)
-        context ['form'] =form
-        return render(request, 'dashboard/profile.html', context)
+#     if request.method == 'GET':
+#         form  = ProfileForm(instance = request.user.profile)
+#         context ['form'] =form
+#         return render(request, 'dashboard/profile.html', context)
     
     
-    if request.method == 'POST':
-        context['form'] = form
-        form= ProfileForm(request.POST,instance = request.user.profile)
-        if form.is_valid():
-           form.save()
-        return redirect('profile') 
+#     if request.method == 'POST':
+#         context['form'] = form
+#         form= ProfileForm(request.POST,instance = request.user.profile)
+#         if form.is_valid():
+#            form.save()
+#         return redirect('profile') 
     
     
             
-    return render(request, 'dashboard/profile.html', context)
+#     return render(request, 'dashboard/profile.html', context)
+
+
+@login_required(login_url='login')
+def profile(request):
+    if request.method == "POST":
+        user_account_form = ProfileForm(request.POST , request.FILES, instance=request.user.profile)
+        if user_account_form.is_valid():
+            user_account_form.save()
+            messages.success(request, ('Your profile was successfully created!!'))
+        else:
+            messages.error(request, 'Error saving form')
+
+        return redirect("http://127.0.0.1:8000/")
+    
+    else:
+        user = request.user
+        profile = user.profile
+        user_account_form = ProfileForm(instance=profile)
+
+    context = {'form' : user_account_form}
+    return render(request , 'user/user.html' , context)
