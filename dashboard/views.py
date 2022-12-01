@@ -48,9 +48,9 @@ def home(request):
 @login_required(login_url='login')
 def profile(request):
     if request.method == "POST":
-        user_account_form = ProfileForm(request.POST , request.FILES, instance=request.user.profile)
-        if user_account_form.is_valid():
-            user_account_form.save()
+        form = ProfileForm(request.POST , request.FILES, instance=request.user.profile)
+        if form.is_valid():
+            form.save()
             messages.success(request, ('Your profile was successfully created!!'))
         else:
             messages.error(request, 'Error saving form')
@@ -60,7 +60,7 @@ def profile(request):
     else:
         user = request.user
         profile = user.profile
-        user_account_form = ProfileForm(instance=profile)
+        form = ProfileForm(instance=profile)
 
-    context = {'form' : user_account_form}
+    context = {'form' : form}
     return render(request , 'dashboard/profile.html' , context)
