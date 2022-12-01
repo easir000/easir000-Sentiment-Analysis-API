@@ -3,7 +3,7 @@
 {% load static %}
 {% load crispy_forms_tags %}
 
-{% comment %} {% crispy ModelForm ModelForm.helper %} {% endcomment %}
+{% crispy form form.helper %}
 
 
 
@@ -64,10 +64,10 @@
         <hr class="my-0" />
         <div class="card-body">
 
-          <form action="#"   method="POST">
+          <form action="#" id="id-ProfileForm"  method="POST">
           
             {% csrf_token %}
-            {{form|crispy}}
+            {% crispy form %}
            {% comment %} {% crispy form %} {% endcomment %}
 
             {% comment %} <div class = "mt-2">
