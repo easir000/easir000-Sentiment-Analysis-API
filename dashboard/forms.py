@@ -58,7 +58,7 @@ class ProfileForm(forms.Form):
 
 def __init__(self, *args, **kwargs):
         
-        super(ProfileForm, self).__init__(*args, **kwargs)
+        super(Profile, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.layout = Layout(
             Row(
