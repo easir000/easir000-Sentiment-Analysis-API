@@ -55,7 +55,7 @@ INSTALLED_APPS = [
     'authorisation',
     'dashboard',
     #third party apps
-    'crispy_forms',
+    'crispy_form',
      "crispy_bootstrap5",
    
 ]
