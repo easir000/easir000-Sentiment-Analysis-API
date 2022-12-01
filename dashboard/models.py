@@ -43,7 +43,7 @@ last_updated = models.DateTimeField(blank=True, null=True)
 
 def __str__(self):
         return  '{} {} {} '.format(self.user.first_name, self.user.last_name, self.user.email)
-
+ 
 class Meta:
         verbose_name = _('Profile')
 

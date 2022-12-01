@@ -67,9 +67,7 @@
           <form action="#"  id="ProfileForm" method="POST">
           
             {% csrf_token %}
-            <div class="form-group col-md-6 mb-0">
-              {{ forms.__all__|as_crispy_field }}
-          </div>
+            {{form|crispy}}
            {% comment %} {% crispy form %} {% endcomment %}
 
             {% comment %} <div class = "mt-2">
