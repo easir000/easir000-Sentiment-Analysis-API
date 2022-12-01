@@ -7,7 +7,7 @@ from django.contrib import admin
 urlpatterns = [
  
    path('home', views.home, name='dashboard'),
-   path(r'^profile/', views.profile, name='profile'),
+   path('profile/', views.profile, name='profile'),
    
    
    
