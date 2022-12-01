@@ -47,6 +47,7 @@ def home(request):
 
 @login_required(login_url='login')
 def profile(request):
+    context = {}  
     if request.method == "POST":
         form = ProfileForm(request.POST , request.FILES, instance=request.user.profile)
         if form.is_valid():
@@ -62,5 +63,5 @@ def profile(request):
     #     profile = user.profile
     #     form = ProfileForm(instance=profile)
 
-    context = {'form' : form}
+    # context = {'form' : form}
     return render(request , 'dashboard/profile.html' , context)
