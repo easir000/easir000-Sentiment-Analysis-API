@@ -45,23 +45,34 @@ def home(request):
 #     return render(request, 'dashboard/profile.html', context)
 
 
-# @login_required(login_url='login')
+
+
 def profile(request):
-    context = {}  
-    if request.method == "POST":
-        form = ProfileForm(request.POST , request.FILES, instance=request.user.profile)
+
+    modelss = profile.objects.filter(variable=profile)
+
+    context = {}
+    context['models'] = models
+
+    if request.method == 'GET':
+        form  = ProfileForm()
+        context['form'] = form
+        return render(request , 'dashboard/profile.html' , context)
+
+    if request.method == 'POST':
+        form  =  ProfileForm(request.POST)
+
         if form.is_valid():
-            form.save()
-            messages.success(request, ('Your profile was successfully created!!'))
+            obj = form.save(commit=False)
+            obj.extraVariable = ProfileForm
+            obj.save()
+
+            messages.success(request, "Model Updated Succesfully")
+            return redirect('models-view')
         else:
-            messages.error(request, 'Error saving form')
+            context['form'] = form
+        return render(request , 'dashboard/profile.html' , context)
+        return render(request, 'app/models-view.html', context)
 
-        return redirect("profile")
-    
-    # else:
-    #     user = request.user
-    #     profile = user.profile
-    #     form = ProfileForm(instance=profile)
 
-    # context = {'form' : form}
     return render(request , 'dashboard/profile.html' , context)
