@@ -49,30 +49,29 @@ def home(request):
 
 def profile(request):
 
-    modelss = profile.objects.filter(variable=profile)
+    
 
     context = {}
-    context['models'] = models
+   
 
     if request.method == 'GET':
         form  = ProfileForm()
         context['form'] = form
         return render(request , 'dashboard/profile.html' , context)
+    
 
     if request.method == 'POST':
         form  =  ProfileForm(request.POST)
 
         if form.is_valid():
-            obj = form.save(commit=False)
-            obj.extraVariable = ProfileForm
-            obj.save()
+            form.save()
 
             messages.success(request, "Model Updated Succesfully")
-            return redirect('models-view')
+            return redirect('profile')
         else:
             context['form'] = form
         return render(request , 'dashboard/profile.html' , context)
-        return render(request, 'app/models-view.html', context)
+        
 
 
     return render(request , 'dashboard/profile.html' , context)
