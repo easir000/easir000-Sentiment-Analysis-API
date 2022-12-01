@@ -64,8 +64,7 @@
         <hr class="my-0" />
         <div class="card-body">
 
-          {% comment %} <form action="#"   method="POST"> {% endcomment %}
-            <form action="#"  class = "mb-3 col-md-6" method="POST">
+          <form action="#"   method="POST">
           
             {% csrf_token %}
             {{form|crispy}}
