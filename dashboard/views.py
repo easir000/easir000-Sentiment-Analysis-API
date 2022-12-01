@@ -48,10 +48,6 @@ def home(request):
 # @login_required(login_url='login')
 def profile(request):
     context = {}  
-    if request.method == 'GET':
-        form  = ProfileForm(instance = request.user.profile)
-        context ['form'] =form
-        return render(request, 'dashboard/profile.html', context)
     if request.method == "POST":
         form = ProfileForm(request.POST , request.FILES, instance=request.user.profile)
         if form.is_valid():
