@@ -64,10 +64,10 @@
         <hr class="my-0" />
         <div class="card-body">
 
-          <form action="#"  method="POST">
+          <form action="#" id="id-ProfileForm"  method="POST">
           
             {% comment %} {% csrf_token %} {% endcomment %}
-            {% crispy ProfileForm %}
+            {% comment %} {% crispy form %} {% endcomment %}
            
 
              <div class = "mt-2">
