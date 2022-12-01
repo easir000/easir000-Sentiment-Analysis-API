@@ -34,20 +34,15 @@ def profile(request):
     
     
     if request.method == 'POST':
-        
+        context['form'] = form
         form= ProfileForm(request.POST,instance = request.user.profile)
         if form.is_valid():
            form.save()
         return redirect('profile') 
     
-    else:
-            context['form'] = form
-    return render(request , 'dashboard/profile.html' , context)
-
-
-        
-
-
+    
+            
+    return render(request, 'dashboard/profile.html', context)
 
 
 # @login_required(login_url='login')
@@ -69,4 +64,26 @@ def profile(request):
 #     #     form = ProfileForm(instance=profile)
 
 #     # context = {'form' : form}
+#     return render(request , 'dashboard/profile.html' , context)
+
+
+
+# def profile(request):
+#     context = {}  
+   
+#     if request.method == 'GET':
+#         form  = ProfileForm(instance = request.user.profile)
+#         context ['form'] =form
+#         return render(request, 'dashboard/profile.html', context)
+    
+    
+#     if request.method == 'POST':
+        
+#         form= ProfileForm(request.POST,instance = request.user.profile)
+#         if form.is_valid():
+#            form.save()
+#         return redirect('profile') 
+    
+#     else:
+#             context['form'] = form
 #     return render(request , 'dashboard/profile.html' , context)
