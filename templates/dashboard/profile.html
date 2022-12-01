@@ -68,7 +68,7 @@
           
             {% csrf_token %}
             <div class="form-group col-md-6 mb-0">
-              {{ forms.CharField|as_crispy_field }}
+              {{ forms.__all__|as_crispy_field }}
           </div>
            {% comment %} {% crispy form %} {% endcomment %}
 
