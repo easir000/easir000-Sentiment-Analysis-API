@@ -55,7 +55,7 @@ def profile(request):
         else:
             messages.error(request, 'Error saving form')
 
-        return redirect("http://127.0.0.1:8000/")
+        return redirect("profile")
     
     else:
         user = request.user
