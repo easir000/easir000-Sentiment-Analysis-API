@@ -55,8 +55,8 @@ INSTALLED_APPS = [
     'authorisation',
     'dashboard',
     #third party apps
-    'crispy_form',
-     "crispy_bootstrap5",
+    'crispy_forms',
+    
    
 ]
  
@@ -163,7 +163,7 @@ MEDIA_URL = '/uploads/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-CRISPY_ALLOWED_TEMPLATE_PACKS = ('bootstrap', 'uni_form', 'bootstrap3', 'bootstrap4', 'semantic-ui')
+CRISPY_ALLOWED_TEMPLATE_PACKS = ('bootstrap', 'uni_form', 'bootstrap3','bootstrap5', 'bootstrap4', 'semantic-ui')
 
 
 
