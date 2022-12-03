@@ -5,7 +5,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.decorators import user_passes_test
 
-from django.core.exceptions import ValidationError
+
 
 
 
@@ -33,17 +33,13 @@ def get(self, request):
 def post(self, request):
         form = ProfileForm(request.POST, request.FILES, instance=self.profile)
 
+        
         if form.is_valid():
-            profile = form.save()
-            profile.user.first_name = form.cleaned_data.get('first_name')
-            profile.user.last_name = form.cleaned_data.get('last_name')
-            profile.user.email = form.cleaned_data.get('email')
-            profile.user.save()
-
-            messages.success(request, 'Profile saved successfully')
-        else:
-            messages.error(request, ValidationError(form))
-        return redirect('profile')
+            form.save()
+        return redirect('profile') 
+         
+    
+        return render(request, 'dashboard/profile.html', context)
 
 
 
