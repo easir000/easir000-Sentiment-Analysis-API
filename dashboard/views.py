@@ -47,7 +47,7 @@ def home(request):
 def profile(self,request):
     context = {}  
     if request.method == "POST":
-        form = ProfileForm(request.POST,  instance=self.profile)
+        form = ProfileForm(request.POST,instance = request.user.profile)
         if form.is_valid():
             profile = form.save()
             profile.user.save()
