@@ -43,6 +43,7 @@ def home(request):
     
             
 #     return render(request, 'dashboard/profile.html', context)
+@login_required
 def profile(request):
     context = {}  
     if request.method == "POST":
@@ -61,4 +62,4 @@ def profile(request):
     #     form = ProfileForm(instance=profile)
 
     # context = {'form' : form}
-    return render(request , 'dashboard/profile.html' , context)
+    return render(request , 'dashboard/home.html' , context)
