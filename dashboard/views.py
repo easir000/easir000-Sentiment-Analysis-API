@@ -23,23 +23,49 @@ def home(request):
 
 
 
-@login_required
-def profile(request):
-    context = {}  
+# @login_required
+# def profile(request):
+#     context = {}  
    
-    if request.method == 'GET':
-        form  = ProfileForm(instance = request.user.profile)
-        context ['form'] =form
-        return render(request, 'dashboard/profile.html', context)
+#     if request.method == 'GET':
+#         form  = ProfileForm(instance = request.user.profile)
+#         context ['form'] =form
+#         return render(request, 'dashboard/profile.html', context)
     
     
-    if request.method == 'POST':
+#     if request.method == 'POST':
 
-        form= ProfileForm(request.POST,instance = request.user.profile)
-        if form.is_valid():
-           form.save()
-        return redirect('profile') 
+#         form= ProfileForm(request.POST,instance = request.user.profile)
+#         if form.is_valid():
+#            form.save()
+#         return redirect('profile') 
     
     
             
+#     return render(request, 'dashboard/profile.html', context)
+
+
+def profile(request):
+
+    
+
+    context = {}
+    context['form'] = form
+
+    if request.method == 'GET':
+        form  = ProfileForm()
+        context['form'] = form
+        return render(request, 'dashboard/profile.html', context)
+
+    if request.method == 'POST':
+        form  =  ProfileForm(request.POST)
+
+        if form.is_valid():
+           form.save()
+        return redirect('profile') 
+
+    messages.success(request, "Model Updated Succesfully")
+    
+
+
     return render(request, 'dashboard/profile.html', context)
