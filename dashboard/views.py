@@ -42,7 +42,8 @@ def profile(request):
     
     
             
-    return render(request, 'dashboard/profile.html', context)
+    # return render(request, 'dashboard/profile.html', context)
+    return HttpResponseRedirect("Hello")
 # @login_required
 # def profile(request):
 #     context = {}  
