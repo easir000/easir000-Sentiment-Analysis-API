@@ -52,13 +52,11 @@ def profile(request):
         form = ProfileForm(request.POST)
         # check whether it's valid:
         if form.is_valid():
-            # process the data in form.cleaned_data as required
-            # ...
-            # redirect to a new URL:
-            return HttpResponseRedirect('profile')
+           u = form.save()
+           profile = Profile.objects.create(user=u)
+           profile.save()
+           u.save()
 
-    # if a GET (or any other method) we'll create a blank form
-    else:
-        form = ProfileForm()
+        return redirect('profile') 
 
     return render(request, 'dashboard/profile.html', {'form': form})
