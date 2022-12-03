@@ -27,14 +27,7 @@ profileImage = ResizedImageField(size=[200, 200], quality=90, upload_to='profile
    
    
    
-  
-    #### ADD OTHER VARIABLES HERE
-    
-    
-    #Related Variables
-    # user = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE)
 
-    #Utility Variable
   
 uniqueId = models.CharField(null=True, blank=True, max_length=100)
 slug = models.SlugField(max_length=500, unique=True, blank=True, null=True)
