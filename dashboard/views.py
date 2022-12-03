@@ -28,7 +28,7 @@ def profile(request):
    
     if request.method == 'GET':
         # form = ProfileForm(request.POST , instance=request.user.profile)
-        context ['form'] =form
+        # context ['form'] =form
         return render(request, 'dashboard/profile.html', context)
     
     
