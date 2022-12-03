@@ -45,13 +45,20 @@ def home(request):
 #     return render(request, 'dashboard/profile.html', context)
 # @login_required
 def profile(self,request):
-    context = {}  
+    context = {} 
+    
+    if request.method == 'GET':
+        form  = ProfileForm(instance = request.user.profile)
+        context ['form'] =form
+        return render(request, 'dashboard/profile.html', context) 
+    
+    
     if request.method == "POST":
         form = ProfileForm(request.POST,instance = request.user.profile)
         if form.is_valid():
             profile = form.save()
             profile.user.save()
-            messages.success(request, ('Your profile was successfully created!!'))
+            messages.success(request, 'Your profile was successfully created!!')
         else:
             messages.error(request, 'Error saving form')
 
