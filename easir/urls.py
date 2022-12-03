@@ -21,7 +21,6 @@ urlpatterns = [
     path('',include('landing.urls')),
     path('auth/',include('authorisation.urls')),
     path('dashboard/',include('dashboard.urls')),
-    path('profile',include('dashboard.urls')),
     
     
 ]
