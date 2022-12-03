@@ -1,5 +1,5 @@
 from django.shortcuts import render ,redirect
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User,auth
 from django.contrib import messages
 
 
@@ -43,25 +43,23 @@ def home(request):
     
             
 #     return render(request, 'dashboard/profile.html', context)
-# @login_required
+@login_required
 def profile(self,request):
-    context = {} 
-    
-    if request.method == 'GET':
-        form  = ProfileForm(instance = request.user.profile)
-        context ['form'] =form
-        return render(request, 'dashboard/profile.html', context) 
-    
-    
-    if request.method == 'POST':
-
-        form= ProfileForm(request.POST,instance = request.user.profile)
+    context = {}  
+    if request.method == "POST":
+        form = ProfileForm(request.POST, request.FILES, instance=self.profile)  
         if form.is_valid():
-           form.save()
-        return redirect('profile') 
+            form.save()
+            messages.success(request, ('Your profile was successfully created!!'))
+        else:
+            messages.error(request, 'Error saving form')
+
+        return redirect("profile")
     
-    
-            
-    return render(request, 'dashboard/profile.html', context)
-    
-   
+    # else:
+    #     user = request.user
+    #     profile = user.profile
+    #     form = ProfileForm(instance=profile)
+
+    # context = {'form' : form}
+    # return render(request , 'dashboard/profile.html' , context)
