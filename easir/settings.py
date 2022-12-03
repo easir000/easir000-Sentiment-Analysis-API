@@ -56,8 +56,7 @@ INSTALLED_APPS = [
     'dashboard',
     
     'crispy_forms',
-    "crispy_bootstrap4",
-    "crispy_bootstrap5",
+    
     
     
    
