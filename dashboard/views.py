@@ -50,13 +50,13 @@ def profile(request):
     context ={}  
     
     if request.method == 'GET':
-        form = ProfileForm()
-        context = {'form' : form}
+        # form = ProfileForm()
+        # context = {'form' : form}
         return render(request, 'dashboard/profile.html', context)
     
     if request.method == "POST":
-        form = ProfileForm()
-        if form.is_valid():
+        # form = ProfileForm()
+        # if form.is_valid():
             
             pass
         #     form.save()
