@@ -86,11 +86,12 @@ def register(request):
                  messages.error(request, 'Email Taken')
                  return redirect('register')
              
-    user = User.objects.create_user(email=email,username=email,password1=password2)
+    user = User.objects.create_user(email=email,username=email,password=password2)
     user.save()
     auth.login(request,user)
+   
     return redirect ('home')
-return render (request,'authorisation/register.html', {} )
+    return render (request,'authorisation/register.html', {} )
     
     #     if password1 == password2:
     #         if User.objects.filter(email=email).exists():
