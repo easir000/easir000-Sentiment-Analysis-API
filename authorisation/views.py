@@ -51,67 +51,60 @@ def login(request):
             return redirect('register')
     return render (request,'authorisation/login.html', {})
 
-# def login(request):
-    
 
- 
-#      email = request.POST ['email'].replace('','' ).lower()
-#      password = request.POST['password']
-#      user = auth.authenticate( username = email, password = password)
-#      if user is not None:
-#         authlogin(request, user)
-#         return redirect('dashboard')
-#      else:
-#             messages.error(request, 'account does not exit plz sign in')
-#             return redirect('register')
-#      return render (request,'authorisation/login.html', {})
 
 # @anonymous_required
-def register(request):
-    if request.method == 'POST':
+# def register(request):
+#     if request.method == 'POST':
         
-        email = request.POST ['email'].replace('','' ).lower()
-        password1 = request.POST ['password1']
-        password2 = request.POST ['password2']
+#         email = request.POST ['email'].replace('','' ).lower()
+#         password1 = request.POST ['password1']
+#         password2 = request.POST ['password2']
         
       
     
     
-    if not password1 == password2:
-        messages.error(request, 'Password does not match')
-        return redirect('register')
+#     if not password1 == password2:
+#         messages.error(request, 'Password does not match')
+#         return redirect('register')
     
     
-    if User.objects.filter(email=email).exists():
-                 messages.error(request, 'Email Taken')
-                 return redirect('register')
+#     if User.objects.filter(email=email).exists():
+#                  messages.error(request, 'Email Taken')
+#                  return redirect('register')
              
-    user = User.objects.create_user(email=email,username=email,password=password2)
-    user.save()
-    auth.login(request,user)
+#     user = User.objects.create_user(email=email,username=email,password=password2)
+#     user.save()
+#     auth.login(request,user)
    
-    return redirect ('home')
-    return render (request,'authorisation/register.html', {} )
+#     return redirect ('home')
+#     return render (request,'authorisation/register.html', {} )
     
-    #     if password1 == password2:
-    #         if User.objects.filter(email=email).exists():
-    #             messages.error(request, 'Email Taken')
-    #             return redirect('register')
+def register(request):
+     if request.method == 'POST':
+        
+        email = request.POST ['email'].replace('','' ).lower()
+        password1 = request.POST ['password1']
+        password2 = request.POST ['password2']
+        if password1 == password2:
+            if User.objects.filter(email=email).exists():
+                messages.error(request, 'Email Taken')
+                return redirect('register')
              
-    #         else:
+            else:
                
 				
                 
-    #             user = User.objects.create_user(email=email,username=email,password=password2)
-    #             user.save()
-    #             auth.login(request,user)
-    #             return redirect ('dashboard')
+                user = User.objects.create_user(email=email,username=email,password=password2)
+                user.save()
+                auth.login(request,user)
+                return redirect ('dashboard')
                 
-    #     else:
-    #         messages.error(request, 'Password does not match')
-    #         return redirect('register')
-    # else:
-    #     return render (request,'authorisation/register.html' )
+        else:
+            messages.error(request, 'Password does not match')
+            return redirect('register')
+     else:
+        return render (request,'authorisation/register.html' )
     
    #using the long-required decorator
 @login_required
