@@ -64,5 +64,4 @@ def profile(request):
     #     form = ProfileForm(instance=profile)
 
     # context = {'form' : form}
-    return HttpResponse("Hello")
-# return render(request , 'dashboard/profile.html' , context)
+    return render(request , 'dashboard/profile.html' , context)
