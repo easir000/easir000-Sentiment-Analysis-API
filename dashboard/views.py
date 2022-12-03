@@ -61,5 +61,5 @@ def profile(request):
     #     profile = user.profile
     #     form = ProfileForm(instance=profile)
 
-    # context = {'form' : form}
+    context = {'form' : form}
     return render(request , 'dashboard/profile.html' , context)
