@@ -71,13 +71,13 @@ def register(request):
     if request.method == 'POST':
         
         email = request.POST ['email'].replace('','' ).lower()
-        password = request.POST ['password']
+        password1 = request.POST ['password1']
         password2 = request.POST ['password2']
         
       
     
     
-    if not password == password2:
+    if not password1 == password2:
         messages.error(request, 'Password does not match')
         return redirect('register')
     
