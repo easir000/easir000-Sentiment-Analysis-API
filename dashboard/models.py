@@ -12,7 +12,7 @@ import os
 class Profile(models.Model):
     #Standard Variables
     
-   user = models.OneToOneField(User, on_delete=models.CASCADE)
+   user = models.OneToOneField(User,related_name='profile', on_delete=models.CASCADE)
    
 addressLine1 = models.CharField(null=True, blank=True, max_length=100)
 addressLine2 = models.CharField(null=True, blank=True, max_length=100)
