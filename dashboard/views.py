@@ -27,7 +27,7 @@ def profile(request):
     context = {}  
    
     if request.method == 'GET':
-        form  = ProfileForm()
+        form = ProfileForm(request.POST , request.FILES, instance=request.user.profile)
         context ['form'] =form
         return render(request, 'dashboard/profile.html', context)
     
@@ -36,9 +36,9 @@ def profile(request):
 
         form= ProfileForm(request.POST)
         if form.is_valid():
-        #    form.save()
-        # return redirect('profile') 
-         pass
+           form.save()
+        return redirect('profile') 
+         
     
             
     return render(request, 'dashboard/profile.html', context)
