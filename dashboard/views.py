@@ -23,12 +23,12 @@ def home(request):
 
 
 
-class ProfileView(View):
+class profileView(View):
     profile = None
 
     def dispatch(self, request, *args, **kwargs):
         self.profile, __ = Profile.objects.get_or_create(user=request.user)
-        return super(ProfileView, self).dispatch(request, *args, **kwargs)
+        return super(profileView, self).dispatch(request, *args, **kwargs)
 
     def get(self, request):
         context = {'profile': self.profile, 'segment': 'profile'}
