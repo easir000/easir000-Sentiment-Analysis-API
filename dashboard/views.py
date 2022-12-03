@@ -23,7 +23,7 @@ def home(request):
 
 
 
-@login_required
+# @login_required
 def profile(request):
     context = {}  
    
@@ -34,7 +34,7 @@ def profile(request):
     
     
     if request.method == 'POST':
-        context['form'] = form
+        
         form= ProfileForm(request.POST,instance = request.user.profile)
         if form.is_valid():
            form.save()
