@@ -12,6 +12,8 @@ from .forms import *
 from .models import *
 
 
+from django.template import Context, Template
+
 
 
 
@@ -45,16 +47,24 @@ def home(request):
 #     return render(request, 'dashboard/profile.html', context)
 # @login_required
 def profile(request):
-    context = {}  
+    context ={}  
+    
+    if request.method == 'GET':
+        form = ProfileForm()
+        context = {'form' : form}
+        return render(request, 'dashboard/profile.html', context)
+    
     if request.method == "POST":
-        form = ProfileForm(request.POST , request.FILES, instance=request.user.profile)
+        form = ProfileForm()
         if form.is_valid():
-            form.save()
-            messages.success(request, ('Your profile was successfully created!!'))
-        # else:
+            
+            pass
+        #     form.save()
+        #     messages.success(request, ('Your profile was successfully created!!'))
+        # # else:
         #     messages.error(request, 'Error saving form')
 
-        return redirect("profile")
+        # return redirect("profile")
     
     # else:
     #     user = request.user
@@ -62,4 +72,4 @@ def profile(request):
     #     form = ProfileForm(instance=profile)
 
     # context = {'form' : form}
-    return render(request , 'dashboard/profile.html' , {'form': form})
+    return render(request , 'dashboard/profile.html' , context)
