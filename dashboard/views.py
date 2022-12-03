@@ -12,8 +12,6 @@ from .forms import *
 from .models import *
 
 
-from django.template import Context, Template
-
 
 
 
@@ -26,50 +24,42 @@ def home(request):
 
 
 # @login_required
-# def profile(request):
-#     context = {}  
-   
-#     if request.method == 'GET':
-#         form  = ProfileForm(instance = request.user.profile)
-#         context ['form'] =form
-#         return render(request, 'dashboard/profile.html', context)
-    
-    
-#     if request.method == 'POST':
-
-#         form= ProfileForm(request.POST,instance = request.user.profile)
-#         if form.is_valid():
-#            form.save()
-#         return redirect('profile') 
-    
-    
-            
-#     return render(request, 'dashboard/profile.html', context)
-# @login_required
 def profile(request):
-    context ={}  
-    
+    context = {}  
+   
     if request.method == 'GET':
-        # form = ProfileForm()
-        # context = {'form' : form}
+        form  = ProfileForm(instance = request.user.profile)
+        context ['form'] =form
         return render(request, 'dashboard/profile.html', context)
     
-    if request.method == "POST":
-        # form = ProfileForm()
-        # if form.is_valid():
-            
-            pass
-        #     form.save()
-        #     messages.success(request, ('Your profile was successfully created!!'))
-        # # else:
-        #     messages.error(request, 'Error saving form')
-
-        # return redirect("profile")
     
-    # else:
-    #     user = request.user
-    #     profile = user.profile
-    #     form = ProfileForm(instance=profile)
+    if request.method == 'POST':
 
-    # context = {'form' : form}
-    return render(request , 'dashboard/profile.html' , context)
+        form= ProfileForm(request.POST,instance = request.user.profile)
+        if form.is_valid():
+           form.save()
+        return redirect('profile') 
+    
+    
+            
+    return render(request, 'dashboard/profile.html', context)
+# @login_required
+# def profile(request):
+#     context = {}  
+#     if request.method == "POST":
+#         form = ProfileForm(request.POST , request.FILES, instance=request.user.profile)
+#         if form.is_valid():
+#             form.save()
+#             messages.success(request, ('Your profile was successfully created!!'))
+#         else:
+#             messages.error(request, 'Error saving form')
+
+#         return redirect("profile")
+    
+#     # else:
+#     #     user = request.user
+#     #     profile = user.profile
+#     #     form = ProfileForm(instance=profile)
+
+#     # context = {'form' : form}
+#     return render(request , 'dashboard/profile.html' , context)
