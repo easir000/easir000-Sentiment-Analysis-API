@@ -43,7 +43,7 @@ def home(request):
     
             
 #     return render(request, 'dashboard/profile.html', context)
-@login_required
+# @login_required
 def profile(request):
     context = {}  
     if request.method == "POST":
@@ -51,8 +51,8 @@ def profile(request):
         if form.is_valid():
             form.save()
             messages.success(request, ('Your profile was successfully created!!'))
-        else:
-            messages.error(request, 'Error saving form')
+        # else:
+        #     messages.error(request, 'Error saving form')
 
         return redirect("profile")
     
@@ -62,4 +62,4 @@ def profile(request):
     #     form = ProfileForm(instance=profile)
 
     # context = {'form' : form}
-    return render(request , 'dashboard/profile.html' , context)
+    return render(request , 'dashboard/profile.html' , {'form': form})
