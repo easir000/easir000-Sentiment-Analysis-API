@@ -3,7 +3,7 @@ from django.contrib.auth.models import User,auth
 from django.contrib import messages
 from django.shortcuts import redirect, render,get_object_or_404
 
-from .forms import ProfileForm
+from .forms import ProfileForm,form
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.decorators import user_passes_test
 
@@ -28,14 +28,17 @@ def profile(request):
     context = {}  
    
     if request.method == 'GET':
-        form  = ProfileForm(instance = request.user.profile)
+        # form  = ProfileForm(instance = request.user.profile)
+        profile = ProfileForm.objects.create(user=request.user)
         context ['form'] =form
         return render(request, 'dashboard/profile.html', context)
     
     
     if request.method == 'POST':
         context['form'] = form
-        form= ProfileForm(request.POST,instance = request.user.profile)
+        profile = ProfileForm.objects.create(request.POST,user=request.user)
+        
+        # form= ProfileForm(request.POST,instance = request.user.profile)
         if form.is_valid():
            form.save()
         return redirect('profile') 
