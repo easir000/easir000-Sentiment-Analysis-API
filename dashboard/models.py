@@ -1,7 +1,4 @@
 from django.db import models
-
-# Create your models here.
-from django.db import models
 from django.contrib.auth.models import User
 from django.template.defaultfilters import slugify
 from django.utils import timezone
@@ -56,7 +53,8 @@ def save(self, *args, **kwargs):
             self.date_created = timezone.localtime(timezone.now())
         if self.uniqueId is None:
             self.uniqueId = str(uuid4()).split('-')[4]
-            
+            # self.slug = slugify('{} {} {} '.format(self.user.first_name, self.user.last_name, self.user.email))
+
 
         self.slug = slugify('{} {} {} '.format(self.user.first_name, self.user.last_name, self.user.email))
         self.last_updated = timezone.localtime(timezone.now())
