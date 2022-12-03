@@ -53,21 +53,15 @@ def profile(self,request):
         return render(request, 'dashboard/profile.html', context) 
     
     
-    if request.method == "POST":
-        form = ProfileForm(request.POST,instance = request.user.profile)
+    if request.method == 'POST':
+
+        form= ProfileForm(request.POST,instance = request.user.profile)
         if form.is_valid():
-            profile = form.save()
-            profile.user.save()
-            messages.success(request, 'Your profile was successfully created!!')
-        else:
-            messages.error(request, 'Error saving form')
-
-        return redirect("profile")
+           form.save()
+        return redirect('profile') 
     
-    # else:
-    #     user = request.user
-    #     profile = user.profile
-    #     form = ProfileForm(instance=profile)
-
-    # context = {'form' : form}
-    return render(request , 'dashboard/profile.html' , context)
+    
+            
+    return render(request, 'dashboard/profile.html', context)
+    
+   
