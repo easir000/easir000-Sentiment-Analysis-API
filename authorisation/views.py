@@ -39,7 +39,8 @@ def login(request):
         # AuthenticationForm_can_also_be_used__
   
         email = request.POST ['email'].replace('','' ).lower()
-        password = request.POST['password']
+        password = request.POST ['password']
+        password2 = request.POST ['password2']
         user = auth.authenticate( username = email, password = password)
         if user :
          auth.login(request, user)
@@ -70,13 +71,13 @@ def register(request):
     if request.method == 'POST':
         
         email = request.POST ['email'].replace('','' ).lower()
-        password1 = request.POST ['password1']
+        password = request.POST ['password']
         password2 = request.POST ['password2']
         
       
     
     
-    if not password1 == password2:
+    if not password == password2:
         messages.error(request, 'Password does not match')
         return redirect('register')
     
@@ -89,8 +90,7 @@ def register(request):
     user.save()
     auth.login(request,user)
     return redirect ('home')
-             
-    return render (request,'authorisation/register.html', {} )
+return render (request,'authorisation/register.html', {} )
     
     #     if password1 == password2:
     #         if User.objects.filter(email=email).exists():
