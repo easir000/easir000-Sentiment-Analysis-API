@@ -8,8 +8,8 @@ from .models import Profile
 
 
     
-
 from crispy_forms.helper import FormHelper
+
 from crispy_forms.layout import Layout, Submit, Row, Column
 
 
@@ -57,7 +57,7 @@ class ProfileForm(forms.Form):
 
 
 def __init__(self, *args, **kwargs):
-        super(ProfileForm, self).__init__(*args, **kwargs)
+        super(forms, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.layout = Layout(
             Row(
