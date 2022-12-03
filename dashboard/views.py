@@ -54,7 +54,7 @@ def profile(self,request):
         else:
             messages.error(request, 'Error saving form')
 
-        return redirect("profile")
+        return redirect("home")
     
     # else:
     #     user = request.user
