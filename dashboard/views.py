@@ -1,4 +1,4 @@
-from django.shortcuts import render ,redirect
+from django.shortcuts import render ,redirect,HttpResponse
 from django.contrib.auth.models import User,auth
 from django.contrib import messages
 from django.shortcuts import redirect, render,get_object_or_404
@@ -6,7 +6,7 @@ from django.shortcuts import redirect, render,get_object_or_404
 from .forms import ProfileForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.decorators import user_passes_test
-from django.http import HttpResponseRedirect
+
 
 from .forms import *
 from .models import *
@@ -64,4 +64,6 @@ def profile(request):
     #     form = ProfileForm(instance=profile)
 
     # context = {'form' : form}
-    return render(request , 'dashboard/profile.html' , context)
+    # return render(request , 'dashboard/profile.html' , context)
+    return HttpResponse("Hello")
+    
