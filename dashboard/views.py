@@ -58,7 +58,8 @@ def profile(request):
         return render(request, 'dashboard/profile.html', context)
 
     if request.method == 'POST':
-        form  =  ProfileForm(request.POST)
+        if form.is_valid():
+         form  =  ProfileForm(request.POST)
 
         if form.is_valid():
            form.save()
