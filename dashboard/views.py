@@ -28,8 +28,8 @@ def profile(request):
     context = {}  
    
     if request.method == 'GET':
-        form  = ProfileForm(instance = request.user.profile)
-        context ['form'] =form
+        # form  = ProfileForm(instance = request.user.profile)
+        # context ['form'] =form
         return render(request, 'dashboard/profile.html', context)
     
     
