@@ -85,10 +85,10 @@ def register(request):
                
 				
                 
-                # user = User.objects.create_user(email=email,username=email,password=password2)
-                # user.save()
-                # auth.login(request,user)
-                return redirect ('dashboard')
+                user = User.objects.create_user(email=email,username=email,password=password2)
+                user.save()
+                auth.login(request,user)
+                return redirect ('home')
                 
         else:
             messages.error(request, 'Password does not match')
