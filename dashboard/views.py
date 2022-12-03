@@ -44,17 +44,17 @@ def home(request):
             
 #     return render(request, 'dashboard/profile.html', context)
 @login_required
-def profile(self,request):
+def profile(request):
     context = {}  
     if request.method == "POST":
-        form = ProfileForm(request.POST, request.FILES, instance=self.profile)  
+        form = ProfileForm(request.POST , request.FILES, instance=request.user.profile)
         if form.is_valid():
             form.save()
             messages.success(request, ('Your profile was successfully created!!'))
         else:
             messages.error(request, 'Error saving form')
 
-        return redirect("home")
+        return redirect("profile")
     
     # else:
     #     user = request.user
@@ -63,3 +63,5 @@ def profile(self,request):
 
     # context = {'form' : form}
     # return render(request , 'dashboard/profile.html' , context)
+    return HttpResponseRedirect("Hello")
+    
