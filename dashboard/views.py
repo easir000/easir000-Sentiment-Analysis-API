@@ -43,11 +43,11 @@ def home(request):
     
             
 #     return render(request, 'dashboard/profile.html', context)
-@login_required
+# @login_required
 def profile(self,request):
     context = {}  
     if request.method == "POST":
-        form = ProfileForm(request.POST, request.FILES, instance=request.self.profile)
+        form = ProfileForm(request.POST, request.FILES, instance=self.profile)
         if form.is_valid():
             profile = form.save()
             profile.user.save()
