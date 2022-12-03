@@ -70,9 +70,9 @@ def register(request):
                
 				
                 
-                user = User.objects.create_user(email=email,username=email,password=password2)
-                user.save()
-                auth.login(request,user)
+                User = User.objects.create_user(email=email,username=email,password=password2)
+                User.save()
+                auth.login(request,User)
                 return redirect ('dashboard')
                 
         else:
