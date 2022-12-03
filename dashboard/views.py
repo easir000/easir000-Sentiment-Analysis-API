@@ -5,7 +5,9 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.decorators import user_passes_test
 
-from .forms import ProfileForm, form_validation_error
+from django.core.exceptions import ValidationError
+
+
 
 from .forms import *
 from .models import *
@@ -40,7 +42,7 @@ def post(self, request):
 
             messages.success(request, 'Profile saved successfully')
         else:
-            messages.error(request, form_validation_error(form))
+            messages.error(request, ValidationError(form))
         return redirect('profile')
 
 
