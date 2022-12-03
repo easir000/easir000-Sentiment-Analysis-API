@@ -58,12 +58,7 @@ def profile(request):
 
         return redirect("profile")
     
-    else:
-              user = request.user
-              profile = user.profile
-              form = ProfileForm(instance=profile)
-
-              context = {'form' : form}
+   
     return render(request , 'dashboard/profile.html' , context)
     
     
