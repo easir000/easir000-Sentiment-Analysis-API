@@ -11,7 +11,7 @@ from django.http import HttpResponseRedirect
 from .forms import *
 from .models import *
 
-
+from django.views import View
 
 
 
@@ -23,29 +23,53 @@ def home(request):
 
 
 
-@login_required
-def profile(request):
-    context = {}  
-   
-    if request.method == 'GET':
-        form  = ProfileForm(instance = request.user.profile)
-        context ['form'] =form
-        # return render(request, 'dashboard/profile.html', context)
-    return HttpResponseRedirect("Hello")
-        
-    
-    
-    if request.method == 'POST':
+class ProfileView(View):
+    profile = None
 
-        form= ProfileForm(request.POST,instance = request.user.profile)
+    def dispatch(self, request, *args, **kwargs):
+        self.profile, __ = Profile.objects.get_or_create(user=request.user)
+        return super(ProfileView, self).dispatch(request, *args, **kwargs)
+
+    def get(self, request):
+        context = {'profile': self.profile, 'segment': 'profile'}
+        return render(request, 'dashboard/profile.html', context)
+
+    def post(self, request):
+        form = ProfileForm(request.POST, request.FILES, instance=self.profile)
+
         if form.is_valid():
-           form.save()
-        return redirect('profile') 
+            profile = form.save()
+            profile.user.first_name = form.cleaned_data.get('first_name')
+            profile.user.last_name = form.cleaned_data.get('last_name')
+            profile.user.email = form.cleaned_data.get('email')
+            profile.user.save()
+
+            messages.success(request, 'Profile saved successfully')
+        else:
+            messages.error(request,(form))
+        return redirect('profile')
+
+# @login_required
+# def profile(request):
+#     context = {}  
+   
+#     if request.method == 'GET':
+#         form  = ProfileForm(instance = request.user.profile)
+#         context ['form'] =form
+#         return render(request, 'dashboard/profile.html', context)
+    
+    
+#     if request.method == 'POST':
+
+#         form= ProfileForm(request.POST,instance = request.user.profile)
+#         if form.is_valid():
+#            form.save()
+#         return redirect('profile') 
     
     
             
-    # return render(request, 'dashboard/profile.html', context)
-    return HttpResponseRedirect("Hello")
+#     return render(request, 'dashboard/profile.html', context)
+    # return HttpResponseRedirect("Hello")
 # @login_required
 # def profile(request):
 #     context = {}  
