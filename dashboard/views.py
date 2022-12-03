@@ -30,7 +30,9 @@ def profile(request):
     if request.method == 'GET':
         form  = ProfileForm(instance = request.user.profile)
         context ['form'] =form
-        return render(request, 'dashboard/profile.html', context)
+        # return render(request, 'dashboard/profile.html', context)
+    return HttpResponseRedirect("Hello")
+        
     
     
     if request.method == 'POST':
