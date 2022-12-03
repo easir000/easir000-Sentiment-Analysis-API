@@ -5,7 +5,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.decorators import user_passes_test
 
-
+from .forms import ProfileForm, form_validation_error
 
 from .forms import *
 from .models import *
@@ -23,25 +23,54 @@ def home(request):
 
 
 # @login_required
-def profile(request):
-    context = {}  
-   
-    if request.method == 'GET':
-        # form = ProfileForm(request.POST , instance=request.user.profile)
-        # context ['form'] =form
-        return render(request, 'dashboard/profile.html', context)
-    
-    
-    if request.method == 'POST':
 
-        form= ProfileForm(request.POST,instance=request.user.profile)
+def get(self, request):
+        context = {'profile': self.profile, 'segment': 'profile'}
+        return render(request, 'dashboard/profile.html', context)
+
+def post(self, request):
+        form = ProfileForm(request.POST, request.FILES, instance=self.profile)
+
         if form.is_valid():
-           form.save()
-        return redirect('profile') 
+            profile = form.save()
+            profile.user.first_name = form.cleaned_data.get('first_name')
+            profile.user.last_name = form.cleaned_data.get('last_name')
+            profile.user.email = form.cleaned_data.get('email')
+            profile.user.save()
+
+            messages.success(request, 'Profile saved successfully')
+        else:
+            messages.error(request, form_validation_error(form))
+        return redirect('profile')
+
+
+
+
+
+
+
+
+
+
+# def profile(self,request):
+#     context = {}  
+   
+#     if request.method == 'GET':
+#         # form = ProfileForm(request.POST , instance=request.user.profile)
+#         # context ['form'] =form
+#         return render(request, 'dashboard/profile.html', context)
+    
+    
+#     if request.method == 'POST':
+
+#         form= ProfileForm(request.POST,instance=request.user.profile)
+#         if form.is_valid():
+#            form.save()
+#         return redirect('profile') 
          
     
             
-    return render(request, 'dashboard/profile.html', context)
+#     return render(request, 'dashboard/profile.html', context)
 # @login_required
 # def profile(request):
 #     context = {}  
