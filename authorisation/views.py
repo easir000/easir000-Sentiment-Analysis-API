@@ -75,26 +75,42 @@ def register(request):
         
       
     
-     
-        if password1 == password2:
-            if User.objects.filter(email=email).exists():
-                messages.error(request, 'Email Taken')
-                return redirect('register')
+    
+    if not password1 == password2:
+        messages.error(request, 'Password does not match')
+        return redirect('register')
+    
+    
+    if User.objects.filter(email=email).exists():
+                 messages.error(request, 'Email Taken')
+                 return redirect('register')
              
-            else:
+    user = User.objects.create_user(email=email,username=email,password=password2)
+    user.save()
+    auth.login(request,user)
+    return redirect ('home')
+             
+    return render (request,'authorisation/register.html', {} )
+    
+    #     if password1 == password2:
+    #         if User.objects.filter(email=email).exists():
+    #             messages.error(request, 'Email Taken')
+    #             return redirect('register')
+             
+    #         else:
                
 				
                 
-                user = User.objects.create_user(email=email,username=email,password=password2)
-                user.save()
-                auth.login(request,user)
-                return redirect ('dashboard')
+    #             user = User.objects.create_user(email=email,username=email,password=password2)
+    #             user.save()
+    #             auth.login(request,user)
+    #             return redirect ('dashboard')
                 
-        else:
-            messages.error(request, 'Password does not match')
-            return redirect('register')
-    else:
-        return render (request,'authorisation/register.html' )
+    #     else:
+    #         messages.error(request, 'Password does not match')
+    #         return redirect('register')
+    # else:
+    #     return render (request,'authorisation/register.html' )
     
    #using the long-required decorator
 @login_required
