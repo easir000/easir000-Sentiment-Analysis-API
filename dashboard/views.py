@@ -50,7 +50,7 @@ def profile(request):
     
 
     context = {}
-    context['form'] = form
+    
 
     if request.method == 'GET':
         form  = ProfileForm()
