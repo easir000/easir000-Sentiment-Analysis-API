@@ -6,10 +6,11 @@ from django.urls import reverse
 from uuid import uuid4
 from django_resized import ResizedImageField
 
+
 import os 
 
 # Create your models here.
-class Profile(models.ModelForm):
+class Profile(models.ProfileForm):
     #Standard Variables
     
    user = models.OneToOneField(User, on_delete=models.CASCADE)
