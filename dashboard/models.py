@@ -5,13 +5,11 @@ from django.utils import timezone
 from django.urls import reverse
 from uuid import uuid4
 from django_resized import ResizedImageField
-from django.db import models
-from django.forms import ModelForm
 
 import os 
 
 # Create your models here.
-class Profile(models.ModelForm):
+class Profile(models.Model):
     #Standard Variables
     
    user = models.OneToOneField(User, on_delete=models.CASCADE)
