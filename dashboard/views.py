@@ -26,7 +26,7 @@ def home(request):
 # @login_required
 def profile(request):
     context = {}  
-    profile = User.profile
+    
     if request.method == 'GET':
          form  = ProfileForm()
          context ['form'] =form
@@ -37,25 +37,15 @@ def profile(request):
         
         
         form= ProfileForm(request.POST)
-        if form.is_valid():
-            profile = form.save()
-            profile.user.first_name = form.cleaned_data.get('first_name')
-            profile.user.last_name = form.cleaned_data.get('last_name')
-            profile.user.email = form.cleaned_data.get('email')
-            profile.user.save()
-
-            messages.success(request, 'Profile saved successfully')
-    else:
-            messages.error(request, (form))
-    return redirect('profile')
+       
             
         # form= ProfileForm(request.POST,instance= request.user.profile)
         # obj = form.save(commit=False)
         # obj.user = request.user
         # obj.save()
-    #     if form.is_valid():
-    #        form.save()
-    #     return redirect('profile') 
+        if form.is_valid():
+           form.save()
+        return redirect('profile') 
     
     
             
