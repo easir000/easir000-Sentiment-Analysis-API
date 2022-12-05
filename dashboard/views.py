@@ -28,13 +28,16 @@ def profile(request):
     context = {}  
     profile = User.profile
     if request.method == 'GET':
-         form  = ProfileForm(instance= request.user.profile)
+         form  = ProfileForm()
          context ['form'] =form
          return render(request, 'dashboard/profile.html', context)
     
     
     if request.method == 'POST':
-      if form.is_valid():
+        
+        
+        form= ProfileForm(request.POST)
+        if form.is_valid():
             profile = form.save()
             profile.user.first_name = form.cleaned_data.get('first_name')
             profile.user.last_name = form.cleaned_data.get('last_name')
