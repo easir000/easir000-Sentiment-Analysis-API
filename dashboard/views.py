@@ -24,29 +24,45 @@ def home(request):
 
 
 # @login_required
-def profile(request):
-    context = {}  
+# def profile(request):
+#     context = {}  
     
-    if request.method == 'GET':
-         form  = ProfileForm()
-         context ['form'] =form
-         return render(request, 'dashboard/profile.html', context)
+#     if request.method == 'GET':
+#          form  = ProfileForm()
+#          context ['form'] =form
+#          return render(request, 'dashboard/profile.html', context)
     
     
-    if request.method == 'POST':
+#     if request.method == 'POST':
         
         
-        form= ProfileForm(request.POST)
+#         form= ProfileForm(request.POST)
        
             
-        # form= ProfileForm(request.POST,instance= request.user.profile)
-        # obj = form.save(commit=False)
-        # obj.user = request.user
-        # obj.save()
-        if form.is_valid():
-           form.save()
-        return redirect('profile') 
+#         # form= ProfileForm(request.POST,instance= request.user.profile)
+#         # obj = form.save(commit=False)
+#         # obj.user = request.user
+#         # obj.save()
+#         if form.is_valid():
+#            form.save()
+#         return redirect('profile') 
     
     
             
-    return render(request, 'dashboard/profile.html', context)
+#     return render(request, 'dashboard/profile.html', context)
+
+
+def profile(request):
+    if request.method == 'POST':
+        form = ProfileForm(request.POST, request.FILES)
+
+        if form.is_valid():
+            instance = form.save(commit=False)
+            instance.user = request.user
+            instance.save()
+            return redirect('profile') 
+
+    else:
+        form = ProfileForm()
+
+    return render(request, 'account/edit.html', {'form': form})
