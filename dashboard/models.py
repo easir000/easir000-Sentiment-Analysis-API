@@ -5,7 +5,7 @@ from django.utils import timezone
 from django.urls import reverse
 from uuid import uuid4
 from django_resized import ResizedImageField
-
+from django.db import models
 import os 
 
 # Create your models here.
