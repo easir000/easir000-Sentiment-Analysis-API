@@ -17,8 +17,8 @@ from .models import *
 
 @login_required
 def home(request):
-    
-    context = {}    
+    context = {} 
+      
     return render (request,'dashboard/home.html', context)
 
 
@@ -26,9 +26,14 @@ def home(request):
 # @login_required
 def profile(request):
     context = {}  
+    user = request.isupper()
+    if hasattr(user,'profile'):
+     pass
+    else:
+        profile = profile.objects.create(user=user) 
    
     if request.method == 'GET':
-         form  = ProfileForm(instance= request.user.profile)
+         form  = ProfileForm(instance=profile)
          context ['form'] =form
          return render(request, 'dashboard/profile.html', context)
     
