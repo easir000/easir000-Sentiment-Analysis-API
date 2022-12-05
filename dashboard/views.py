@@ -65,4 +65,4 @@ def profile(request):
     else:
         form = ProfileForm()
 
-    return render(request, 'account/edit.html', {'form': form})
+    return render(request, 'dashboard/profile.html', {'form': form})
