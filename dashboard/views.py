@@ -53,38 +53,45 @@ def home(request):
 
 
 def profile(request):
+    context = {}  
     
-    # form = ProfileForm(
-    #         request.POST,
-    #         request.FILES,
-    #         instance=request.user.profile
-    #     )
+    if request.method == 'GET':
+         form  = ProfileForm(instance=request.user.profile)
+         context ['form'] =form
+         return render(request, 'dashboard/profile.html', context)
 
-    # if  form.is_valid():
-            
-    #     form.save()
-            
-    #     messages.success(request,'Your profile has been updated successfully')
-            
-    #     return redirect('profile')
-    # else:
-    #         context = {
-                
-    #             'form': form
-    #         }
-    #         messages.error(request,'Error updating you profile')
-            
-    #         return render(request, 'dashboard/profile.html', context)
-    if request.method == 'POST':
-        form = ProfileForm(request.POST, request.FILES)
+    if request.method == 'POST': 
+     form = ProfileForm(
+            request.POST,
+            request.FILES,
+            instance=request.user.profile
+        )
 
-        if form.is_valid():
-            instance = form.save(commit=False)
-            instance.user = request.user
-            instance.save()
-            return redirect('profile') 
-
+    if  form.is_valid():
+            
+        form.save()
+            
+        messages.success(request,'Your profile has been updated successfully')
+            
+        return redirect('profile')
     else:
-        form = ProfileForm()
+            context = {
+                
+                'form': form
+            }
+            messages.error(request,'Error updating you profile')
+            
+            return render(request, 'dashboard/profile.html', context)
+    # if request.method == 'POST':
+    #     form = ProfileForm(request.POST, request.FILES)
 
-    return render(request, 'dashboard/profile.html', {'form': form})
+    #     if form.is_valid():
+    #         instance = form.save(commit=False)
+    #         instance.user = request.user
+    #         instance.save()
+    #         return redirect('profile') 
+
+    # else:
+    #     form = ProfileForm()
+
+    # return render(request, 'dashboard/profile.html', {'form': form})
