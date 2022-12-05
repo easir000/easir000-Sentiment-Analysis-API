@@ -60,7 +60,7 @@
           <form action="#"   method="POST">
           
             {% csrf_token %} 
-            {% crispy form %}
+            {{ form|crispy }}
            
 
              <div class = "mt-2">
