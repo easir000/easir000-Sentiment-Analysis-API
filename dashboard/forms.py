@@ -1,12 +1,5 @@
 from django import forms 
 from .models import *
-from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserCreationForm
-
-
-
-
-
 
     
 from crispy_forms.helper import FormHelper
@@ -81,6 +74,11 @@ Submit('submit', 'Save Changes', css_class= "btn btn-primary me-2")
 
 
 
+# class Meta:
+#     model = Profile
+# fields = ['addressLine1','addressLine2','city','province','country','postalcode']
+
+
 class Meta:
-    model = Profile
-fields = ['addressLine1','addressLine2','city','province','country','postalcode']
+        model=Profile
+        fields=['all', 'the', 'fields']
