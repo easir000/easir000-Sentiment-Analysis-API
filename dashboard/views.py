@@ -26,7 +26,7 @@ def home(request):
 # @login_required
 def profile(request):
     context = {}  
-    user = request.isupper()
+    user = request.user()
     if hasattr(user,'profile'):
      pass
     else:
