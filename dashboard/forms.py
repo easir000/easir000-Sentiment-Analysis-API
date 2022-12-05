@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 
 
-from .models import ProfileModel
+
 
 
 
@@ -82,5 +82,5 @@ Submit('submit', 'Save Changes', css_class= "btn btn-primary me-2")
 
 
 class Meta:
-    model = ProfileModel
+    model = Profile
 fields = ['addressLine1','addressLine2','city','province','country','postalcode']
