@@ -12,8 +12,8 @@ import os
 class Profile(models.Model):
     #Standard Variables
     
-   user = models.OneToOneField(User, on_delete=models.CASCADE)
-   
+#    user = models.OneToOneField(User, on_delete=models.CASCADE)
+ user = models.OneToOneField(User, related_name="profile", on_delete=models.CASCADE)
 addressLine1 = models.CharField(null=True, blank=True, max_length=100)
 addressLine2 = models.CharField(null=True, blank=True, max_length=100)
 city = models.CharField(null=True, blank=True, max_length=100)
@@ -35,9 +35,11 @@ slug = models.SlugField(max_length=500, unique=True, blank=True, null=True)
 date_created = models.DateTimeField(blank=True, null=True)
 last_updated = models.DateTimeField(blank=True, null=True)
 
-def __str__(self):
-        return  '{} {} {} '.format(self.user.first_name, self.user.last_name, self.user.email)
+# def __str__(self):
+#         return  '{} {} {} '.format(self.user.first_name, self.user.last_name, self.user.email)
 
+def __str__(self):
+    return '{} {} {} {}'.format(self.user.first_name, self.user.last_name, self.addressLine1.addressLine1, self.addressLine2.addressLine2,self.city.city, self.province.province, self.country.country, self.postalCode.postalCode)
 
 
 
@@ -46,10 +48,9 @@ def save(self, *args, **kwargs):
             self.date_created = timezone.localtime(timezone.now())
         if self.uniqueId is None:
             self.uniqueId = str(uuid4()).split('-')[4]
-            # self.slug = slugify('{} {} {} '.format(self.user.first_name, self.user.last_name, self.user.email))
+           
 
-
-        self.slug = slugify('{} {} {} '.format(self.user.first_name, self.user.last_name, self.user.email))
+        self.slug = slugify('{} {} {} {}'.format(self.user.first_name, self.user.last_name, self.addressLine1.addressLine1, self.addressLine2.addressLine2,self.city.city, self.province.province, self.country.country, self.postalCode.postalCode))
         self.last_updated = timezone.localtime(timezone.now())
         super(Profile, self).save(*args, **kwargs)
         
