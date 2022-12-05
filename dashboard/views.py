@@ -28,17 +28,28 @@ def profile(request):
     context = {}  
     profile = User.profile
     if request.method == 'GET':
-         form  = ProfileForm(instance= profile)
+         form  = ProfileForm(instance= request.user.profile)
          context ['form'] =form
          return render(request, 'dashboard/profile.html', context)
     
     
     if request.method == 'POST':
+      if form.is_valid():
+            profile = form.save()
+            profile.user.first_name = form.cleaned_data.get('first_name')
+            profile.user.last_name = form.cleaned_data.get('last_name')
+            profile.user.email = form.cleaned_data.get('email')
+            profile.user.save()
 
-        form= ProfileForm(request.POST)
-        obj = form.save(commit=False)
-        obj.user = request.user
-        obj.save()
+            messages.success(request, 'Profile saved successfully')
+    else:
+            messages.error(request, (form))
+    return redirect('profile')
+            
+        # form= ProfileForm(request.POST,instance= request.user.profile)
+        # obj = form.save(commit=False)
+        # obj.user = request.user
+        # obj.save()
     #     if form.is_valid():
     #        form.save()
     #     return redirect('profile') 
