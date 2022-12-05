@@ -9,7 +9,7 @@ from django_resized import ResizedImageField
 import os 
 
 # Create your models here.
-class Profile(models.Model):
+class Profile(models.ModelForm):
     #Standard Variables
     
    user = models.OneToOneField(User, on_delete=models.CASCADE)
