@@ -99,7 +99,7 @@ def home(request):
             
 #     return render(request, 'dashboard/profile.html', context)
     
-@method_decorator(login_required(login_url='login'), name='dispatch')
+# @method_decorator(login_required(login_url='login'), name='dispatch')
 class ProfileView(View):
     profile = None
 
@@ -108,7 +108,7 @@ class ProfileView(View):
         return super(ProfileView, self).dispatch(request, *args, **kwargs)
 
     def get(self, request):
-        context = {'profile': self.profile, 'segment': 'profile'}
+        context = {}
         return render(request, 'dashboard/profile.html', context)
 
     def post(self, request):
@@ -121,8 +121,9 @@ class ProfileView(View):
             profile.user.email = form.cleaned_data.get('email')
             profile.user.save()
 
-            messages.success(request, 'Profile saved successfully')
-        else:
-            messages.error(request, (form))
+            messages.success(request,'Your profile has been updated successfully')
+            
         return redirect('profile')
-        return render(request, 'dashboard/profile.html', context)
+      
+            
+        
