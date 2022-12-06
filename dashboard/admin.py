@@ -15,10 +15,7 @@ from .models import Profile
 
 
 
-class Profile (admin.Model):
-    list_display = ['firstname','lastname','email','city']
-    search_fields = ['firstname','lastname','email','city']
-    list_per_page = 10
+
     
     
 
