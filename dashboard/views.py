@@ -8,8 +8,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.decorators import user_passes_test
 from django.http import HttpResponseRedirect
 
+from .forms import ProfileForm
 
-from dashboard.forms import ProfileForm, form_validation_error
 
 from dashboard.models import Profile
 from django.utils.decorators import method_decorator
@@ -123,6 +123,6 @@ class ProfileView(View):
 
             messages.success(request, 'Profile saved successfully')
         else:
-            messages.error(request, form_validation_error(form))
+            messages.error(request, (form))
         return redirect('profile')
         return render(request, 'dashboard/profile.html', context)
