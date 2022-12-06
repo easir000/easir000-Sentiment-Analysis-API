@@ -1,5 +1,5 @@
 from django.apps import AppConfig
-
+from . import signals
 
 class DashboardConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
@@ -8,9 +8,9 @@ class DashboardConfig(AppConfig):
     
     #call the signals
     
-    # def ready(self):
+    def ready(self):
         
-    #     # from . import signals
+   
         
-    #     import dashboard.signals
+        import dashboard.signals
         

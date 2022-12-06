@@ -25,25 +25,48 @@ def home(request):
 
 
 @login_required
-def profile(request,self):
-    context = {}  
-   
-    if request.method == 'GET':
-        form  = ProfileForm(instance=self.profile)
-        context ['form'] =form
-        return render(request, 'dashboard/profile.html', context)
-    
-    
+def profile(request):
     if request.method == 'POST':
-        context['form'] = form
-        form= ProfileForm(request.POST,instance=self.profile)
-        if form.is_valid():
-           form.save()
-        return redirect('profile') 
+        
+        p_form = ProfileForm(request.POST,
+                                   request.FILES,
+                                   instance=request.user.profile)
+        if p_form.is_valid():
+            
+            p_form.save()
+            messages.success(request, f'Your account has been updated!')
+            return redirect('profile')
+
+    else:
+        
+        p_form = ProfileForm(instance=request.user.profile)
+
+    context = {
+       
+        'p_form': p_form
+    }
+
+    return render(request, 'dashboard/home.html', context)
+
+# def profile(request):
+#     context = {}  
+   
+#     if request.method == 'GET':
+#         form  = ProfileForm(instance=request.user)
+#         context ['form'] =form
+#         return render(request, 'dashboard/profile.html', context)
+    
+    
+#     if request.method == 'POST':
+#         context['form'] = form
+#         form= ProfileForm(request.POST,instance=request.user)
+#         if form.is_valid():
+#            form.save()
+#         return redirect('profile') 
     
     
             
-    return render(request, 'dashboard/profile.html', context)
+#     return render(request, 'dashboard/profile.html', context)
 
 
 # @login_required(login_url='login')
