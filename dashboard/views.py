@@ -64,7 +64,7 @@ def profile(request):
      form = ProfileForm(
             request.POST,
             # request.FILES,
-            instance=request.user.profile
+            user=request.user.profile
         )
 
     if  form.is_valid():
