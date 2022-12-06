@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect
 from django.utils.decorators import method_decorator
 from django.views import View
 
-from customers.forms import ProfileForm, form_validation_error
+from customers.forms import ProfileForm
 from customers.models import Profile
 
 
@@ -32,5 +32,5 @@ class ProfileView(View):
 
             messages.success(request, 'Profile saved successfully')
         else:
-            messages.error(request, form_validation_error(form))
+            messages.error(request, (form))
         return redirect('profile')
