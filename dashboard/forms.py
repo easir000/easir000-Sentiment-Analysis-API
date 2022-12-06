@@ -9,7 +9,7 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Submit, Row, Column
 
 
-class ProfileForm(forms.Form):
+class ProfileForm(forms.ModelForm):
 
     
      helper = FormHelper()
@@ -48,7 +48,7 @@ class ProfileForm(forms.Form):
 
     
     
-     #Enter the Form Variables
+     #Enter the Form Variables  
 
 
 

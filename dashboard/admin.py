@@ -5,5 +5,24 @@ from .models import *
 
 
 
-admin.site.register(Profile)
+
 # Register your models here.
+
+
+
+
+class ProfileAdmin (admin.ModelAdmin):
+    list_display = ['firstname','lastname','email']
+    search_fields = ['firstname','lastname','email']
+    list_per_page = 10
+    
+
+
+
+
+admin.site.register(Profile)
+
+
+
+
+
