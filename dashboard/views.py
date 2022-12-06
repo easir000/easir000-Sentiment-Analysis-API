@@ -55,33 +55,33 @@ def home(request):
 def profile(request):
     context = {}  
     
-    # if request.method == 'GET':
-    #      form  = ProfileForm(instance=request.user.profile)
-    #      context ['form'] =form
-    #      return render(request, 'dashboard/profile.html', context)
+    if request.method == 'GET':
+         form  = ProfileForm()
+         context ['form'] =form
+         return render(request, 'dashboard/profile.html', context)
 
     if request.method == 'POST': 
      form = ProfileForm(
             request.POST,
-            request.FILES,
+            # request.FILES,
             instance=request.user.profile
         )
 
-     if  form.is_valid():
+    if  form.is_valid():
             
         form.save()
             
         messages.success(request,'Your profile has been updated successfully')
             
         return redirect('profile')
-     else:
+    else:
             context = {
                 
                 'form': form
             }
             messages.error(request,'Error updating you profile')
             
-    return render(request, 'dashboard/profile.html', context)
+            return render(request, 'dashboard/profile.html', context)
     # if request.method == 'POST':
     #     form = ProfileForm(request.POST, request.FILES)
 
