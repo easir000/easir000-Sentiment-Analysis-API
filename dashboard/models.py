@@ -36,6 +36,22 @@ slug = models.SlugField(max_length=500, unique=True, blank=True, null=True)
 date_created = models.DateTimeField(blank=True, null=True)
 last_updated = models.DateTimeField(blank=True, null=True)
 
+def __str__(self):
+    return '{} {} {} {}'.format(self.user.first_name, self.user.last_name, self.addressLine1.addressLine1, self.addressLine2.addressLine2,self.city.city, self.province.province, self.country.country, self.postalCode.postalCode)
+
+
+
+def save(self, *args, **kwargs):
+        if self.date_created is None:
+            self.date_created = timezone.localtime(timezone.now())
+        if self.uniqueId is None:
+            self.uniqueId = str(uuid4()).split('-')[4]
+           
+
+        self.slug = slugify('{} {} {} {}'.format(self.user.first_name, self.user.last_name, self.addressLine1.addressLine1, self.addressLine2.addressLine2,self.city.city, self.province.province, self.country.country, self.postalCode.postalCode))
+        self.last_updated = timezone.localtime(timezone.now())
+        super(Profile, self).save(*args, **kwargs)
+        
 class Meta:
         verbose_name = _('Profile')
         verbose_name_plural = _('Profiles')
