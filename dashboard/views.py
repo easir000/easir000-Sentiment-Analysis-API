@@ -60,7 +60,7 @@ def profile(request):
          form = ProfileForm(
             # request.POST,
             # request.FILES,
-           request.user.profile
+        #    request.user.profile
         )
          context ['form'] =form
          return render(request, 'dashboard/profile.html', context)
