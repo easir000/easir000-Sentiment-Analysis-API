@@ -88,10 +88,12 @@ def profile(request, user):
     if request.method == 'POST':
         pass
 
-    user = User.objects.filter(username=user).first()
-    if user:
-        form = ProfileForm(instance=user)
-        return render(request, 'dashboard/profile.html', context={'form': form})
+    form = ProfileForm(
+            request.POST,
+            # request.FILES,
+            instance=request.user.profile
+        )
+    return render(request, 'dashboard/profile.html', context={'form': form})
 
     return redirect("homepage")
     # if request.method == 'POST':
