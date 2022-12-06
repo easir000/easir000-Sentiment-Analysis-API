@@ -1,18 +1,18 @@
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
-from django.dispatch import receiver
+# from django.dispatch import receiver
 
 from .models import Profile  
 
 
-@receiver(post_save, sender=User, dispatch_uid='save_new_user_profile')
+# @receiver(post_save, sender=User, dispatch_uid='save_new_user_profile')
 
 
 
 def create_profile(sender, instance, created, **kwargs):
     if created:
         
-        Profile.object.create(user=instance)
+        Profile.objects.create(user=instance)
         # profile = Profile(user=instance)
         # profile.save()
         
