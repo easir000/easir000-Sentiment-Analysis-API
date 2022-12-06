@@ -10,9 +10,8 @@ from django.http import HttpResponseRedirect
 
 from .forms import ProfileForm
 
+from .models import Profile
 
-from dashboard.models import Profile
-from django.utils.decorators import method_decorator
 
 
 
@@ -68,60 +67,34 @@ def home(request):
 #             }
 #     return render(request, 'dashboard/profile.html', context)
 
-# def profile(request):
-#     context = {}  
+def profile(request):
+    context = {}  
     
-#     if request.method == 'GET':
-#          form  = ProfileForm(instance=request.user.profile)
-#          context ['form'] =form
-#          return render(request, 'dashboard/profile.html', context)
+    if request.method == 'GET':
+         form  = ProfileForm(request.GET or None)
+         context ['form'] =form
+         return render(request, 'dashboard/profile.html', context)
 
-#     if request.method == 'POST': 
-#      form = ProfileForm(
-#             request.POST,
-#             # request.FILES,
-#             instance=request.user.profile
-#         )
+    if request.method == 'POST': 
+     form = ProfileForm(
+            request.POST,
+            # request.FILES,
+            instance=request.user.profile
+        )
 
-#     if  form.is_valid():
+    if  form.is_valid():
             
-#         form.save()
+        form.save()
             
-#         messages.success(request,'Your profile has been updated successfully')
-            
-#         return redirect('profile')
-#     else:
-#             context = {
-                
-#                 'form': form
-#             }
-#             messages.error(request,'Error updating you profile')
-            
-#     return render(request, 'dashboard/profile.html', context)
-    
-# @method_decorator(login_required(login_url='login'), name='dispatch')
-class ProfileView(View):
-    profile = None
-
-    def dispatch(self, request, *args, **kwargs):
-        self.profile, __ = Profile.objects.get_or_create(user=request.user)
-        return super(ProfileView, self).dispatch(request, *args, **kwargs)
-
-    def get(self, request):
-        context = {}
-        return render(request, 'dashboard/profile.html', context)
-
-    def post(self, request):
-        form = ProfileForm(request.POST, request.FILES, instance=self.profile)
-
-        if form.is_valid():
-            profile = form.save()
-            profile.user.first_name = form.cleaned_data.get('first_name')
-            profile.user.last_name = form.cleaned_data.get('last_name')
-            profile.user.email = form.cleaned_data.get('email')
-            profile.user.save()
-
-            messages.success(request,'Your profile has been updated successfully')
+        messages.success(request,'Your profile has been updated successfully')
             
         return redirect('profile')
-      
+    else:
+            context = {
+                
+                'form': form
+            }
+            messages.error(request,'Error updating you profile')
+            
+    return render(request, 'dashboard/profile.html', context)
+    
