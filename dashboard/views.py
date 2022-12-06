@@ -125,5 +125,3 @@ class ProfileView(View):
             
         return redirect('profile')
       
-            
-        
