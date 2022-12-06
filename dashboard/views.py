@@ -7,13 +7,9 @@ from .forms import ProfileForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.decorators import user_passes_test
 from django.http import HttpResponseRedirect
-from django.views import View
 
-
+from .forms import *
 from .models import *
-
-
-from dashboard.forms import ProfileForm
 
 
 @login_required
