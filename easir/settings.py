@@ -175,8 +175,3 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'hi@email.com'
 EMAIL_HOST_PASSWORD = 'password'
 DEFAULT_FROM_EMAIL = 'hi@email.com'
-
-
-import django
-django.setup()
-
