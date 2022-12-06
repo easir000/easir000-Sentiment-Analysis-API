@@ -8,7 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.decorators import user_passes_test
 from django.http import HttpResponseRedirect
 
-from .forms import ProfileForm
+
 from dashboard.forms import ProfileForm, form_validation_error
 
 from dashboard.models import Profile
