@@ -56,11 +56,7 @@ def profile(request):
     context = {}  
     
     if request.method == 'GET':
-         form = ProfileForm(
-            request.POST,
-            request.FILES,
-            instance=request.user.profile
-        )
+         form  = ProfileForm()
          context ['form'] =form
          return render(request, 'dashboard/profile.html', context)
 
