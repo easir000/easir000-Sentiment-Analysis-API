@@ -46,7 +46,7 @@ def profile(request):
         'p_form': p_form
     }
 
-    return render(request, 'dashboard/home.html', context)
+    return render(request, 'dashboard/profile.html', context)
 
 # def profile(request):
 #     context = {}  
