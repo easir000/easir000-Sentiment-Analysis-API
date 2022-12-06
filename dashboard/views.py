@@ -56,12 +56,12 @@ def profile(request):
     context = {}  
     
     if request.method == 'GET':
-          Profile.objects.get_or_create(user=request.user.profile)
-          form = ProfileForm(
-            # request.POST,
-            # request.FILES,
-            request.user.profile
-        )
+          form = ProfileForm.objects.get_or_create(user=request.user.profile)
+        #   form = ProfileForm(
+        #     # request.POST,
+        #     # request.FILES,
+        #     request.user.profile
+        # )
           context ['form'] =form
           return render(request, 'dashboard/profile.html', context)
 
