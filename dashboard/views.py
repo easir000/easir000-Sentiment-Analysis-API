@@ -8,6 +8,14 @@ from dashboard.forms import ProfileForm, form_validation_error
 from dashboard.models import Profile
 
 
+
+@login_required
+def home(request):
+    
+    context = {}    
+    return render (request,'dashboard/home.html', context)
+
+
 @method_decorator(login_required(login_url='login'), name='dispatch')
 class ProfileView(View):
     profile = None
