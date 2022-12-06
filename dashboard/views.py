@@ -8,8 +8,9 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.decorators import user_passes_test
 from django.http import HttpResponseRedirect
 
-from .forms import *
-from .models import *
+from .forms import ProfileForm
+
+from .models import Profile
 
 
 

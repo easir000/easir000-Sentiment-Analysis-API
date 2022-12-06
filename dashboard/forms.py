@@ -1,6 +1,6 @@
 from django import forms 
 from django.contrib.auth.models import User
-from .models import *
+from .models import Profile
 
 
     
@@ -78,4 +78,5 @@ Submit('submit', 'Save Changes', css_class= "btn btn-primary me-2")
 
 class Meta:
     model = Profile
-fields = ['addressLine1','addressLine2','city','province','country','postalcode']
+# fields = ['addressLine1','addressLine2','city','province','country','postalcode']
+    fields = '__all__'
