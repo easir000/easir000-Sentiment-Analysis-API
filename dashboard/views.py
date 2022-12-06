@@ -52,58 +52,48 @@ def home(request):
 #     return render(request, 'dashboard/profile.html', context)
 
 # @login_required
-def profile(request):
+# def profile(request):
     
-    form  = ProfileForm(request.POST or None)
+#     form  = ProfileForm(request.POST or None)
+#     if  form.is_valid():
+#         form.save()
+#         messages.success(request,'Your profile has been updated successfully')
+            
+#         return HttpResponseRedirect('profile')
+#     context = {
+                
+#                 'form': form
+#             }
+#     return render(request, 'dashboard/profile.html', context)
+
+def profile(request):
+    context = {}  
+    
+    if request.method == 'GET':
+         form  = ProfileForm(request.GET or None)
+         context ['form'] =form
+         return render(request, 'dashboard/profile.html', context)
+
+    if request.method == 'POST': 
+     form = ProfileForm(
+            request.POST,
+            # request.FILES,
+            instance=request.user.profile
+        )
+
     if  form.is_valid():
+            
         form.save()
+            
         messages.success(request,'Your profile has been updated successfully')
             
-        return HttpResponseRedirect('profile')
-    context = {
+        return redirect('profile')
+    else:
+            context = {
                 
                 'form': form
             }
+            messages.error(request,'Error updating you profile')
+            
     return render(request, 'dashboard/profile.html', context)
-    # context = {}  
     
-    # if request.method == 'GET':
-    #      form  = ProfileForm()
-    #      context ['form'] =form
-    #      return render(request, 'dashboard/profile.html', context)
-
-    # if request.method == 'POST': 
-    #  form = ProfileForm(
-    #         request.POST,
-    #         # request.FILES,
-    #         instance=request.user.profile
-    #     )
-
-    # if  form.is_valid():
-            
-    #     form.save()
-            
-    #     messages.success(request,'Your profile has been updated successfully')
-            
-    #     return redirect('profile')
-    # else:
-    #         context = {
-                
-    #             'form': form
-    #         }
-    #         messages.error(request,'Error updating you profile')
-            
-    #         return render(request, 'dashboard/profile.html', context)
-    # if request.method == 'POST':
-    #     form = ProfileForm(request.POST, request.FILES)
-
-    #     if form.is_valid():
-    #         instance = form.save(commit=False)
-    #         instance.user = request.user
-    #         instance.save()
-    #         return redirect('profile') 
-
-    # else:
-    #     form = ProfileForm()
-
-    # return render(request, 'dashboard/profile.html', {'form': form})
