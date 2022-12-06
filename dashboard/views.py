@@ -12,7 +12,7 @@ from django.views import View
 from .models import *
 
 
-from dashboard.forms import ProfileForm, form_validation_error
+from dashboard.forms import ProfileForm
 
 
 @login_required
@@ -46,7 +46,7 @@ class ProfileView(View):
 
             messages.success(request, 'Profile saved successfully')
         else:
-            messages.error(request, form_validation_error(form))
+            messages.error(request, (form))
         return redirect('profile')
 # @login_required
 # def profile(request):
