@@ -1,60 +1,34 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.template.defaultfilters import slugify
-from django.utils import timezone
-from django.urls import reverse
-from uuid import uuid4
-from django_resized import ResizedImageField
-from django.db import models
 from django.utils.translation import gettext as _
-import os 
 
-# Create your models here.
+from django.templatetags.static import static
+
 class Profile(models.Model):
-    #Standard Variables
-    
-#    user = models.OneToOneField(User, on_delete=models.CASCADE)
- user = models.OneToOneField(User,  on_delete=models.CASCADE)
-addressLine1 = models.CharField(null=True, blank=True, max_length=100)
-addressLine2 = models.CharField(null=True, blank=True, max_length=100)
-city = models.CharField(null=True, blank=True, max_length=100)
-province = models.CharField(null=True, blank=True, max_length=100)
-country = models.CharField(null=True, blank=True, max_length=100)
-postalCode = models.CharField(null=True, blank=True, max_length=100)
-profileImage = ResizedImageField(size=[200, 200], quality=90, upload_to='profile_images')
+    GENDER_MALE = 1
+    GENDER_FEMALE = 2
+    GENDER_CHOICES = [
+        (GENDER_MALE, _("Male")),
+        (GENDER_FEMALE, _("Female")),
+    ]
 
-   
-   
-   
-   
-   
-  
-  
-  
-uniqueId = models.CharField(null=True, blank=True, max_length=100)
-slug = models.SlugField(max_length=500, unique=True, blank=True, null=True)
-date_created = models.DateTimeField(blank=True, null=True)
-last_updated = models.DateTimeField(blank=True, null=True)
+    user = models.OneToOneField(User, related_name="profile", on_delete=models.CASCADE)
+    avatar = models.ImageField(upload_to="customers/profiles/avatars/", null=True, blank=True)
+    birthday = models.DateField(null=True, blank=True)
+    gender = models.PositiveSmallIntegerField(choices=GENDER_CHOICES, null=True, blank=True)
+    phone = models.CharField(max_length=32, null=True, blank=True)
+    address = models.CharField(max_length=255, null=True, blank=True)
+    number = models.CharField(max_length=32, null=True, blank=True)
+    city = models.CharField(max_length=50, null=True, blank=True)
+    zip = models.CharField(max_length=30, null=True, blank=True)
 
-def __str__(self):
-    return '{} {} {} {}'.format(self.user.first_name, self.user.last_name, self.addressLine1.addressLine1, self.addressLine2.addressLine2,self.city.city, self.province.province, self.country.country, self.postalCode.postalCode)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
-
-
-def save(self, *args, **kwargs):
-        if self.date_created is None:
-            self.date_created = timezone.localtime(timezone.now())
-        if self.uniqueId is None:
-            self.uniqueId = str(uuid4()).split('-')[4]
-           
-
-        self.slug = slugify('{} {} {} {}'.format(self.user.first_name, self.user.last_name, self.addressLine1.addressLine1, self.addressLine2.addressLine2,self.city.city, self.province.province, self.country.country, self.postalCode.postalCode))
-        self.last_updated = timezone.localtime(timezone.now())
-        super(Profile, self).save(*args, **kwargs)
-        
-class Meta:
+    class Meta:
         verbose_name = _('Profile')
         verbose_name_plural = _('Profiles')
-        
-        
-        
+
+    @property
+    def get_avatar(self):
+        return self.avatar.url if self.avatar else static('assets/img/team/default-profile-picture.png')
