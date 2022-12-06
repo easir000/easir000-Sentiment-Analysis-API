@@ -67,7 +67,7 @@ def profile(request):
             instance=request.user.profile
         )
 
-    if  form.is_valid():
+     if  form.is_valid():
             
         form.save()
             
