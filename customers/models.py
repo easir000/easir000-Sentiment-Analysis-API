@@ -1,9 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils.translation import gettext as _
-from django.contrib.staticfiles.templatetags.staticfiles import static
 
 
+from django.templatetags.static import static
 class Profile(models.Model):
     GENDER_MALE = 1
     GENDER_FEMALE = 2
