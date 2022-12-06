@@ -84,7 +84,7 @@ def home(request):
 #             return render(request, 'dashboard/profile.html', context)
         
         
-def profile(request, user):
+def profile(request):
     if request.method == 'POST':
         pass
 
