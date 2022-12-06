@@ -51,8 +51,9 @@ class ProfileForm(forms.Form):
      #Enter the Form Variables  
 
 
+class CustomFieldForm(ProfileForm):
 
-def __init__(self, *args, **kwargs):
+ def __init__(self, *args, **kwargs):
         super(ProfileForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.layout = Layout(
