@@ -56,7 +56,7 @@ def profile(request):
     context = {}  
     
     if request.method == 'GET':
-         form  = ProfileForm(user=request.user.profile)
+         form  = ProfileForm(request.user.profile)
          context ['form'] =form
          return render(request, 'dashboard/profile.html', context)
 
@@ -64,7 +64,7 @@ def profile(request):
      form = ProfileForm(
             request.POST,
             # request.FILES,
-            user=request.user.profile
+            instance=request.user.profile
         )
 
     if  form.is_valid():
