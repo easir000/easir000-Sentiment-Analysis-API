@@ -63,7 +63,7 @@ def profile(request):
     if request.method == 'POST': 
      form = ProfileForm(
             request.POST,
-            # request.FILES,
+            request.FILES,
             instance=request.user.profile
         )
 
@@ -74,12 +74,12 @@ def profile(request):
         messages.success(request,'Your profile has been updated successfully')
             
         return redirect('profile')
-    # else:
-    #         context = {
+     else:
+            context = {
                 
-    #             'form': form
-    #         }
-    #         messages.error(request,'Error updating you profile')
+                'form': form
+            }
+            messages.error(request,'Error updating you profile')
             
     return render(request, 'dashboard/profile.html', context)
     # if request.method == 'POST':
