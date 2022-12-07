@@ -7,9 +7,10 @@ class DashboardConfig(AppConfig):
     
     
     #call the signals
+    
     def ready(self):
         
-     from . import signals
+       
         
-    import dashboard.signals
+        import dashboard.signals
         
