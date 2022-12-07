@@ -93,7 +93,7 @@ Submit('submit', 'Save Changes', css_class= "btn btn-primary me-2")
 
 class Meta:
   model = Profile
-  fields = ['first_name','lastt_name' 'addressLine1','addressLine2','city','province','country','postalcode']
+  fields = ['first_name','last_name' 'addressLine1','addressLine2','city','province','country','postalcode']
 
 
 
