@@ -57,20 +57,6 @@ class ProfileForm(forms.ModelForm):
 
 
     
-class Meta:
-  model = Profile
-  fields = ['addressLine1','addressLine2','city','province','country','postalcode']
-
-
-
-def  save (self, *args, **kwargs):
-
-    user = self.instance.user
-    user.first_name = self.cleaned_data.get('first_name')
-    user.last_name = self.cleaned_data.get('last_name')
-    user.save()
-    profile = super(ProfileForm, self).save(*args, **kwargs)
-    return profile 
 
     
      #Enter the Form Variables
@@ -105,6 +91,20 @@ Submit('submit', 'Save Changes', css_class= "btn btn-primary me-2")
 )
 
 
+class Meta:
+  model = Profile
+  fields = ['addressLine1','addressLine2','city','province','country','postalcode']
+
+
+
+def  save (self, *args, **kwargs):
+
+    user = self.instance.user
+    user.first_name = self.cleaned_data.get('first_name')
+    user.last_name = self.cleaned_data.get('last_name')
+    user.save()
+    profile = super(ProfileForm, self).save(*args, **kwargs)
+    return profile 
 
 
 
