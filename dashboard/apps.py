@@ -9,8 +9,5 @@ class DashboardConfig(AppConfig):
     #call the signals
     
     def ready(self):
-        
-       
-        
         import dashboard.signals
         
