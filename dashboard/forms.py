@@ -13,7 +13,7 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Submit, Row, Column
 
 
-class ProfileForm(forms.ModelForm):
+class ProfileForm(forms.Form):
     
      first_name = forms.CharField(
                     required = True,
@@ -107,7 +107,7 @@ def  save(self, *args, **kwargs):
     return profile 
 
 
-class ProfileImageForm(forms.ModelForm):
+class ProfileImageForm(forms.Form):
     
  ProfileImageForm = forms.ImageField(
                       required=True,
