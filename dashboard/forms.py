@@ -51,7 +51,10 @@ class ProfileForm(forms.Form):
 
 
     
-    
+class Meta:
+  model = Profile
+  fields = ['addressLine1','addressLine2','city','province','country','postalcode']
+
      #Enter the Form Variables
 
 
@@ -81,6 +84,3 @@ Submit('submit', 'Save Changes', css_class= "btn btn-primary me-2")
 
 
 
-class Meta:
-    model = Profile
-fields = ['addressLine1','addressLine2','city','province','country','postalcode']
