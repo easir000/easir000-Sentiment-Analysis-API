@@ -17,12 +17,12 @@ class ProfileForm(forms.ModelForm):
     
      first_name = forms.CharField(
                     required = True,
-                    label='Address Line 1',
+                    label='First Name',
                     widget=forms.TextInput(attrs={'class': 'form-control mb-3', 'placeholder': 'Enter First Name'}))
                     
      last_name = forms.CharField(
                     required = True,
-                    label='Address Line 2',
+                    label='Last Name',
                     widget=forms.TextInput(attrs={'class': 'form-control mb-3', 'placeholder': 'Enter Last Name'}))
   
      addressLine1 = forms.CharField(
