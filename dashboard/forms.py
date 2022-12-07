@@ -13,12 +13,18 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Submit, Row, Column
 
 
-class ProfileForm(forms.Form):
-
+class ProfileForm(forms.ModelForm):
     
-     helper = FormHelper()
-    
-    
+     first_name = forms.CharField(
+                    required = True,
+                    label='Address Line 1',
+                    widget=forms.TextInput(attrs={'class': 'form-control mb-3', 'placeholder': 'Enter First Name'}))
+                    
+     last_name = forms.CharField(
+                    required = True,
+                    label='Address Line 2',
+                    widget=forms.TextInput(attrs={'class': 'form-control mb-3', 'placeholder': 'Enter Last Name'}))
+  
      addressLine1 = forms.CharField(
                     required = True,
                     label='Address Line 1',
@@ -55,24 +61,42 @@ class Meta:
   model = Profile
   fields = ['addressLine1','addressLine2','city','province','country','postalcode']
 
+
+
+def  save (self, *args, **kwargs):
+
+    user = self.instance.user
+    user.first_name = self.cleaned_data.get('first_name')
+    user.last_name = self.cleaned_data.get('last_name')
+    user.save()
+    profile = super(ProfileForm, self).save(*args, **kwargs)
+    return profile 
+
+    
      #Enter the Form Variables
 
 
 
 def __init__(self, *args, **kwargs):
         
-        super(Profile, self).__init__(*args, **kwargs)
+        super(ProfileForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.layout = Layout(
+            Row(
+                Column('first_name', css_class='form-group col-md-6'),
+                Column('last_name', css_class='form-group col-md-6')),
+            Row(
+                Column('addressLine1', css_class='form-group col-md-6'),
+                Column('addressLine2', css_class='form-group col-md-6')),
             Row(
                 Column('addressLine1', css_class='form-group col-md-6'),
                 Column('addressLine2', css_class='form-group col-md-6')),
                 
-    Row(
+            Row(
                 Column('city', css_class='form-group col-md-6'),
                 Column('province', css_class='form-group col-md-6')),
                 
-    Row(
+             Row(
                 Column('country', css_class='form-group col-md-6'),
                 Column('postalCode', css_class='form-group col-md-6')),
                 
