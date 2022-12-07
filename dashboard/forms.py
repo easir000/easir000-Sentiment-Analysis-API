@@ -13,7 +13,7 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Submit, Row, Column
 
 
-class ProfileForm(forms.Form):
+class ProfileForm(forms.ModelForm):
     
      first_name = forms.CharField(
                     required = True,
@@ -107,4 +107,13 @@ def  save(self, *args, **kwargs):
     return profile 
 
 
-
+class ProfileImageForm(forms.ModelForm):
+    
+ ProfileImageForm = forms.ImageField(
+                      required=True,
+                      label='Upload Image',
+                      widget=forms.FileInput(attrs={'class': 'form-control'})
+                      )
+class Meta:
+  model = Profile
+  fields = ['ProfileImage']

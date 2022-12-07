@@ -25,24 +25,28 @@ def profile(request):
     context = {}  
    
     if request.method == 'GET':
-        form  = ProfileForm(request.GET or None)
+        form  = ProfileForm(instance=request.user.profile)
+        image_form  = ProfileImageForm(instance=request.user.profile)
                                    
-                                   
-        context ['form'] =form
+        context ['form'] =form                          
+        context ['image_form'] =image_form
         return render(request, 'dashboard/profile.html', context)
     
     
     if request.method == 'POST':
         context['form'] = form
-        form= ProfileForm(request.POST or None)
+        form = ProfileForm(request.POST ,instance=request.user.profile)
+        image_form  = ProfileImageForm(request.POST , request.FILES, instance=request.user.profile)
+#        
         if form.is_valid():
            form.save()
         return redirect('profile') 
     
-    context = {
-        'form': form,
-        
-    }
+    if image_form.is_valid():
+        image_form.save()
+    return redirect('profile')
+    
+
             
     return render(request, 'dashboard/profile.html', context)
 
