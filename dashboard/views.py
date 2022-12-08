@@ -25,8 +25,8 @@ def profile(request):
     context = {}  
    
     if request.method == 'GET':
-        form  = ProfileForm(request.GET ,instance=request.user.profile)
-        image_form  = ProfileImageForm(request.GET,instance=request.user.profile)
+        form  = ProfileForm(request.GET or None)
+        image_form  = ProfileImageForm(request.GET or None)
                                    
         context ['form'] =form                          
         context ['image_form'] =image_form
@@ -35,8 +35,8 @@ def profile(request):
     
     if request.method == 'POST':
         
-        form = ProfileForm(request.POST ,instance=request.user.profile)
-        image_form  = ProfileImageForm(request.POST,request.FILES,instance=request.user.profile)
+        form = ProfileForm(request.POST or None)
+        image_form  = ProfileImageForm(request.POST,request.FILES)
 #        
         if form.is_valid():
            form.save()
