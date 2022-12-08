@@ -34,7 +34,7 @@ def profile(request):
     
     
     if request.method == 'POST':
-        context['form'] = form
+        
         form = ProfileForm(request.POST or None)
         image_form  = ProfileImageForm(request.POST or None)
 #        
