@@ -71,9 +71,7 @@ def __init__(self, *args, **kwargs):
             Row(
                 Column('first_name', css_class='form-group col-md-6'),
                 Column('last_name', css_class='form-group col-md-6')),
-            Row(
-                Column('addressLine1', css_class='form-group col-md-6'),
-                Column('addressLine2', css_class='form-group col-md-6')),
+           
             Row(
                 Column('addressLine1', css_class='form-group col-md-6'),
                 Column('addressLine2', css_class='form-group col-md-6')),
