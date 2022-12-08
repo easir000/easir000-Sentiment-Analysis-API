@@ -176,7 +176,7 @@
                       {% if user.profile.profileImage.name %}
             <img src="{{ user.profile.profileImage.url }}" alt="{{user.first_name}} {{user.last_name}}"class="d-block rounded"height="100" />
              {% else %}
-                      <img src="{(%user.profile.profile_image.url%)} " alt class="w-px-40 h-auto rounded-circle" />
+             <img src="{% static 'main/img/avatars/1.webp' %}" alt class="w-px-40 h-auto rounded-circle" />
                     {% endif %}
                     </div>
                   </a>
@@ -189,13 +189,13 @@
                               {% if user.profile.profileImage.name %}
             <img src="{{ user.profile.profileImage.url }}" alt="{{user.first_name}} {{user.last_name}}"class="d-block rounded"height="100" />
              {% else %}
-                      <img src="{(%user.profile.profile_image.url%)} " alt class="w-px-40 h-auto rounded-circle" />
+             <img src="{% static 'main/img/avatars/1.webp' %}" alt class="w-px-40 h-auto rounded-circle" />
                     {% endif %} </div>
                           </div>
                           <div class="flex-grow-1">
                             <span class="fw-semibold d-block">{{ user.email }}</span>
                             <small class="text-muted">{{ user.first_name }} {{ user.last_name }}</small>
-
+                            
                             
                           </div>
                         </div>
