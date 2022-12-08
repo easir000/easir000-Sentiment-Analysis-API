@@ -15,15 +15,15 @@ from crispy_forms.layout import Layout, Submit, Row, Column
 
 class ProfileForm(forms.Form):
     
-     first_name = forms.CharField(
-                    required = True,
-                    label='First Name',
-                    widget=forms.TextInput(attrs={'class': 'form-control mb-3', 'placeholder': 'Enter First Name'}))
+    #  first_name = forms.CharField(
+    #                 required = True,
+    #                 label='First Name',
+    #                 widget=forms.TextInput(attrs={'class': 'form-control mb-3', 'placeholder': 'Enter First Name'}))
                     
-     last_name = forms.CharField(
-                    required = True,
-                    label='Last Name',
-                    widget=forms.TextInput(attrs={'class': 'form-control mb-3', 'placeholder': 'Enter Last Name'}))
+    #  last_name = forms.CharField(
+    #                 required = True,
+    #                 label='Last Name',
+    #                 widget=forms.TextInput(attrs={'class': 'form-control mb-3', 'placeholder': 'Enter Last Name'}))
   
      addressLine1 = forms.CharField(
                     required = True,
@@ -68,9 +68,9 @@ def __init__(self, *args, **kwargs):
         super(ProfileForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.layout = Layout(
-            Row(
-                Column('first_name', css_class='form-group col-md-6'),
-                Column('last_name', css_class='form-group col-md-6')),
+            # Row(
+            #     Column('first_name', css_class='form-group col-md-6'),
+            #     Column('last_name', css_class='form-group col-md-6')),
            
             Row(
                 Column('addressLine1', css_class='form-group col-md-6'),
@@ -91,7 +91,7 @@ Submit('submit', 'Save Changes', css_class= "btn btn-primary me-2")
 
 class Meta:
   model = Profile
-  fields = ['first_name','last_name' 'addressLine1','addressLine2','city','province','country','postalcode']
+  fields = [ 'addressLine1','addressLine2','city','province','country','postalcode']
 
 
 
