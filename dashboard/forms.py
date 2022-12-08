@@ -114,4 +114,4 @@ class ProfileImageForm(forms.Form):
                       )
 class Meta:
   model = Profile
-  fields = ['ProfileImage']
+  fields = ['profileImage']
