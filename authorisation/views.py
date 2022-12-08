@@ -47,7 +47,7 @@ def register(request):
         password1 = request.POST ['password1']
         password2 = request.POST ['password2']
         
-    if password1 == password2:
+    if password1 and password2 and password1 != password2:
             if User.objects.filter(email=email).exists():
                 messages.error(request, 'Email Taken')
                 return redirect('register')
