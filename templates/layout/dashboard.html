@@ -173,9 +173,9 @@
                 <li class="nav-item navbar-dropdown dropdown-user dropdown">
                   <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                     <div class="avatar avatar-online">
-                      {%if user.profile.profileImage.name%}
-                      <img src="{(%user.profile.profile_image.url%)} " alt class="w-px-40 h-auto rounded-circle" />
-                      {% else %}
+                      {% if user.profile.profileImage.name %}
+            <img src="{{ user.profile.profileImage.url }}" alt="{{user.first_name}} {{user.last_name}}"class="d-block rounded"height="100" />
+             {% else %}
                       <img src="{(%user.profile.profile_image.url%)} " alt class="w-px-40 h-auto rounded-circle" />
                     {% endif %}
                     </div>
@@ -186,9 +186,9 @@
                         <div class="d-flex">
                           <div class="flex-shrink-0 me-3">
                             <div class="avatar avatar-online">
-                              {%if user.profile.profileImage.name%}
-                      <img src="{(%user.profile.profile_image.url%)} " alt class="w-px-40 h-auto rounded-circle" />
-                      {% else %}
+                              {% if user.profile.profileImage.name %}
+            <img src="{{ user.profile.profileImage.url }}" alt="{{user.first_name}} {{user.last_name}}"class="d-block rounded"height="100" />
+             {% else %}
                       <img src="{(%user.profile.profile_image.url%)} " alt class="w-px-40 h-auto rounded-circle" />
                     {% endif %} </div>
                           </div>
