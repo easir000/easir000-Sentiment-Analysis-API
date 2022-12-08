@@ -1,61 +1,102 @@
-# -*- encoding: utf-8 -*-
-"""
-Copyright (c) 2019 - present AppSeed.us
-"""
-
-from django.shortcuts import render
-
-# Create your views here.
-from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login
-from django.contrib.auth.models import User
-from django.forms.utils import ErrorList
-from django.http import HttpResponse
-from .forms import LoginForm, SignUpForm
+from django.shortcuts import render ,redirect
+from django.contrib.auth.models import User,auth
+from django.contrib import messages
 
 
-def login_view(request):
-    form = LoginForm(request.POST or None)
 
-    msg = None
 
-    if request.method == "POST":
 
-        if form.is_valid():
-            username = form.cleaned_data.get("username")
-            password = form.cleaned_data.get("password")
-            user = authenticate(username=username, password=password)
-            if user is not None:
-                login(request, user)
-                return redirect("dashboard")
-            else:
-                msg = 'Invalid credentials'
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import user_passes_test
+ 
+
+
+
+
+
+
+
+def anonymous_required(function=None, redirect_url=None):
+
+   if not redirect_url:
+       redirect_url = 'dashboard'
+
+   actual_decorator = user_passes_test(
+       lambda u: u.is_anonymous,
+       login_url=redirect_url
+   )
+
+   if function:
+       return actual_decorator(function)
+   return actual_decorator
+
+
+
+# @anonymous_required
+def login(request):
+    if request.method == 'POST':
+  
+        # AuthenticationForm_can_also_be_used__
+  
+        email = request.POST ['email'].replace('','' ).lower()
+        password = request.POST['password']
+        user = auth.authenticate( username = email, password = password)
+        if user :
+         auth.login(request, user)
+            
+         return redirect('dashboard')
         else:
-            msg = 'Error validating the form'
+            messages.error(request, 'account does not exit plz sign in')
+            return redirect('register')
+    return render (request,'authorisation/login.html', {})
 
-    return render(request, "authorisation/login.html", {"form": form, "msg": msg})
+# def login(request):
+    
+
+ 
+#      email = request.POST ['email'].replace('','' ).lower()
+#      password = request.POST['password']
+#      user = auth.authenticate( username = email, password = password)
+#      if user is not None:
+#         authlogin(request, user)
+#         return redirect('dashboard')
+#      else:
+#             messages.error(request, 'account does not exit plz sign in')
+#             return redirect('register')
+#      return render (request,'authorisation/login.html', {})
+
+# @anonymous_required
+def register(request):
+    if request.method == 'POST':
+        
+        email = request.POST ['email'].replace('','' ).lower()
+        password1 = request.POST ['password1']
+        password2 = request.POST ['password2']
+        
+      
+    
+     
+        if not password1 == password2:
+            
+                messages.error(request, 'Password do not match')
+                return redirect('register')
+             
+        if User.objects.filter(email=email).exists():
+            messages.error(request, 'Email Taken')
+            return redirect('register')
+            
+        user = User.objects.create_user(email=email,username=email,password=password2)
+        user.save()
+        auth.login(request,user)
+        return redirect ('dashboard')
+                
+      
+    return render (request,'authorisation/register.html' )
+    
+   #using the long-required decorator
+@login_required
+def logout(request):
+  auth.logout(request)
+  return redirect('login')
 
 
-def register_user(request):
-    msg = None
-    success = False
-
-    if request.method == "POST":
-        form = SignUpForm(request.POST)
-        if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get("username")
-            raw_password = form.cleaned_data.get("password1")
-            user = authenticate(username=username, password=raw_password)
-
-            msg = 'User created - please <a href="/login">login</a>.'
-            success = True
-
-            # return redirect("/login/")
-
-        else:
-            msg = 'Form is not valid'
-    else:
-        form = SignUpForm()
-
-    return render(request, "authorisation/register.html", {"form": form, "msg": msg, "success": success})
