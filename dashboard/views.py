@@ -30,7 +30,7 @@ def profile(request):
                                    
         context ['form'] =form                          
         context ['image_form'] =image_form
-        return render(request, 'dashboard/profile.html', context)
+        # return render(request, 'dashboard/profile.html', context)
     
     
     if request.method == 'POST':
@@ -44,9 +44,9 @@ def profile(request):
     
     if image_form.is_valid():
         image_form.save()
-    return redirect('profile')
+    # return redirect('profile')
     
-    return render(request, 'dashboard/profile.html', context)
+    return render(request,'dashboard/profile.html',context)
 
 
 # @login_required(login_url='login')
