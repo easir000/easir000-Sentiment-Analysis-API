@@ -46,8 +46,6 @@ def profile(request):
         image_form.save()
     return redirect('profile')
     
-
-            
     return render(request, 'dashboard/profile.html', context)
 
 
