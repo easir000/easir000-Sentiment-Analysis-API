@@ -92,7 +92,7 @@
                 <th> Audience</th>
                 <th>Keywords</th>
                 <th>wordCount</th>
-                <th>monthCount</th>
+                {% comment %} <th>monthCount</th> {% endcomment %}
                 <th>Actions</th>
 
 
@@ -111,7 +111,7 @@
                 <td> <strong>{{blog.audience}}</strong></td>
                 <td> {{blog.keywords}}</td>
                 <td>{{ blog.wordCount}}</td>
-                <td>{{ blog.monthCount}}</td>
+                {% comment %} <td>{{ blog.monthCount}}</td> {% endcomment %}
 
                 <td> <a href ="{% url 'view-generated-blog'  blog.slug %}"><button class = "btn btn-outline-primary">VIEW</button></a></td>
 

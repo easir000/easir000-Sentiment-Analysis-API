@@ -170,56 +170,59 @@ def checkCountAllowance(profile):
               
        
 def getNextSubscriptionDate(profile):
-  subID = profile.subscriptionReference
-  url = '{{base_url}}/v1/billing/subscriptions/{}'.format(subID)
-  headers = {}
-  headers['Authorization'] = settings.PAYPAL_SECRET
-  r= requests.get(url,headers = headers)
-  response = json.loads(r.text)
+  subId = profile.subscriptionReference
+  if subId:
+    try:
+      
+      url = '{{base_url}}/v1/billing/subscriptions/{}'.format(subId)
+      headers = {}
+      headers['Authorization'] = settings.PAYPAL_SECRET
+      r= requests.get(url,headers = headers)
+      response = json.loads(r.text)
 
     
-  if 'status' in response :
-    # print (r.text)
-    status = response ['status']
-    if status == 'Active':
-      next_date = response ['billing_info']['next_billing_time'].split('T')[0]
-      return next_date
-    else:
-            profile.subscribed= False
-            profile.subscriptionType= 'free'
-            profile.save()
-            # return 'none'
-            today = datetime.datetime.now().day
-            day_created = profile.date.created.day
+      if 'status' in response :
+        # print (r.text)
+        status = response ['status']
+        if status == 'Active':
+          next_date = response ['billing_info']['next_billing_time'].split('T')[0]
+          return next_date
+        else:
+                profile.subscribed= False
+                profile.subscriptionType= 'free'
+                profile.save()
+                # return 'none'
+                today = datetime.datetime.now().day
+                day_created = profile.date.created.day
             
-            if day_created >today:
+                if day_created >today:
+                  next_date = datetime.datetimw.now()
+                  next_month = returnMonth(next_date.month)
+                  year = next_date.year
+                else:
+                  next_date = datetime.datetime.now() + relativedelta(months = 1)
+                  next_month = returnMonth(next_date.month)
+                  year = next_date.year
+              
+                return ' {} {} {} '. format (day_created,next_month,year)
+          
+    except:
+        profile.subscribed = False  
+        profile.subscriptionType = 'free'
+        profile.save()  
+        today = datetime.datetime.now().day
+        day_created = profile.date.created.day
+            
+        if day_created >today:
               next_date = datetime.datetimw.now()
               next_month = returnMonth(next_date.month)
               year = next_date.year
-            else:
+        else:
               next_date = datetime.datetime.now() + relativedelta(months = 1)
               next_month = returnMonth(next_date.month)
               year = next_date.year
               
-            return ' {} {} {} '. format (day_created,next_month,year)
-          
-  else:
-    profile.subscribed = False  
-    profile.subscriptionType = 'free'
-    profile.save()  
-    today = datetime.datetime.now().day
-    day_created = profile.date.created.day
-        
-    if day_created >today:
-          next_date = datetime.datetimw.now()
-          next_month = returnMonth(next_date.month)
-          year = next_date.year
-    else:
-          next_date = datetime.datetime.now() + relativedelta(months = 1)
-          next_month = returnMonth(next_date.month)
-          year = next_date.year
-          
-    return ' {} {} {} '. format (day_created,next_month,year)
+        return ' {} {} {} '. format (day_created,next_month,year)
       
              
                

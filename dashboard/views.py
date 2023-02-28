@@ -46,7 +46,7 @@ def home(request):
     context = {}
     context ['numBlogs'] = len(completedBlogs)
     context ['monthCount'] =request.user.profile.monthlyCount                        
-    context ['countReset'] ='23 july ,2023' 
+    context ['countReset'] =getNextSubscriptionDate(request.user.profile)
     context ['emptyBlogs'] =emptyBlogs     
     context ['completedBlogs'] =completedBlogs 
     context ['allowance'] = checkCountAllowance(request.user.profile)    
