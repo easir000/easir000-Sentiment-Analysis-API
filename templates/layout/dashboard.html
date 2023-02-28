@@ -38,7 +38,7 @@
     <meta name="description" content="" />
 
     <!-- Favicon -->
-    {% comment %} <link rel="icon" type="image/x-icon" href="{% static 'main/img/favicon/favicon.ico' %}" /> {% endcomment %}
+     <link rel="icon" type="image/x-icon" href="{% static 'main/img/favicon/favicon.ico' %}" /> 
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -80,14 +80,12 @@
             <a href="index.html" class="app-brand-link">
               <span class="app-brand-logo demo">
                 
-
-### Logo 
-
-
-
-
+                  <a  href = "{% url 'home' %}" class="navbar-brand" href="#">
+                    <img src="{% static 'landing/img/chalkr.ai.jpg' %}" alt="Bootstrap" width="100" height="100">
+                  </a>
+              
               </span>
-              <span class="app-brand-text demo menu-text fw-bolder ms-2">Chalkr AI</span>
+              {% comment %} <span class="app-brand-text demo menu-text fw-bolder ms-2">Chalkr AI</span> {% endcomment %}
             </a>
 
             <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
@@ -120,12 +118,18 @@
               </a>
             </li> 
             <li class="menu-item">
-              <a href="#" class="menu-link">
+              <a href="{% url 'blog-topic' %} " class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                <div data-i18n="Analytics">Blog Topic Generator </div>
+                <div data-i18n="Analytics">Generate Blog Topic  </div>
               </a>
             </li>
-
+            <li class="menu-item">
+              <a href="{% url 'blog-sections' %} " class="menu-link">
+                <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                <div data-i18n="Analytics">Generate Blog section  </div>
+              </a>
+            </li>
+            
             <li class="menu-header small text-uppercase">
               <span class="menu-header-text">Logout</span>
             </li>
@@ -206,7 +210,7 @@
                     </li>
                     
                     <li>
-                      <a class="dropdown-item" href="{% url 'profile' %}">
+                      <a class="dropdown-item" href="{% url 'billing' %}">
                         <i class="bx bx-cog me-2"></i>
                         <span class="align-middle">Billing</span>
                       </a>
@@ -246,6 +250,8 @@
             {% block body %}
               
             {% endblock  %}
+
+           
               
 
             <!-- Footer -->
@@ -257,7 +263,7 @@
                     document.write(new Date().getFullYear());
                   </script>
                   , made with ❤️ by
-                  <a href="http://149.28.174.44:5000/dashboard/home" target="_blank" class="footer-link fw-bolder">Chalkr AI</a>
+                  <a href="http://127.0.0.1:8000/dashboard/home" target="_blank" class="footer-link fw-bolder">Chalkr AI</a>
                 </div>
                
               </div>
@@ -292,6 +298,10 @@
 
     <!-- Main JS -->
     <script src="{% static 'main/js/main.js' %}"></script>
+
+    {% block js %}
+  
+    {% endblock %}
 
     <!-- Page JS -->
 

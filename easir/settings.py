@@ -37,8 +37,12 @@ SECRET_KEY = 'django-insecure-%rlj+=^p&p+w62&*mr)3@=!w%3g-6pxyt7oz!=zs37mr3v^&qp
 DEBUG = True
 # DEBUG = False
 
-ALLOWED_HOSTS = ['149.28.174.44', 'localhost']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 # ALLOWED_HOSTS = ['*']
+
+
+PAYPAL_SECRET='Bearer A21AAKAFl03qmdioe5WHl8FDSkt9LvS4MG0jiR-LrFy2102XNnYsB2DzreEzNj1pJj2NpN-PPsLK-IlgssZFONkRGNToowERA'
+# Application definition
 
 
 # Application definition
@@ -96,17 +100,32 @@ WSGI_APPLICATION = 'easir.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'vultr',
+#         'USER': 'vultruser',
+#         'PASSWORD': 'password',
+#         'HOST': 'localhost',
+#         'PORT': '',
+#     }
+# }
+
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'vultr',
-        'USER': 'vultruser',
-        'PASSWORD': 'password',
-        'HOST': 'localhost',
-        'PORT': '',
-    }
+'default': {
+'ENGINE': 'django.db.backends.mysql',
+'NAME': 'hexflow',
+'USER': 'root',
+'PASSWORD': '',
+'HOST': '',
+'PORT': '',
+'OPTIONS': {
+'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
 }
 
+}
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -139,8 +158,16 @@ USE_I18N = True
 USE_TZ = True
 
 
-LOGIN_REDIRECT_URL = 'dashboard'
+# LOGIN_REDIRECT_URL = 'dashboard'
 LOGIN_URL = 'login'
+
+
+
+OPENAI_API_KEYS = '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'
+SECURE_CROSS_ORIGIN_OPENER_POLICY='same-origin-allow-popups'
+
+# CONTENT_API_KEYS = 'beed94d14e0e32676281afe883'
+# BLOG_URL = 'https://test.hexflow.au/ghost/'
 
 DJANGORESIZED_DEFAULT_SIZE = [500, 500]
 DJANGORESIZED_DEFAULT_QUALITY = 75
@@ -175,3 +202,5 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'hi@email.com'
 EMAIL_HOST_PASSWORD = 'password'
 DEFAULT_FROM_EMAIL = 'hi@email.com'
+
+

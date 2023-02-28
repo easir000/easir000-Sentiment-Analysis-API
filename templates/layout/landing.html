@@ -10,7 +10,8 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
  
-  <title>AI</title>
+     <link rel="icon" type="image/x-icon" href="{% static 'main/img/favicon/favicon.ico' %}" /> 
+     <title> CHalkr AI</title>
 
   <link rel="stylesheet" href="{% static 'landing/css/maicons.css' %}">
 
@@ -29,7 +30,9 @@
   <header>
     <nav class="navbar navbar-expand-lg navbar-light bg-white sticky" data-offset="500">
       <div class="container">
-        <a href="#" class="navbar-brand">Seo<span class="text-primary">Gram.</span></a>
+        <a  href = "{% url 'home' %}" class="navbar-brand" href="#">
+          <img src="{% static 'landing/img/chalkr.ai.jpg' %}" alt="Bootstrap" width="100" height="100">
+        </a>
 
         <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -70,7 +73,9 @@
     <div class="container">
       <div class="row mb-5">
         <div class="col-lg-3 py-3">
-          <h3>SEOGram</h3>
+          <a class="navbar-brand" href="#">
+            <img src="{% static 'landing/img/chalkr.ai.jpg' %}" alt="Bootstrap" width="100" height="100">
+          </a>
           <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero amet, repellendus eius blanditiis in iusto eligendi iure.</p>
 
           <div class="social-media-button">
@@ -107,7 +112,8 @@
         </div>
       </div>
 
-      <p class="text-center" id="copyright">Copyright &copy; 2020. This template design and develop by <a href="https://macodeid.com/" target="_blank">MACode ID</a></p>
+      <p class="text-center" id="copyright">Copyright &copy; 2023.  <a href="http://127.0.0.1:8000/" target="_blank" class="footer-link fw-bolder">Chalkr AI</a>
+        </p>
     </div>
   </footer>
 

@@ -2,7 +2,7 @@ from django.shortcuts import render ,redirect
 from django.contrib.auth.models import User,auth
 from django.contrib import messages
 
-
+from django.contrib.auth import authenticate, login as auth_login
 
 
 
@@ -32,7 +32,7 @@ def anonymous_required(function=None, redirect_url=None):
 
 
 
-# @anonymous_required
+@anonymous_required
 def login(request):
     if request.method == 'POST':
   
@@ -41,10 +41,10 @@ def login(request):
         email = request.POST ['email'].replace('','' ).lower()
         password = request.POST['password']
         user = auth.authenticate( username = email, password = password)
-        if user :
-         auth.login(request, user)
-            
-         return redirect('dashboard')
+        if user:
+            auth.login(request, user)
+                
+            return redirect('home')
         else:
             messages.error(request, 'account does not exit plz sign in')
             return redirect('register')
@@ -65,9 +65,9 @@ def login(request):
 #             return redirect('register')
 #      return render (request,'authorisation/login.html', {})
 
-# @anonymous_required
+@anonymous_required
 def register(request):
-    if request.method == 'POST':
+    if request.method =='POST':
         
         email = request.POST ['email'].replace('','' ).lower()
         password1 = request.POST ['password1']
@@ -78,11 +78,11 @@ def register(request):
      
         if not password1 == password2:
             
-                messages.error(request, 'Password do not match')
-                return redirect('register')
+            messages.error(request, 'Password do not match')
+            return redirect('register')
              
         if User.objects.filter(email=email).exists():
-            messages.error(request, 'Email Taken')
+            messages.error(request, "A USer with the email address ; {} already exists, please use a different email". format(email))
             return redirect('register')
             
         user = User.objects.create_user(email=email,username=email,password=password2)
@@ -91,7 +91,7 @@ def register(request):
         return redirect ('dashboard')
                 
       
-    return render (request,'authorisation/register.html' )
+    return render (request,'authorisation/register.html',{} )
     
    #using the long-required decorator
 @login_required
