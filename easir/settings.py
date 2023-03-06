@@ -41,7 +41,7 @@ ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 # ALLOWED_HOSTS = ['*']
 
 
-PAYPAL_SECRET='Bearer A21AAKAFl03qmdioe5WHl8FDSkt9LvS4MG0jiR-LrFy2102XNnYsB2DzreEzNj1pJj2NpN-PPsLK-IlgssZFONkRGNToowERA'
+PAYPAL_SECRET='A21AAKosVkXnrECQW1S0xLMWKAGMnsPlnn7icj4-hW5NOMUDLlUqscCLdw5NuBU1-xxqFcQdzy9ee8niL0-mhPnMx9eTiF4ww'
 # Application definition
 
 
@@ -195,12 +195,31 @@ CRISPY_ALLOWED_TEMPLATE_PACKS = ('bootstrap', 'uni_form', 'bootstrap3','bootstra
 
 
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'email.host'
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = 'email.host'
+# EMAIL_PORT = 587
+# EMAIL_USE_TLS = True
+# EMAIL_HOST_USER = 'hi@email.com'
+# EMAIL_HOST_PASSWORD = 'password'
+# DEFAULT_FROM_EMAIL = 'hi@email.com'
+
+
+# Emailing settings
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# EMAIL_HOST = 'mail.hexflow.com.au'
+# EMAIL_FROM = 'chalkrai@hexflow.com.au'
+# EMAIL_HOST_USER = 'chalkrai@hexflow.com.au'
+
+# EMAIL_HOST_PASSWORD = str(os.getenv('LgYZ?xU396U['))
+# EMAIL_PORT = 465
+# EMAIL_USE_TLS = True
+
+# PASSWORD_RESET_TIMEOUT = 14400
+
+
+EMAIL_HOST = 'mail.hexflow.com.au'
 EMAIL_PORT = 587
+EMAIL_HOST_USER = 'chalkrai@hexflow.com.au'
+EMAIL_HOST_PASSWORD = 'LgYZ?xU396U['
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'hi@email.com'
-EMAIL_HOST_PASSWORD = 'password'
-DEFAULT_FROM_EMAIL = 'hi@email.com'
-
-
+DEFAULT_FROM_EMAIL = 'TestSite Team <noreply@example.com>'
